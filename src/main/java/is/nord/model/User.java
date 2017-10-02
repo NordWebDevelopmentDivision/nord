@@ -56,6 +56,28 @@ public class User implements UserDetails {
         this.id = id;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+    /*public void setRole(int roleID){
+        Role role = new Role();
+        role.setId((long) roleID);
+        role.setName("user");
+        this.role = role;
+    }*/
+
     @Override
     public String getPassword() {
         return password;
