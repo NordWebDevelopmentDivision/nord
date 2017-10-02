@@ -1,0 +1,98 @@
+/**********************************
+GENERAL
+**********************************/
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+#wrapper {
+  max-width: 60%;
+  padding: 0 5%;
+  border-right: 3px solid rgba(49, 181, 95, 0.9);
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+
+/**********************************
+HEADING
+**********************************/
+
+/**********************************
+NAVIGATION
+**********************************/
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 5px 0;
+}
+
+nav li {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+nav a {
+  font-size: 1.4em;
+  font-weight: 800;
+  padding: 0 10px;
+}
+
+
+/**********************************
+ADS
+**********************************/
+
+
+
+/*******************************
+PAGE: HOMEPAGE
+********************************/
+
+.news-item {
+    border: 1px solid rgb(49, 181, 95);
+}
+
+
+
+
+/**********************************
+COLORS
+**********************************/
+
+nav {
+  background-color: rgb(49, 181, 95);
+}
+
+nav a {
+  color: #333;
+}
+
+nav a.selected, nav a:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
+
+/**********************************
+FLOAT CLEARFIX
+**********************************/
+
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Nemendafélagið Nörd</title>
+    <link rel="stylesheet" href="../../css/normalize.css" />
+</head>
+<body>
+
+<form th:action="@{${action}}" method="post" th:object="${event}">
+    <input type="hidden" th:field="*{id}"/>
+
+    <h2 th:text="${heading}">Búa til Viðburð</h2>
+
+    <input type="text" th:field="*{title}" placeholder="Fyrirsögn"/>
+
+    <textarea cols="86" rows ="20" th:field="*{description}" placeholder="Meginmál"></textarea>
+
+    <input type="text" th:field="*{host}" placeholder="Í boði.." />
+
+    <button th:text="${submit}" type="submit"></button>
+</form>
+
+
+<a th:href="@{/}">Fara á forsíðu</a>
+
+</body>
+
+</html>
