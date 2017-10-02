@@ -12,6 +12,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * A service layer for user objects
  */
 public interface UserService extends UserDetailsService {
+
+    Iterable<User> findAll();
+
     // Returns a user with the specified username. Throws exception if that user does not exist
     User findByUsername(String username);
+
+    // Saves the specified user item through a call to the userRepository
+    void save(User user);
 }

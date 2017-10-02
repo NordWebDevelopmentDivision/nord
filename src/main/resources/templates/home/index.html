@@ -10,6 +10,8 @@
 <div class="new-items">
     <a sec:authorize="hasRole('ROLE_ADMIN')" href="/news/add">Búa til frétt</a>
     <a sec:authorize="hasRole('ROLE_ADMIN')" href="/event/add">Búa til Viðburð</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/add">Bæta við notanda</a>
+    <a sec:authorize="hasAnyRole('ROLE_ADMIN, ROLE_USER')" href="/user/userList">Listi yfir notendur</a>
 </div>
 
 

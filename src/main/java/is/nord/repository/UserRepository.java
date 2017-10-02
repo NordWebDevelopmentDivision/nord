@@ -4,6 +4,8 @@ import is.nord.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /*
  * Author:
  *       Chris Ramacciotti, a teacher at teamtreehouse.com
@@ -16,4 +18,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends CrudRepository<User,Long> {
     // Fetches a single (or none) user by the specified username
     User findByUsername(String username);
+
+    List<User> findAllByOrderByIdDesc();
 }

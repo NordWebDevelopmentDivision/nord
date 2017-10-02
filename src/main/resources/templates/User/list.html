@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Nemendafélagið Nörd</title>
+    <link rel="stylesheet" href="../../css/normalize.css" />
+</head>
+<body>
+
+<!-- For each news item -->
+<div th:each="user : ${user}" class="user-items">
+    <div>
+        <h3 th:text="${user.username}"></h3>
+    </div>
+</div>
+
+
+<a th:href="@{/}">Fara á forsíðu</a>
+
+</body>
+
+</html>
