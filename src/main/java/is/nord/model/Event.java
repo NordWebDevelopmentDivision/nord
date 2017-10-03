@@ -2,6 +2,7 @@ package is.nord.model;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.List;
 */
 
 @Entity
+@Table(name="event")
 public class Event extends News {
     private String host;            // The company or host of the event
     private String location;        // The location of the event

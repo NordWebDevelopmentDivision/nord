@@ -9,6 +9,7 @@ import java.io.File;
 */
 
 @Entity
+@Table(name="about")
 public class About {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

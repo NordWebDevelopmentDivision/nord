@@ -21,7 +21,7 @@ import java.util.List;
  * Define users
  */
 @Entity
-@Table(name="member")
+@Table(name="norduser")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

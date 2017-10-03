@@ -1,9 +1,6 @@
 package is.nord.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /*
  * Author:
@@ -15,6 +12,7 @@ import javax.persistence.Id;
  * Each role has different authorization
  */
 @Entity
+@Table(name="role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
