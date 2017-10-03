@@ -62,7 +62,7 @@
             </div>
             <div th:case="${true}">
                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/event/${news.id}/edit|}">Breyta</a>
-                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/news/${news.id}/delete|}">Eyða</a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/event/${news.id}/delete|}">Eyða</a>
             </div>
         </div>
     </div>

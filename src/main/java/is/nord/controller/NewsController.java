@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.security.Principal;
-import java.util.List;
 
 /*
  * Author:
@@ -190,11 +189,20 @@ public class NewsController {
     @RequestMapping("/news/{newsId}/delete")
     public String deleteNews(@PathVariable Long newsId) {
         News news = newsService.findOne(newsId);
+        newsService.delete(news);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/event/{newsId}/delete")
+    public String deleteEvent(@PathVariable Long newsId) {
+        News news = newsService.findOne(newsId);
         Iterable<Registration> registrations = registrationService.findRegistrationsByEvent((Event)news);
         registrationService.deleteAll(registrations);
         newsService.delete(news);
 
         return "redirect:/";
     }
+
 
 }
