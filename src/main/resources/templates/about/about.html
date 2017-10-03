@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+<head th:replace="layout :: head"></head>
+<body>
+<nav th:replace="layout :: nav"></nav>
+
+<!-- Only admins are autorized to make new news items and events -->
+<div class="new-items">
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/news/add">Búa til frétt</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/event/add">Búa til Viðburð</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/add">Bæta við notanda</a>
+    <a sec:authorize="hasAnyRole('ROLE_ADMIN, ROLE_USER')" href="/user/userList">Listi yfir notendur</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/ad/add">Bæta við auglýsingu</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/about/add">Bæta við upplýsingum um Nörd</a>
+</div>
+
+
+<!-- For each news item -->
+<h1>Um Nörd</h1>
+<div th:each="about : ${about}" >
+    <h3 th:text="${about.title}"></h3>
+    <a th:text="${about.content}"></a>
+    <div>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/about/${about.id}/edit|}">Breyta</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/about/${about.id}/delete|}">Eyða</a>
+    </div>
+</div>
+
+<!-- For each ad -->
+<h1>Styrktaraðilar</h1>
+<div th:each="ad : ${ad}" >
+    <div>
+        <a th:href="@{http://} + ${ad.link}" th:text="${ad.link}"></a>
+        <div>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/ad/${ad.id}/edit|}">Breyta</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/ad/${ad.id}/delete|}">Eyða</a>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
