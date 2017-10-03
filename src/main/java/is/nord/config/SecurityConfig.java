@@ -21,7 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 
 /*
  * Author:
@@ -88,22 +87,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return (request, response, exception) -> {
             request.getSession().setAttribute("flash", new FlashMessage("Incorrect username and/or password. Please try again.", FlashMessage.Status.FAILURE));
             response.sendRedirect("/login");
-        };
-    }
-
-    @Bean
-    public EvaluationContextExtension securityExtension() {
-        return new EvaluationContextExtensionSupport() {
-            @Override
-            public String getExtensionId() {
-                return "security";
-            }
-
-            @Override
-            public Object getRootObject() {
-                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                return new SecurityExpressionRoot(authentication) {};
-            }
         };
     }
 }

@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 /*
@@ -32,8 +30,13 @@ public class AboutController {
     private AdService adService;    // Establish a connection to the adService
 
 
+    /**
+     * Displays informations about Nörd
+     * @param model the model
+     * @return a website that displays informations about Nörd
+     */
     @RequestMapping(path = "/about", method = RequestMethod.GET)
-    public String about(Model model, Principal principal) {
+    public String about(Model model) {
         // Get all about items
         Iterable<About> about = aboutService.findAll();
         // Add them to the model
@@ -64,20 +67,6 @@ public class AboutController {
     }
 
     /**
-     * Add new information if valid data is received TODO: validate the received data
-     * @param about the information from the user input that is to be added
-     * @return back to the main page
-     */
-    @RequestMapping(value = "/about/save", method = RequestMethod.POST)
-    public String saveAbout(About about) {
-        // Save to database through aboutService
-        aboutService.save(about);
-
-        // Redirect browser
-        return "redirect:/about";
-    }
-
-    /**
      * Edits information if valid data is received TODO: validate the received data
      * @param aboutId the id of the information about to be edited
      * @param model  the model
@@ -94,13 +83,27 @@ public class AboutController {
     }
 
     /**
+     * Add new information if valid data is received TODO: validate the received data
+     * @param about the information from the user input that is to be added
+     * @return back to the main page
+     */
+    @RequestMapping(value = "/about/save", method = RequestMethod.POST)
+    public String saveAbout(About about) {
+        // Save to database through aboutService
+        aboutService.save(about);
+
+        // Redirect browser
+        return "redirect:/about";
+    }
+
+    /**
      * Updates information if valid data is received TODO: validate the received data
      * @param about the information to update
      * @return back to the about page
      */
     @RequestMapping(value = "/about/{aboutId}", method = RequestMethod.POST)
     public String updateInformation(About about) {
-
+        // Save to database through aboutService
         aboutService.save(about);
 
         return "about/about";

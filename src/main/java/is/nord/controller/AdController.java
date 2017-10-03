@@ -1,22 +1,13 @@
 package is.nord.controller;
 
 import is.nord.model.Ad;
-import is.nord.model.Event;
-import is.nord.model.News;
-import is.nord.model.User;
 import is.nord.service.AdService;
-import is.nord.service.NewsService;
-import is.nord.service.RegistrationService;
-import is.nord.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.security.Principal;
 
 /*
  * Author:
@@ -32,7 +23,6 @@ public class AdController {
     @Autowired
     private AdService adService;    // Establish a connection to the adService
 
-
     /**
      * Form for adding a new ad
      * @param model the model
@@ -45,6 +35,21 @@ public class AdController {
         model.addAttribute("action", "/ad/save");
         model.addAttribute("heading", "Ný auglýsing");
         model.addAttribute("submit","Vista auglýsingu");
+
+        return "ad/form";
+    }
+
+    /**
+     * Edit an ad if valid data is received TODO: validate the received data
+     * @param adId the id of the ad to be deleted
+     * @return a webpage with a form for editing the ad
+     */
+    @RequestMapping("/ad/{adId}/edit")
+    public String formEditAd(@PathVariable Long adId, Model model) {
+        model.addAttribute("ad", adService.findOne(adId));
+        model.addAttribute("action", String.format("/ad/%s", adId));
+        model.addAttribute("heading", "Breyta auglýsingu");
+        model.addAttribute("submit","Uppfæra");
 
         return "ad/form";
     }
@@ -64,18 +69,15 @@ public class AdController {
     }
 
     /**
-     * Edit an ad if valid data is received TODO: validate the received data
-     * @param adId the id of the ad to be deleted
-     * @return a webpage with a form for editing the ad
+     * Updates a certain ad if valid data is received TODO: validate the received data
+     * @param ad the ad to update
+     * @return back to the main page
      */
-    @RequestMapping("/ad/{adId}/edit")
-    public String formEditAd(@PathVariable Long adId, Model model) {
-        model.addAttribute("ad", adService.findOne(adId));
-        model.addAttribute("action", String.format("/ad/%s", adId));
-        model.addAttribute("heading", "Breyta auglýsingu");
-        model.addAttribute("submit","Uppfæra");
+    @RequestMapping(value = "/ad/{adId}", method = RequestMethod.POST)
+    public String updateAd(Ad ad) {
+        adService.save(ad);
 
-        return "ad/form";
+        return "redirect:/";
     }
 
     /**
@@ -90,17 +92,4 @@ public class AdController {
 
         return "redirect:/";
     }
-
-    /**
-     * Updates a certain ad if valid data is received TODO: validate the received data
-     * @param ad the ad to update
-     * @return back to the main page
-     */
-    @RequestMapping(value = "/ad/{adId}", method = RequestMethod.POST)
-    public String updateAd(Ad ad) {
-        adService.save(ad);
-
-        return "redirect:/";
-    }
-
 }

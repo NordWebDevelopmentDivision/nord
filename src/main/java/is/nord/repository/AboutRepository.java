@@ -1,10 +1,8 @@
 package is.nord.repository;
 
 import is.nord.model.About;
-import is.nord.model.Ad;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 /*
@@ -17,6 +15,6 @@ import java.util.List;
  */
 @Repository
 public interface AboutRepository extends CrudRepository<About, Long> {
-    // Fetches all the news items in descending order, i.e. the most recent in front
+    // Fetches all the information
     List<About> findAll();
 }

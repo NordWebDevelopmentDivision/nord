@@ -1,22 +1,14 @@
 package is.nord.controller;
 
-import is.nord.model.Event;
-import is.nord.model.News;
 import is.nord.model.Role;
 import is.nord.model.User;
-import is.nord.service.NewsService;
-import is.nord.service.RegistrationService;
 import is.nord.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.security.Principal;
 
 /*
  * Author:

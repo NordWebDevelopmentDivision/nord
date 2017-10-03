@@ -1,13 +1,15 @@
 package is.nord.model;
 
 import javax.persistence.*;
-import java.io.File;
 
 /*
  * Author:
  *       Stella Rut Guðmundsdóttir (srg30@hi.is)
 */
 
+/**
+ * A model for information about Nörd
+ */
 @Entity
 @Table(name="about")
 public class About {
@@ -15,7 +17,6 @@ public class About {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;                // The id of the ad
     private String title;           // The title
-
     @Column(columnDefinition = "text")
     private String content;         // The content
 

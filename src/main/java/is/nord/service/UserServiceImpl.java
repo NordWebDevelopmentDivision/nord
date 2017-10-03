@@ -2,7 +2,6 @@ package is.nord.service;
 
 import is.nord.repository.UserRepository;
 import is.nord.model.User;
-import is.nord.config.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

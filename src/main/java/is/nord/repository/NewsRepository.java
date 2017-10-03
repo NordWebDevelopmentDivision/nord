@@ -3,7 +3,6 @@ package is.nord.repository;
 import is.nord.model.News;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 /*

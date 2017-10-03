@@ -11,10 +11,10 @@ import is.nord.model.Ad;
  * A service layer between the AdController and the AdRepository
  */
 public interface AdService {
-    // Returns all the news items (in descending order)
+    // Returns all the ads
     Iterable<Ad> findAll();
 
-    // Returns the news item with the specified id
+    // Returns the ad with the specified id
     Ad findOne(Long id);
 
     // Saves the specified ad through a call to the adRepository

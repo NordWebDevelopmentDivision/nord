@@ -5,7 +5,6 @@ import is.nord.model.Registration;
 import is.nord.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 /*

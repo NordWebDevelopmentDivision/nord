@@ -1,15 +1,16 @@
 package is.nord.model;
 
 import javax.persistence.*;
-import java.awt.*;
 import java.io.File;
-import java.util.Date;
 
 /*
  * Author:
  *       Stella Rut Guðmundsdóttir (srg30@hi.is)
 */
 
+/**
+ * A model for ads
+ */
 @Entity
 @Table(name="ad")
 public class Ad {
