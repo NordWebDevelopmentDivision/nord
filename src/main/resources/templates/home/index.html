@@ -12,10 +12,12 @@
     <a sec:authorize="hasRole('ROLE_ADMIN')" href="/event/add">Búa til Viðburð</a>
     <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/add">Bæta við notanda</a>
     <a sec:authorize="hasAnyRole('ROLE_ADMIN, ROLE_USER')" href="/user/userList">Listi yfir notendur</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/ad/add">Bæta við auglýsingu</a>
 </div>
 
 
 <!-- For each news item -->
+<h1>Fréttir og viðburðir</h1>
 <div th:each="news : ${news}" class="news-item">
     <div>
         <h1 th:text="${news.title}"></h1>
@@ -58,6 +60,18 @@
             <div th:case="${true}">
                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/event/${news.id}/edit|}">Breyta</a>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- For each ad -->
+<h1>Styrktaraðilar</h1>
+<div th:each="ad : ${ad}" >
+    <div>
+        <a th:href="@{http://} + ${ad.link}" th:text="${ad.link}"></a>
+        <div>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/ad/${ad.id}/edit|}">Breyta</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/ad/${ad.id}/delete|}">Eyða</a>
         </div>
     </div>
 </div>

@@ -1,8 +1,10 @@
 package is.nord.controller;
 
+import is.nord.model.Ad;
 import is.nord.model.Event;
 import is.nord.model.News;
 import is.nord.model.User;
+import is.nord.service.AdService;
 import is.nord.service.NewsService;
 import is.nord.service.RegistrationService;
 import is.nord.service.UserService;
@@ -36,6 +38,8 @@ public class NewsController {
     @Autowired
     private RegistrationService registrationService;    // Establish a connection to the registrationService
 
+    @Autowired
+    private AdService adService;    // Establish a connection to the adService
 
     /**
      * Index of all news items
@@ -58,6 +62,10 @@ public class NewsController {
 
         // Allow method calls from the thymeleaf template to registrationService
         model.addAttribute("registrationService", registrationService);
+
+        Iterable<Ad> ad = adService.findAll();
+        model.addAttribute("ad", ad);
+
         return "home/index";
     }
 

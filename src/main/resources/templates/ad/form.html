@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Nemendafélagið Nörd</title>
+    <link rel="stylesheet" href="../../css/normalize.css" />
+</head>
+<body>
+
+<form th:action="@{${action}}" method="post" th:object="${ad}">
+    <input type="hidden" th:field="*{id}"/>
+
+    <h2 th:text="${heading}">Búa til auglýsingu</h2>
+
+    <input type="text" th:field="*{link}" placeholder="Linkur"/>
+    <input type="file" th:fields="*{adLogo}" placeholder="Auglýsing"/>
+
+    <button th:text="${submit}" type="submit"></button>
+</form>
+
+
+<a th:href="@{/}">Fara á forsíðu</a>
+
+</body>
+
+</html>
