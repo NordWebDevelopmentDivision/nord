@@ -51,12 +51,15 @@
                 </div>
             </div>
         </div>
+        <!-- Make conditions based on whether the news item is news or event, and check for admin priveleges -->
         <div th:switch="${news instanceof T(is.nord.model.Event)}">
             <div th:case="${false}">
                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/news/${news.id}/edit|}">Breyta</a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/news/${news.id}/delete|}">Eyða</a>
             </div>
             <div th:case="${true}">
                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/event/${news.id}/edit|}">Breyta</a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/news/${news.id}/delete|}">Eyða</a>
             </div>
         </div>
     </div>
