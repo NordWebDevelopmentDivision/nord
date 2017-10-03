@@ -113,8 +113,9 @@ public class AboutController {
      */
     @RequestMapping("/about/{aboutId}/delete")
     public String deleteAbout(@PathVariable Long aboutId) {
-        aboutService.delete(aboutId);
+        About about = aboutService.findOne(aboutId);
+        aboutService.delete(about);
 
-        return "about/about";
+        return "redirect:/about";
     }
 }

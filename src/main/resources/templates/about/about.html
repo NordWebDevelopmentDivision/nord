@@ -28,18 +28,6 @@
     </div>
 </div>
 
-<!-- For each ad -->
-<h1>Styrktaraðilar</h1>
-<div th:each="ad : ${ad}" >
-    <div>
-        <a th:href="@{http://} + ${ad.link}" th:text="${ad.link}"></a>
-        <div>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/ad/${ad.id}/edit|}">Breyta</a>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/ad/${ad.id}/delete|}">Eyða</a>
-        </div>
-    </div>
-</div>
-
 </body>
 
 </html>

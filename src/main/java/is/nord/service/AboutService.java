@@ -21,5 +21,5 @@ public interface AboutService {
     void save(About about);
 
     // Deletes the specified ad through a call to the adRepository
-    void delete(Long aboutId);
+    void delete(About about);
 }

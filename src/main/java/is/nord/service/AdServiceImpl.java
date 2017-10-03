@@ -31,7 +31,7 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public void delete(Long adId) {
-        adRepository.delete(adId);
+    public void delete(Ad ad) {
+        adRepository.delete(ad);
     }
 }
