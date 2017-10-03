@@ -27,4 +27,6 @@ public interface RegistrationService {
 
     // Returns all registrations to the specified event
     Iterable<Registration> findRegistrationsByEvent(Event event);
+
+    void deleteAll(Iterable<Registration> registrations);
 }

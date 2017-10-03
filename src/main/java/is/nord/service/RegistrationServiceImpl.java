@@ -49,4 +49,9 @@ public class RegistrationServiceImpl implements RegistrationService {
         return registrationRepository.findRegistrationsByEvent(event);
 
     }
+
+    @Override
+    public void deleteAll(Iterable<Registration> registrations) {
+        registrationRepository.delete(registrations);
+    }
 }

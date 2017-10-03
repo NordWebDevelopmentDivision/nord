@@ -1,9 +1,6 @@
 package is.nord.controller;
 
-import is.nord.model.Ad;
-import is.nord.model.Event;
-import is.nord.model.News;
-import is.nord.model.User;
+import is.nord.model.*;
 import is.nord.service.AdService;
 import is.nord.service.NewsService;
 import is.nord.service.RegistrationService;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.security.Principal;
+import java.util.List;
 
 /*
  * Author:
@@ -192,7 +190,10 @@ public class NewsController {
     @RequestMapping("/news/{newsId}/delete")
     public String deleteNews(@PathVariable Long newsId) {
         News news = newsService.findOne(newsId);
+        Iterable<Registration> registrations = registrationService.findRegistrationsByEvent((Event)news);
+        registrationService.deleteAll(registrations);
         newsService.delete(news);
+
         return "redirect:/";
     }
 
