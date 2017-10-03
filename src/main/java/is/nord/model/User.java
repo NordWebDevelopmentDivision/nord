@@ -28,7 +28,7 @@ public class User implements UserDetails {
     private Long id;            // The id of the user
 
     @Column(unique = true)
-    @Size(min = 8, max = 20)
+    @Size(min = 1, max = 20)
     private String username;    // The username of the user
 
     @Column(length = 100)

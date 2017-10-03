@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Iterable<User> findAll() {
-        return userRepository.findAllByOrderByIdDesc();
+        return userRepository.findAllByOrderByUsername();
     }
 
     @Override

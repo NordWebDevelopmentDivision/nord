@@ -19,5 +19,5 @@ public interface UserRepository extends CrudRepository<User,Long> {
     // Fetches a single (or none) user by the specified username
     User findByUsername(String username);
 
-    List<User> findAllByOrderByIdDesc();
+    List<User> findAllByOrderByUsername();
 }
