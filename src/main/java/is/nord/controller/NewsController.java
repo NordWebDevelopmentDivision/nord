@@ -63,8 +63,8 @@ public class NewsController {
         // Allow method calls from the thymeleaf template to registrationService
         model.addAttribute("registrationService", registrationService);
 
-        Iterable<Ad> ad = adService.findAll();
-        model.addAttribute("ad", ad);
+        // Allow method calls from the thymeleaf template to adService
+        model.addAttribute("adService", adService);
 
         return "home/index";
     }
