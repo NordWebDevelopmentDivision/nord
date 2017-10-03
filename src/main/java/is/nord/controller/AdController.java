@@ -85,7 +85,8 @@ public class AdController {
      */
     @RequestMapping("/ad/{adId}/delete")
     public String deleteAd(@PathVariable Long adId) {
-        adService.delete(adId);
+        Ad ad = adService.findOne(adId);
+        adService.delete(ad);
 
         return "redirect:/";
     }
@@ -97,7 +98,6 @@ public class AdController {
      */
     @RequestMapping(value = "/ad/{adId}", method = RequestMethod.POST)
     public String updateAd(Ad ad) {
-
         adService.save(ad);
 
         return "redirect:/";

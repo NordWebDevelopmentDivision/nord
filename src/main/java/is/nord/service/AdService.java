@@ -21,5 +21,5 @@ public interface AdService {
     void save(Ad ad);
 
     // Deletes the specified ad through a call to the adRepository
-    void delete(Long adId);
+    void delete(Ad ad);
 }

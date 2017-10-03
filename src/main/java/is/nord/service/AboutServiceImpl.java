@@ -31,7 +31,7 @@ public class AboutServiceImpl implements AboutService {
     }
 
     @Override
-    public void delete(Long aboutId) {
-        aboutRepository.delete(aboutId);
+    public void delete(About about) {
+        aboutRepository.delete(about);
     }
 }
