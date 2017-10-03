@@ -32,6 +32,6 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public void delete(News news) {
-
+        newsRepository.delete(news);
     }
 }

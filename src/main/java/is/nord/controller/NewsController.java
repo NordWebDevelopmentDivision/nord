@@ -189,4 +189,11 @@ public class NewsController {
         return "redirect:/";
     }
 
+    @RequestMapping("/news/{newsId}/delete")
+    public String deleteNews(@PathVariable Long newsId) {
+        News news = newsService.findOne(newsId);
+        newsService.delete(news);
+        return "redirect:/";
+    }
+
 }
