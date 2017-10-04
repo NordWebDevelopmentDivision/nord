@@ -15,6 +15,5 @@ import java.util.List;
  */
 @Repository
 public interface AdRepository extends CrudRepository<Ad, Long> {
-    // Fetches all the information
-    List<Ad> findAll();
+
 }

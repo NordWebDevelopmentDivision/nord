@@ -106,7 +106,7 @@ public class AboutController {
         // Save to database through aboutService
         aboutService.save(about);
 
-        return "about/about";
+        return "redirect:/about";
     }
 
     /**
