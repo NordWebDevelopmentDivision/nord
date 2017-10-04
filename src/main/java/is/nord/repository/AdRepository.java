@@ -15,5 +15,6 @@ import java.util.List;
  */
 @Repository
 public interface AdRepository extends CrudRepository<Ad, Long> {
-
+    // We only use methods that are included in CrudRepository
+    // This is intentionally empty
 }

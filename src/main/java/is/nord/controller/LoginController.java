@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 /*
  * Author:
  *       Chris Ramacciotti, a teacher at teamtreehouse.com
- * Altered by:
- *       Kári Snær Kárason (ksk12@hi.is)
 */
 
 /**

@@ -10,6 +10,8 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 /*
  * Author:
  *       Chris Ramacciotti, a teacher at teamtreehouse.com
+ * Altered by:
+ *       Ólafur Georg Gylfason (ogg4@hi.is)
 */
 
 @Configuration

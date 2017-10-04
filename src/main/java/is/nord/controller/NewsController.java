@@ -39,9 +39,9 @@ public class NewsController {
     private AdService adService;    // Establish a connection to the adService
 
     /**
-     * Index of all news items
+     * Index of all news/event items
      * @param model the model
-     * @return a webpage displaying all news items
+     * @return a webpage displaying all news/event items
      */
     @RequestMapping("/")
     public String listNews(Model model, Principal principal) {
@@ -82,6 +82,12 @@ public class NewsController {
         return "news/form";
     }
 
+    /**
+     * Form for editing a news item
+     * @param newsId the id of the news item that should be edited
+     * @param model the model
+     * @return a webpage with a filled in form which is editable
+     */
     @RequestMapping("/news/{newsId}/edit")
     public String formEditNews(@PathVariable Long newsId, Model model) {
         model.addAttribute("news", newsService.findOne(newsId));
@@ -112,6 +118,11 @@ public class NewsController {
         return "redirect:/";
     }
 
+    /**
+     * Update the news item in the datastore. The author of the news item is also updated.
+     * @param news the news item that is to be updated
+     * @return back to the main page.
+     */
     @RequestMapping(value = "/news/{newsId}", method = RequestMethod.POST)
     public String updateNews(News news) {
 
@@ -122,6 +133,19 @@ public class NewsController {
         news.setAuthor(user.getUsername());
 
         newsService.save(news);
+
+        return "redirect:/";
+    }
+
+    /**
+     * Delete news item
+     * @param newsId the id of the news item to be deleted
+     * @return back to the home page
+     */
+    @RequestMapping("/news/{newsId}/delete")
+    public String deleteNews(@PathVariable Long newsId) {
+        News news = newsService.findOne(newsId);
+        newsService.delete(news);
 
         return "redirect:/";
     }
@@ -142,6 +166,12 @@ public class NewsController {
         return "event/form";
     }
 
+    /**
+     * Form for editing an event
+     * @param newsId the id of the event that should be edited
+     * @param model the model
+     * @return a webpage with a filled in form which is editable
+     */
     @RequestMapping("/event/{newsId}/edit")
     public String formEditEvent(@PathVariable Long newsId, Model model) {
         model.addAttribute("event", newsService.findOne(newsId));
@@ -172,6 +202,11 @@ public class NewsController {
         return "redirect:/";
     }
 
+    /**
+     * Update the news item in the datastore. The author of the event is also updated.
+     * @param event the event that is to be updated
+     * @return back to the main page.
+     */
     @RequestMapping(value = "/event/{newsId}", method = RequestMethod.POST)
     public String updateEvent(Event event) {
 
@@ -186,14 +221,11 @@ public class NewsController {
         return "redirect:/";
     }
 
-    @RequestMapping("/news/{newsId}/delete")
-    public String deleteNews(@PathVariable Long newsId) {
-        News news = newsService.findOne(newsId);
-        newsService.delete(news);
-
-        return "redirect:/";
-    }
-
+    /**
+     * Delete event from the data store
+     * @param newsId the id of the event to be deleted
+     * @return back to the home page
+     */
     @RequestMapping("/event/{newsId}/delete")
     public String deleteEvent(@PathVariable Long newsId) {
         News news = newsService.findOne(newsId);

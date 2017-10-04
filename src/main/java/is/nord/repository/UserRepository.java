@@ -7,8 +7,7 @@ import java.util.List;
 
 /*
  * Author:
- *       Chris Ramacciotti, a teacher at teamtreehouse.com
- *
+ *       Ólafur Georg Gylfason (ogg4@hi.is)
 */
 
 /**
@@ -19,5 +18,6 @@ public interface UserRepository extends CrudRepository<User,Long> {
     // Fetches a single (or none) user by the specified username
     User findByUsername(String username);
 
+    // Fetches all users sorted in alphabetical order by username
     List<User> findAllByOrderByUsername();
 }
