@@ -18,7 +18,7 @@ import java.security.Principal;
 */
 
 /**
- * A controller that handles informations about Nörd
+ * A controller that handles information about Nörd
  */
 @Controller
 public class AboutController {

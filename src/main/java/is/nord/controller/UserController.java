@@ -41,34 +41,45 @@ public class UserController {
 
         return "user/form";
     }
+
+    /**
+     * List of users
+     * @param model the model
+     * @return a webpage with a list of registered users
+     */
     @RequestMapping("/user/userList")
     public String viewUsers(Model model) {
-
+        // Get list of all users
         Iterable<User> user = userService.findAll();
-
+        // Add model attribute
         model.addAttribute("user", user);
+
         return "user/list";
     }
 
-
     /**
-     * Add a user item if valid data is received
+     * Add a user item
      * @param user the user object formed from the user input that is to be added
      * @return back to the main page
      */
     @RequestMapping(value = "/user/save", method = RequestMethod.POST)
     public String saveUser(@RequestParam(value = "roleID", required = false) boolean id, User user) {
+        // Mark the new user as enabled
         user.setEnabled(true);
+        // Create a role and set the correct authorization to it
         Role role = new Role();
-        System.out.println(id);
         if(id){
             role.setId((long) 2);
+            role.setName("admin");
         } else{
             role.setId((long) 1);
+            role.setName("user");
         }
 
-        role.setName("user");
+        // Add the role to the user
         user.setRole(role);
+
+        // Save the new user
         userService.save(user);
 
         // Redirect browser to /

@@ -70,12 +70,6 @@ public class User implements UserDetails {
     public void setRole(Role role) {
         this.role = role;
     }
-    /*public void setRole(int roleID){
-        Role role = new Role();
-        role.setId((long) roleID);
-        role.setName("user");
-        this.role = role;
-    }*/
 
     @Override
     public String getPassword() {
