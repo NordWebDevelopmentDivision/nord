@@ -6,6 +6,7 @@ import java.io.File;
 /*
  * Author:
  *       Stella Rut Guðmundsdóttir (srg30@hi.is)
+ *       Ólafur Georg Gylfason (ogg4@hi.is)
 */
 
 /**
@@ -18,7 +19,9 @@ public class Ad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;                // The id of the ad
     private String link;            // The link behind the ad for the company's website
-    private File adLogo;           // The ad, that is the company logo or product
+
+    @Lob
+    private byte[] bytes;          // The ad, that is the company logo or product
 
     public Ad() {}
 
@@ -38,11 +41,11 @@ public class Ad {
         this.link = link;
     }
 
-    public File getAdLogo() {
-        return adLogo;
+    public byte[] getBytes() {
+        return bytes;
     }
 
-    public void setAdLogo(File adLogo) {
-        this.adLogo = adLogo;
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
     }
 }

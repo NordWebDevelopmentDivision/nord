@@ -5,13 +5,13 @@ import is.nord.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /*
  * Author:
  *       Stella Rut Guðmundsdóttir (srg30@hi.is)
+ *       Ólafur Georg Gylfason (ogg4@hi.is)
 */
 
 /**
@@ -57,12 +57,13 @@ public class AdController {
     /**
      * Add a new ad if valid data is received TODO: validate the received data
      * @param ad the ad object formed from the user input that is to be added
+     * @param file the image file
      * @return back to the main page
      */
     @RequestMapping(value = "/ad/save", method = RequestMethod.POST)
-    public String saveAd(Ad ad) {
+    public String saveAd(Ad ad, @RequestParam MultipartFile file) {
         // Save to database through adService
-        adService.save(ad);
+        adService.save(ad, file);
 
         // Redirect browser to /
         return "redirect:/";
@@ -71,11 +72,12 @@ public class AdController {
     /**
      * Updates a certain ad if valid data is received TODO: validate the received data
      * @param ad the ad to update
+     * @param file the image file
      * @return back to the main page
      */
     @RequestMapping(value = "/ad/{adId}", method = RequestMethod.POST)
-    public String updateAd(Ad ad) {
-        adService.save(ad);
+    public String updateAd(Ad ad, @RequestParam MultipartFile file) {
+        adService.save(ad, file);
 
         return "redirect:/";
     }
@@ -91,5 +93,16 @@ public class AdController {
         adService.delete(ad);
 
         return "redirect:/";
+    }
+
+    /**
+     * Retrieves an image file from the database
+     * @param adId the id of the image file
+     * @return a single image file from the database
+     */
+    @RequestMapping("/ad/{adId}.jpg")
+    @ResponseBody
+    public byte[] adLogo(@PathVariable Long adId) {
+        return adService.findOne(adId).getBytes();
     }
 }

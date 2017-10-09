@@ -7,7 +7,9 @@
     <h1>Styrktaraðilar</h1>
     <div th:each="ad : ${adService.findAll()}" >
         <div>
-            <a th:href="@{http://} + ${ad.link}" th:text="${ad.link}"></a>
+            <a th:href="@{http://} + ${ad.link}">
+                <img th:src="@{|/ad/${ad.id}.jpg|}" alt="adLogo" />
+            </a>
             <div>
                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/ad/${ad.id}/edit|}">Breyta</a>
                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/ad/${ad.id}/delete|}">Eyða</a>
