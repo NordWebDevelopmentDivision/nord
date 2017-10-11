@@ -1,7 +1,8 @@
 package is.nord.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /*
  * Author:
@@ -20,7 +21,7 @@ public class News {
     private String description;     // The description of the news item
     private String tag;             // The tag of the news item
     private String author;          // The author of the news item
-    private Date datePosted;        // The time when the news item was posted
+    private LocalDateTime datePosted = LocalDateTime.now();        // The time when the news item was posted
 
     public News() {}
 
@@ -64,11 +65,11 @@ public class News {
         this.author = author;
     }
 
-    public Date getDatePosted() {
+    public LocalDateTime getDatePosted() {
         return datePosted;
     }
 
-    public void setDatePosted(Date datePosted) {
+    public void setDatePosted(LocalDateTime datePosted) {
         this.datePosted = datePosted;
     }
 }

@@ -1,6 +1,7 @@
 package is.nord.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /*
@@ -20,7 +21,7 @@ public class Registration {
 
     @ManyToOne
     private User user;                  // The user registered
-    private Date timeOfRegistration;    // The time of the registration
+    private LocalDateTime timeOfRegistration;    // The time of the registration
 
     public Registration(){}
 
@@ -48,11 +49,11 @@ public class Registration {
         this.user = user;
     }
 
-    public Date getTimeOfRegistration() {
+    public LocalDateTime getTimeOfRegistration() {
         return timeOfRegistration;
     }
 
-    public void setTimeOfRegistration(Date timeOfRegistration) {
+    public void setTimeOfRegistration(LocalDateTime timeOfRegistration) {
         this.timeOfRegistration = timeOfRegistration;
     }
 }

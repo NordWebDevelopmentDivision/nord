@@ -20,6 +20,7 @@
 <!-- For each news item -->
 <h1>Fréttir og viðburðir</h1>
 <div th:each="news : ${news}" class="news-item">
+    <h4>Birt þann: <strong th:text="${#temporals.format(news.datePosted, 'dd/MMM/yyyy HH:mm:ss')}">11/10/2017 13:37</strong></h4>
     <div>
         <h1 th:text="${news.title}"></h1>
         <a th:text="${news.description}"></a>
@@ -28,7 +29,7 @@
         <!-- If the news item is an event -->
         <div th:if="${news instanceof T(is.nord.model.Event)}">
             <h4 th:text="${'Gestgjafi: ' + news.host}"></h4>
-
+            <h4>Viðburður hefst: <strong th:text="${#temporals.format(news.timeOfEvent, 'dd/MMM/yyyy HH:mm:ss')}">11/10/2017 13:37</strong></h4>
             <!-- If the user is authenticated -->
             <div th:if="${#authorization.expression('isAuthenticated()')}">
                 <!-- Print out the list of registrations for each event -->

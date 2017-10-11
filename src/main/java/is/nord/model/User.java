@@ -36,6 +36,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private boolean enabled;    // Whether the user is enabled
 
+    //@Column(nullable = true)
+    //private boolean isSenior; // Whether the user is a senior
+
     @OneToOne
     @JoinColumn(name = "role_id")
     private Role role;          // The assigned role of the user
@@ -66,6 +69,14 @@ public class User implements UserDetails {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    /*public boolean isSenior() {
+        return isSenior;
+    }
+
+    public void setSenior(boolean senior) {
+        isSenior = senior;
+    }*/
 
     public void setRole(Role role) {
         this.role = role;
