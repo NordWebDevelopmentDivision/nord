@@ -1,10 +1,7 @@
 package is.nord.controller;
 
 import is.nord.model.*;
-import is.nord.service.AdService;
-import is.nord.service.NewsService;
-import is.nord.service.RegistrationService;
-import is.nord.service.UserService;
+import is.nord.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -38,6 +35,9 @@ public class NewsController {
     @Autowired
     private AdService adService;    // Establish a connection to the adService
 
+    @Autowired
+    private EventBanService eventBanService; // Establish a connection to the eventBanService
+
     /**
      * Index of all news/event items
      * @param model the model
@@ -62,6 +62,12 @@ public class NewsController {
 
         // Allow method calls from the thymeleaf template to adService
         model.addAttribute("adService", adService);
+
+        // Allow method calls from the thymeleaf template to eventBanService
+        model.addAttribute("eventBanService", eventBanService);
+
+        // Allow method calls from the thymeleaf template to eventBanService
+        model.addAttribute("userService", userService);
 
         return "home/index";
     }

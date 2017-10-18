@@ -39,6 +39,11 @@ public class User implements UserDetails {
     //@Column(nullable = true)
     //private boolean isSenior; // Whether the user is a senior
 
+
+
+    @Column(nullable = true)
+    private int points;
+
     @OneToOne
     @JoinColumn(name = "role_id")
     private Role role;          // The assigned role of the user
@@ -110,5 +115,17 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public void addPoints(int addition){
+        this.points = this.points + addition;
     }
 }
