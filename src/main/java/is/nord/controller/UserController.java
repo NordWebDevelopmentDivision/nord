@@ -1,11 +1,16 @@
 package is.nord.controller;
 
+import is.nord.model.Event;
+import is.nord.model.EventBan;
 import is.nord.model.Role;
 import is.nord.model.User;
+import is.nord.service.EventBanService;
 import is.nord.service.UserService;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +30,8 @@ public class UserController {
     @Autowired
     private UserService userService;    // Establish a connection to the userService
 
+    @Autowired
+    private EventBanService eventBanService; // Establish a connection to the eventBanService
 
     /**
      * Form for adding a new user item
@@ -54,6 +61,9 @@ public class UserController {
         // Add model attribute
         model.addAttribute("user", user);
 
+        // Allow method calls from the thymeleaf template to eventBanService
+        model.addAttribute("eventBanService", eventBanService);
+
         return "user/list";
     }
 
@@ -78,12 +88,37 @@ public class UserController {
 
         // Add the role to the user
         user.setRole(role);
-
+        user.setPoints(0);
         // Save the new user
         userService.save(user);
 
         // Redirect browser to /
         return "redirect:/";
+    }
+
+    @RequestMapping("/user/{userId}/eventBan")
+    public String addEventBan(@PathVariable Long userId) {
+        User user = userService.findOne(userId);
+        EventBan eventBan = new EventBan();
+        eventBan.setUser(user);
+        eventBan.setCurrentlyBanned(true);
+        eventBan.setTimeOfBan(LocalDateTime.now());
+
+        // Deduct points from user
+        user.addPoints(-3);
+        userService.update(user);
+
+        eventBanService.save(eventBan);
+        return "redirect:/user/userList";
+    }
+
+    @RequestMapping("/user/{userId}/removeEventBan")
+    public String removeEventBan(@PathVariable Long userId) {
+        User user = userService.findOne(userId);
+        EventBan eventBan = eventBanService.findOneByUser(user);
+        eventBan.setCurrentlyBanned(false);
+        eventBanService.save(eventBan);
+        return "redirect:/user/userList";
     }
 
 }

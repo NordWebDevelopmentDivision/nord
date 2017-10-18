@@ -19,7 +19,7 @@
 
     <input type="text" th:field="*{host}" placeholder="Í boði.." />
 
-    <input type="date" th:field="*{timeOfEvent}" placeholder="2007-12-03T10:15:30" />
+    <input type="datetime-local" th:field="*{timeOfEvent}" placeholder="2007-12-03T10:15:30" />
 
     <button th:text="${submit}" type="submit"></button>
 </form>

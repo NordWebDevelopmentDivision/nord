@@ -36,6 +36,8 @@
                 <h2>Skráningar:</h2>
                 <div th:each="registration : ${registrationService.findRegistrationsByEvent(news)}">
                     <h4 th:text="${registration.user.username}"></h4>
+                    <label sec:authorize="hasRole('ROLE_ADMIN')" th:for="${#ids.next('confirmed')}">Mættur?</label>
+                    <input sec:authorize="hasRole('ROLE_ADMIN')" type="checkbox" name="confirmed"/>
                 </div>
                 <!-- Make conditions based on whether the authenticated user is registered for the event -->
                 <div th:switch="${registrationService.isRegisteredForEvent(news, user)}">
@@ -68,6 +70,15 @@
         </div>
     </div>
 </div>
+<h2>Bannlisti:</h2>
+<div th:each="eventBan : ${eventBanService.findAllBanned()}">
+    <h4 th:text="${eventBan.user.username}"></h4>
+</div>
+<h2>Topp vísindamenn:</h2>
+<div th:each="topUser : ${userService.findAllOrderedByPoints()}">
+    <h4 th:text="${topUser.username} + ' - ' + ${topUser.points}"></h4>
+</div>
+
 
 <div th:replace="ad/ad :: ads"></div>
 

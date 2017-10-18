@@ -18,6 +18,14 @@ public interface UserService extends UserDetailsService {
     // Returns a user with the specified username. Throws exception if that user does not exist
     User findByUsername(String username);
 
+    // Returns the news item with the specified id
+    User findOne(Long id);
+
     // Saves the specified user item through a call to the userRepository
     void save(User user);
+
+    // Updates the user
+    void update(User user);
+
+    Iterable<User> findAllOrderedByPoints();
 }

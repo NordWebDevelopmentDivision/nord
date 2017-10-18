@@ -13,7 +13,22 @@
     <div>
         <h3 th:text="${user.username}"></h3>
     </div>
+
+    <div th:switch="${eventBanService.isEventBanned(user)}">
+        <div th:case="${false}">
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/user/${user.id}/eventBan|}">Setja á bannlista</a>
+        </div>
+        <div th:case="${true}">
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/user/${user.id}/removeEventBan|}">Fjarlægja af bannlista</a>
+        </div>
+    </div>
 </div>
+<h2>Bannlisti:</h2>
+<div th:each="eventBan : ${eventBanService.findAllBanned()}">
+    <h4 th:text="${eventBan.user.username}"></h4>
+</div>
+
+
 
 
 <a th:href="@{/}">Fara á forsíðu</a>
