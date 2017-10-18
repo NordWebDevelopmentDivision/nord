@@ -19,10 +19,9 @@ import java.util.List;
 @Repository
 public interface EventBanRepository extends CrudRepository<EventBan, Long> {
 
-    // Fetches all registrations for the specified event
+    // Fetches all Event bans for users that are currently banned
     List<EventBan> findByCurrentlyBannedTrue();
 
+    // Returns a value if the user is currently banned
     EventBan findByUserAndCurrentlyBannedTrue(User user);
-
-    EventBan findEventBanByUser(User user);
 }

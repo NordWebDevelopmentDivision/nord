@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
  *       Kári Snær Kárason (ksk12@hi.is)
 */
 
+/**
+ * This class is for EventBans
+ */
 @Entity
 @Table(name="eventBan")
 public class EventBan {

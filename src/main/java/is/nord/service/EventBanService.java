@@ -6,11 +6,11 @@ import is.nord.model.User;
 
 /*
  * Author:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
+ *       Kári Snær Kárason(ksk12@hi.is)
 */
 
 /**
- * A service layer between the Registration controller and the Registration repository
+ * A service layer between the User controller and the EventBan repository
  */
 public interface EventBanService {
     // Returns all the event bans
@@ -19,7 +19,7 @@ public interface EventBanService {
     // Returns the news item with the specified id
     EventBan findOneByUser(User user);
 
-    // Saves the specified event ban through a call to the newsRepository
+    // Saves the specified event ban
     void save(EventBan eventBan);
 
     // Returns whether the specified user is event banned

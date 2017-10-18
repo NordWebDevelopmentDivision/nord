@@ -33,6 +33,8 @@ public class UserController {
     @Autowired
     private EventBanService eventBanService; // Establish a connection to the eventBanService
 
+    private int eventBanPoints = -3;
+
     /**
      * Form for adding a new user item
      * @param model the model
@@ -88,6 +90,8 @@ public class UserController {
 
         // Add the role to the user
         user.setRole(role);
+
+        // Set the users beginning points as 0
         user.setPoints(0);
         // Save the new user
         userService.save(user);
@@ -96,6 +100,11 @@ public class UserController {
         return "redirect:/";
     }
 
+    /**
+     * Add an eventBan for the user
+     * @param userId of the user object to be added to the ban
+     * @return back to the userList page
+     */
     @RequestMapping("/user/{userId}/eventBan")
     public String addEventBan(@PathVariable Long userId) {
         User user = userService.findOne(userId);
@@ -104,14 +113,19 @@ public class UserController {
         eventBan.setCurrentlyBanned(true);
         eventBan.setTimeOfBan(LocalDateTime.now());
 
-        // Deduct points from user
-        user.addPoints(-3);
+        // Deduct points from user for going on the banlist
+        user.addPoints(eventBanPoints);
         userService.update(user);
 
         eventBanService.save(eventBan);
         return "redirect:/user/userList";
     }
 
+    /**
+     * Mark ban as not active for the user
+     * @param userId of the user object to be marked as not banned anymore
+     * @return back to the userList page
+     */
     @RequestMapping("/user/{userId}/removeEventBan")
     public String removeEventBan(@PathVariable Long userId) {
         User user = userService.findOne(userId);

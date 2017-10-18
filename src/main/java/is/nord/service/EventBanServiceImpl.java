@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 /*
  * Author:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
+ *       Kári Snær Kárason(ksk12@hi.is)
 */
 
 @Service

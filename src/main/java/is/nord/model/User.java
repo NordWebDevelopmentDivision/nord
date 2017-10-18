@@ -14,6 +14,7 @@ import java.util.List;
  *       Chris Ramacciotti, a teacher at teamtreehouse.com
  * Altered by:
  *       Ólafur Georg Gylfason (ogg4@hi.is)
+ *       Kári Snær Kárason(ksk12@hi.is)
 */
 
 /**
@@ -39,10 +40,8 @@ public class User implements UserDetails {
     //@Column(nullable = true)
     //private boolean isSenior; // Whether the user is a senior
 
-
-
     @Column(nullable = true)
-    private int points;
+    private int points;         // How many points the user has
 
     @OneToOne
     @JoinColumn(name = "role_id")

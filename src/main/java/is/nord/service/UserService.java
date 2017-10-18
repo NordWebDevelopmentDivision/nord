@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 /*
  * Author:
  *       Chris Ramacciotti, a teacher at teamtreehouse.com
+ * Altered:
+ *       Kári Snær Kárason(ksk12@hi.is)
 */
 
 /**

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 /*
  * Author:
  *       Ólafur Georg Gylfason (ogg4@hi.is)
+ * Altered:
+ *       Kári Snær Kárason(ksk12@hi.is)
 */
 
 /**
@@ -31,7 +33,11 @@ public class RegistrationController {
     private UserService userService;    // Establish a connection to the userService
 
     @Autowired
-    NewsService newsService;    // Establish a connection to the newsService
+    private NewsService newsService;    // Establish a connection to the newsService
+
+    // Points the user gets for registering and unregistering for an event
+    private int registrationPoints = 1;
+    private int unregistrationPoints = -1;
 
     /**
      * Allows an authenticated user to register to an event
@@ -52,7 +58,7 @@ public class RegistrationController {
         registration.setUser(user);
 
         // Add a point to the user
-        user.addPoints(1);
+        user.addPoints(registrationPoints);
         userService.update(user);
         // Save to database through a service
         registrationService.save(registration);
@@ -75,7 +81,7 @@ public class RegistrationController {
         News news = newsService.findOne(newsId);
 
         // Deduct a point from the user
-        user.addPoints(-1);
+        user.addPoints(unregistrationPoints);
         userService.update(user);
 
         // delete the registration for the authenticated user for this particular event
