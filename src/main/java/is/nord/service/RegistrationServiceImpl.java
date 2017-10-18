@@ -54,4 +54,9 @@ public class RegistrationServiceImpl implements RegistrationService {
     public void deleteAll(Iterable<Registration> registrations) {
         registrationRepository.delete(registrations);
     }
+
+    /*@Override
+    public List<TopEventUser> findTopUsers(){
+        return registrationRepository.findTopEventUsers();
+    }*/
 }

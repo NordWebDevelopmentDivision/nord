@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findOne(Long id) {
+        return userRepository.findOne(id);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Load user from the database (throw exception if not found)
         User user = userRepository.findByUsername(username);
@@ -49,5 +54,15 @@ public class UserServiceImpl implements UserService {
     public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+    }
+
+    @Override
+    public void update(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public Iterable<User> findAllOrderedByPoints(){
+        return userRepository.findTop5ByOrderByPointsDesc();
     }
 }

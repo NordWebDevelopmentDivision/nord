@@ -14,14 +14,15 @@ import java.util.Date;
 public class Registration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;                    // The id of the registration
+    private Long id;                                // The id of the registration
 
     @ManyToOne
-    private Event event;                // The event registered to
+    private Event event;                            // The event registered to
 
     @ManyToOne
-    private User user;                  // The user registered
-    private LocalDateTime timeOfRegistration;    // The time of the registration
+    private User user;                              // The user registered
+    private LocalDateTime timeOfRegistration;       // The time of the registration
+    private Boolean confirmed;                      // If the user showed up to the event or not
 
     public Registration(){}
 
@@ -55,5 +56,13 @@ public class Registration {
 
     public void setTimeOfRegistration(LocalDateTime timeOfRegistration) {
         this.timeOfRegistration = timeOfRegistration;
+    }
+
+    public Boolean getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
     }
 }

@@ -20,4 +20,6 @@ public interface UserRepository extends CrudRepository<User,Long> {
 
     // Fetches all users sorted in alphabetical order by username
     List<User> findAllByOrderByUsername();
+
+    List<User> findTop5ByOrderByPointsDesc();
 }

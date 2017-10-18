@@ -6,6 +6,7 @@ import is.nord.model.Registration;
 import is.nord.model.User;
 import is.nord.service.NewsService;
 import is.nord.service.RegistrationService;
+import is.nord.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RegistrationController {
     @Autowired
     RegistrationService registrationService;    // Establish a connection to the registrationService
+
+    @Autowired
+    private UserService userService;    // Establish a connection to the userService
 
     @Autowired
     NewsService newsService;    // Establish a connection to the newsService
@@ -47,6 +51,9 @@ public class RegistrationController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         registration.setUser(user);
 
+        // Add a point to the user
+        user.addPoints(1);
+        userService.update(user);
         // Save to database through a service
         registrationService.save(registration);
 
@@ -66,6 +73,10 @@ public class RegistrationController {
 
         // Get the event
         News news = newsService.findOne(newsId);
+
+        // Deduct a point from the user
+        user.addPoints(-1);
+        userService.update(user);
 
         // delete the registration for the authenticated user for this particular event
         registrationService.delete((Event)news, user);
