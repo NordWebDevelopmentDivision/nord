@@ -13,13 +13,35 @@
 
     <h2 th:text="${heading}">Búa til Viðburð</h2>
 
-    <input type="text" th:field="*{title}" placeholder="Fyrirsögn"/>
+    <label for="title">Fyrirsögn:</label>
+    <input type="text" th:field="*{title}" id="title" placeholder="Fyrirsögn"/>
 
-    <textarea cols="86" rows ="20" th:field="*{description}" placeholder="Meginmál"></textarea>
+    <label for="description">Meginmál:</label>
+    <textarea cols="86" rows ="20" th:field="*{description}" id="description" placeholder="Meginmál"></textarea>
 
-    <input type="text" th:field="*{host}" placeholder="Í boði.." />
+    <label for="host">Gestgjafi:</label>
+    <input type="text" th:field="*{host}" id="host" placeholder="Gestgjafi"/>
 
-    <input type="date" th:field="*{timeOfEvent}" placeholder="2007-12-03T10:15:30" />
+    <label for="location">Staðsetning:</label>
+    <input type="text" th:field="*{location}" id="location" placeholder="Staðsetning"/>
+
+    <label for="linkLocation">Já.is/Google maps linkur:</label>
+    <input type="url" th:field="*{linkLocation}" id="linkLocation" placeholder="https://ja.is/"/>
+
+    <label for="capacity">Hámarksfjöldi:</label>
+    <input type="number" th:field="*{capacity}" id="capacity"/>
+
+    <label for="timeOfEvent">Dags. og tími viðburðar:</label>
+    <input type="datetime-local" th:field="*{timeOfEvent}" id="timeOfEvent"/>
+
+    <label for="registrationOpens">Skráning hefst:</label>
+    <input type="datetime-local" th:field="*{registrationOpens}" id="registrationOpens"/>
+
+    <label for="registrationCloses">Skráningu lýkur:</label>
+    <input type="datetime-local" th:field="*{registrationCloses}" id="registrationCloses"/>
+
+    <label for="isPriorityEvent">Forgangsviðburður:</label>
+    <input type="checkbox" th:field="*{isPriorityEvent}" id="isPriorityEvent"/>
 
     <button th:text="${submit}" type="submit"></button>
 </form>

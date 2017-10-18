@@ -61,7 +61,7 @@ public class AdController {
      * @return back to the main page
      */
     @RequestMapping(value = "/ad/save", method = RequestMethod.POST)
-    public String saveAd(Ad ad, @RequestParam MultipartFile file) {
+    public String saveAd(Ad ad, @RequestParam("file") MultipartFile file) {
         // Save to database through adService
         adService.save(ad, file);
 
@@ -77,7 +77,12 @@ public class AdController {
      */
     @RequestMapping(value = "/ad/{adId}", method = RequestMethod.POST)
     public String updateAd(Ad ad, @RequestParam MultipartFile file) {
-        adService.save(ad, file);
+
+        if(file.isEmpty()) {
+            adService.save(ad);
+        } else {
+            adService.save(ad, file);
+        }
 
         return "redirect:/";
     }

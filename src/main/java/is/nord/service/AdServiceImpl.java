@@ -40,6 +40,11 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
+    public void save(Ad ad) {
+        adRepository.save(ad);
+    }
+
+    @Override
     public void delete(Ad ad) {
         adRepository.delete(ad);
     }

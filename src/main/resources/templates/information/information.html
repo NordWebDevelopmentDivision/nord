@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+
+<head th:replace="layout :: head"></head>
+<body>
+<nav th:replace="layout :: nav"></nav>
+
+<!-- Only admins are autorized to make new news items and events -->
+<div class="new-items">
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/news/add">Búa til frétt</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/event/add">Búa til viðburð</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/add">Bæta við notanda</a>
+    <a sec:authorize="hasAnyRole('ROLE_ADMIN, ROLE_USER')" href="/user/userList">Listi yfir notendur</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/ad/add">Bæta við auglýsingu</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/infoNord/add">Bæta við upplýsingum um Nörd</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/infoBoard/add">Bæta við upplýsingum um stjórn/miðstjórn</a>
+</div>
+
+
+<!-- For each info item -->
+<h1>Um Nörd</h1>
+
+<div th:each="infoNord : ${infoNord}" >
+    <h2 th:text="${infoNord.title}"></h2>
+    <a th:text="${infoNord.content}"></a>
+    <div>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoNord/${infoNord.id}/edit|}">Breyta</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoNord/${infoNord.id}/delete|}">Eyða</a>
+    </div>
+</div>
+
+<h2>Stjórn Nörd</h2>
+<div th:each="infoBoard : ${infoBoard}" >
+    <div th:if="${infoBoard.isBoard} == true">
+        <h3 th:text="${infoBoard.title}"></h3>
+        <h4 th:text="${infoBoard.name}"></h4>
+        <img th:src="@{|/infoBoard/${infoBoard.id}.jpg|}" alt="boardMember" />
+        <div>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoBoard/${infoBoard.id}/edit|}">Breyta</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoBoard/${infoBoard.id}/delete|}">Eyða</a>
+        </div>
+    </div>
+</div>
+
+<h2>Miðstjórn Nörd</h2>
+<div th:each="infoBoard : ${infoBoard}" >
+    <div th:if="${infoBoard.isBoard} == false">
+        <h3 th:text="${infoBoard.title}"></h3>
+        <h4 th:text="${infoBoard.name}"></h4>
+        <img th:src="@{|/infoBoard/${infoBoard.id}.jpg|}" alt="boardMember" />
+        <div>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoBoard/${infoBoard.id}/edit|}">Breyta</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoBoard/${infoBoard.id}/delete|}">Eyða</a>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

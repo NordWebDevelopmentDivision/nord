@@ -22,6 +22,8 @@ public interface AdService {
     // Saves the specified ad through a call to the adRepository
     void save(Ad ad, MultipartFile file);
 
+    void save(Ad ad);
+
     // Deletes the specified ad through a call to the adRepository
     void delete(Ad ad);
 }

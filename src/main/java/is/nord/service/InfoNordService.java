@@ -1,6 +1,6 @@
 package is.nord.service;
 
-import is.nord.model.About;
+import is.nord.model.InfoNord;
 
 /*
  * Author:
@@ -8,18 +8,18 @@ import is.nord.model.About;
 */
 
 /**
- * A service layer between the AboutController and the AboutRepository
+ * A service layer between the InformationController and the InfoNordRepository
  */
-public interface AboutService {
+public interface InfoNordService {
     // Returns all the information
-    Iterable<About> findAll();
+    Iterable<InfoNord> findAll();
 
     // Returns the info with the specified id
-    About findOne(Long id);
+    InfoNord findOne(Long id);
 
     // Saves the specified info through a call to the aboutRepository
-    void save(About about);
+    void save(InfoNord infoNord);
 
     // Deletes the specified info through a call to the aboutRepository
-    void delete(About about);
+    void delete(InfoNord infoNord);
 }

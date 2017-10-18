@@ -9,27 +9,39 @@
 <!-- Only admins are autorized to make new news items and events -->
 <div class="new-items">
     <a sec:authorize="hasRole('ROLE_ADMIN')" href="/news/add">Búa til frétt</a>
-    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/event/add">Búa til Viðburð</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/event/add">Búa til viðburð</a>
     <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/add">Bæta við notanda</a>
     <a sec:authorize="hasAnyRole('ROLE_ADMIN, ROLE_USER')" href="/user/userList">Listi yfir notendur</a>
     <a sec:authorize="hasRole('ROLE_ADMIN')" href="/ad/add">Bæta við auglýsingu</a>
-    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/about/add">Bæta við upplýsingum um Nörd</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/infoNord/add">Bæta við upplýsingum um Nörd</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/infoBoard/add">Bæta við upplýsingum um stjórn/miðstjórn</a>
 </div>
 
 
 <!-- For each news item -->
 <h1>Fréttir og viðburðir</h1>
 <div th:each="news : ${news}" class="news-item">
-    <h4>Birt þann: <strong th:text="${#temporals.format(news.datePosted, 'dd/MMM/yyyy HH:mm:ss')}">11/10/2017 13:37</strong></h4>
+    <h4>Birt þann: <strong th:text="${#temporals.format(news.datePosted, 'dd/MM/yyyy HH:mm')}"></strong></h4>
+    <h4 th:text="${'Birt af: '  + news.author}"></h4>
+
     <div>
         <h1 th:text="${news.title}"></h1>
         <a th:text="${news.description}"></a>
-        <h4 th:text="${'Birt af: '  + news.author}"></h4>
 
         <!-- If the news item is an event -->
         <div th:if="${news instanceof T(is.nord.model.Event)}">
             <h4 th:text="${'Gestgjafi: ' + news.host}"></h4>
-            <h4>Viðburður hefst: <strong th:text="${#temporals.format(news.timeOfEvent, 'dd/MMM/yyyy HH:mm:ss')}">11/10/2017 13:37</strong></h4>
+            <h4 th:text="${'Staðsetning: ' + news.location}"></h4>
+            <h4>Já.is/Google maps: <a th:href="@{${news.linkLocation}}" th:text="${news.linkLocation}"></a></h4>
+            <h4 th:text="${'Fjöldi sæta: ' + news.capacity}"></h4>
+
+            <h4 th:if="${news.isPriorityEvent} == true">Forgangsviðburður: Já</h4>
+            <h4 th:if="${news.isPriorityEvent} == false">Forgangsviðburður: Nei</h4>
+
+            <h4>Viðburður hefst: <strong th:text="${#temporals.format(news.timeOfEvent, 'dd/MM/yyyy HH:mm')}"></strong></h4>
+            <h4>Skráning hefst: <strong th:text="${#temporals.format(news.registrationOpens, 'dd/MM/yyyy HH:mm')}"></strong></h4>
+            <h4>Skráningu lýkur: <strong th:text="${#temporals.format(news.registrationCloses, 'dd/MM/yyyy HH:mm')}"></strong></h4>
+
             <!-- If the user is authenticated -->
             <div th:if="${#authorization.expression('isAuthenticated()')}">
                 <!-- Print out the list of registrations for each event -->
@@ -69,7 +81,12 @@
     </div>
 </div>
 
+
 <div th:replace="ad/ad :: ads"></div>
+
+
+
+
 
 
 </body>
