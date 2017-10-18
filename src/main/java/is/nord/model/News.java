@@ -19,7 +19,6 @@ public class News {
 
     @Column(columnDefinition = "text")
     private String description;     // The description of the news item
-    private String tag;             // The tag of the news item
     private String author;          // The author of the news item
     private LocalDateTime datePosted = LocalDateTime.now();        // The time when the news item was posted
 
@@ -48,15 +47,7 @@ public class News {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
+    
     public String getAuthor() {
         return author;
     }

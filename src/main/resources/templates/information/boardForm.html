@@ -8,12 +8,18 @@
 </head>
 <body>
 
-<form enctype="multipart/form-data" th:action="@{${action}}" method="post" th:object="${ad}">
+<form enctype="multipart/form-data" th:action="@{${action}}" method="post" th:object="${infoBoard}">
     <input type="hidden" th:field="*{id}"/>
 
-    <h2 th:text="${heading}">Búa til auglýsingu</h2>
+    <h3 th:text="${heading}">Að setja inn upplýsingar um stjórn/miðstjórn</h3>
 
-    <input type="text" th:field="*{link}" placeholder="Linkur"/>
+    <input type="text" th:field="*{title}" placeholder="Embætti"/>
+
+    <input type="text" th:field="*{name}" placeholder="Nafn"/>
+
+    <input type="checkbox" th:field="*{isBoard}" id="isBoard"/>
+
+    <label for="isBoard">Í stjórn (ef ekki hakað við, þá miðstjórn)</label>
 
     <div class="file-wrapper">
         <input type="file" id="file" name="file"/>
@@ -23,7 +29,9 @@
     <input type="hidden" th:field="*{bytes}"/>
 
     <button th:text="${submit}" type="submit"></button>
+
 </form>
+
 
 
 <a th:href="@{/}">Fara á forsíðu</a>

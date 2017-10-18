@@ -8,11 +8,11 @@ import javax.persistence.*;
 */
 
 /**
- * A model for information about Nörd
+ * A model for information information Nörd
  */
 @Entity
-@Table(name="about")
-public class About {
+@Table(name="infoNord")
+public class InfoNord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;                // The id of the ad
@@ -20,7 +20,7 @@ public class About {
     @Column(columnDefinition = "text")
     private String content;         // The content
 
-    public About() {}
+    public InfoNord() {}
 
     public Long getId() {
         return id;

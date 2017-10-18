@@ -13,9 +13,11 @@
 
     <h2 th:text="${heading}">Búa til frétt</h2>
 
-    <input type="text" th:field="*{title}" placeholder="Fyrirsögn"/>
+    <label for="title">Fyrirsögn:</label>
+    <input type="text" th:field="*{title}" id="title" placeholder="Fyrirsögn"/>
 
-    <textarea cols="86" rows ="20" th:field="*{description}" placeholder="Meginmál"></textarea>
+    <label for="description">Meginmál:</label>
+    <textarea cols="86" rows ="20" th:field="*{description}" id="description" placeholder="Meginmál"></textarea>
 
     <button th:text="${submit}" type="submit"></button>
 </form>

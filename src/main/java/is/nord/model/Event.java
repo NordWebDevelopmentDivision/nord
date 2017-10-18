@@ -14,14 +14,16 @@ import java.util.List;
 */
 
 @Entity
-@Table(name="event")
 public class Event extends News {
     private String host;            // The company or host of the event
     private String location;        // The location of the event
+    private String linkLocation;    // The ja.is link
     private int capacity;           // The maximum allowed attendance to the event
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime timeOfEvent;       // The time of the event
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime registrationOpens; // The time when registration for the event opens
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime registrationCloses; // The time when registration for the event closes
     private boolean isPriorityEvent; // Whether 2nd and 3rd year students have priority
 
@@ -42,6 +44,14 @@ public class Event extends News {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getLinkLocation() {
+        return linkLocation;
+    }
+
+    public void setLinkLocation(String linkLocation) {
+        this.linkLocation = linkLocation;
     }
 
     public int getCapacity() {
@@ -76,12 +86,12 @@ public class Event extends News {
         this.registrationCloses = registrationCloses;
     }
 
-    public boolean isPriorityEvent() {
+    public boolean getIsPriorityEvent() {
         return isPriorityEvent;
     }
 
-    public void setPriorityEvent(boolean priorityEvent) {
-        isPriorityEvent = priorityEvent;
+    public void setIsPriorityEvent(boolean isPriorityEvent) {
+        isPriorityEvent = isPriorityEvent;
     }
 
     public List<Registration> getRegistrations() {
