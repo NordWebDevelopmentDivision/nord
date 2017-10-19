@@ -11,6 +11,84 @@
     <title>Nörd | Nemendafélag</title>
 </head>
 <body>
+<header th:fragment="header" class="main-header">
+    <nav class="nav" id="myNav">
+        <div id="logo">
+            <a href="/">Nörd</a>
+        </div>
+
+        <div id="userImage">
+            <a href="javascript:void(0);" onclick="toggleUserMenu()">
+                <img th:src="@{/assets/img/me.jpg}" alt="The user" />
+            </a>
+            <div id="userMenu" class="menu" th:switch="${#authorization.expression('isAuthenticated()')}">
+                <ul th:case="${true}">
+                    <li><a href="#">Mín síða</a></li>
+                    <li>
+                        <form class="logout inline" th:action="@{/logout}" method="post">
+                            <button type="submit">Skrá út</button>
+                        </form>
+                    </li>
+                </ul>
+                <ul th:case="${false}">
+                    <li>
+                        <a href="/login">Innskrá</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="hamburgerIcon">
+            <a href="javascript:void(0);" onclick="toggleHamburgerMenu()">&#9776;</a>
+            <ul id="hamburgerMenu" class="menu">
+                <li>Um Nörd</li>
+                <ul>
+                    <li><a href="#">Hvað er Nörd?</a></li>
+                    <li><a href="#">Stjórn og miðstjórn</a></li>
+                    <li><a href="#">Lög Nörd</a></li>
+                    <li><a href="#">Kóðinn</a></li>
+                    <li><a href="#">Myndir</a></li>
+                    <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="#">Meðlimir</a></li>
+                </ul>
+                <li>Upplýsingatorg</li>
+                <ul>
+                    <li><a href="#">Lokaverkefni</a></li>
+                    <li><a href="#">Glósubanki</a></li>
+                </ul>
+                <li><a href="#">Innskrá</a></li>
+                <li><a href="#">Mín síða</a></li>
+                <li><a href="#">Admin</a></li>
+                <li><a href="#">Útskrá</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <a href="javascript:void(0);" onclick="toggleAboutMenu()">Um Nörd</a>
+            <ul id="aboutMenu" class="menu">
+                <li><a href="#">Hvað er Nörd?</a></li>
+                <li><a href="#">Stjórn og miðstjórn</a></li>
+                <li><a href="#">Lög Nörd</a></li>
+                <li><a href="#">Kóðinn</a></li>
+                <li><a href="#">Myndir</a></li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="#">Meðlimir</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <a href="javascript:void(0);" onclick="toggleInfoMenu()">Upplýsingatorg</a>
+            <ul id="infoMenu" class="menu">
+                <li><a href="#">Lokaverkefni</a></li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="#">Glósubanki</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <a href="#">Admin</a>
+        </div>
+    </nav>
+</header>
+
+<!--
 <nav th:fragment="nav">
     <div class="container">
         <div class="nav-wrapper">
@@ -35,6 +113,20 @@
         </div>
     </div>
 </nav>
+-->
+
+<footer th:fragment="footer" class="main-footer">
+    <address>
+        Nemendafélagið Nörd<br />
+        Dunhaga 7<br />
+        107 Reykjavík
+    </address>
+    <p><strong>Tölvupóstur:</strong> ft@hi.is</p>
+    <p><strong>Kennitala:</strong> 551087-1589</p>
+    <p><strong>Reikningsnúmer:</strong> 311-26-5587</p>
+    <p><small>&copy;2017 Nörd - Nemendafélag tölvunarfræði- og hugbúnaðarverkfræðinema</small></p>
+</footer>
+
 <div th:fragment="flash" th:if="${flash != null}" class="container">
     <div class="message">
         <i class="right material-icons" data-close="">close</i>
@@ -42,9 +134,7 @@
     </div>
 </div>
 <div th:fragment="scripts">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-    <script type="text/javascript" th:src="@{/assets/js/app.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
 </div>
 </body>
 </html>

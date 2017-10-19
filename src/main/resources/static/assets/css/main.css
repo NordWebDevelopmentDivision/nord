@@ -1,98 +1,191 @@
-/**********************************
+/*==============================
 GENERAL
-**********************************/
+==============================*/
 
 * {
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Open Sans', sans-serif;
-}
-
-#wrapper {
-  max-width: 60%;
-  padding: 0 5%;
-  border-right: 3px solid rgba(49, 181, 95, 0.9);
+img {
+  width: 100%;
 }
 
 a {
   text-decoration: none;
 }
 
-img {
-  max-width: 100%;
+/* Removes outline on link click */
+a:focus {
+    outline: 0;
 }
 
-
-
-/**********************************
-HEADING
-**********************************/
-
-/**********************************
-NAVIGATION
-**********************************/
-
-nav ul {
+li {
   list-style: none;
-  margin: 0;
-  padding: 5px 0;
-}
-
-nav li {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-nav a {
-  font-size: 1.4em;
-  font-weight: 800;
-  padding: 0 10px;
-}
-
-
-/**********************************
-ADS
-**********************************/
-
-
-
-/*******************************
-PAGE: HOMEPAGE
-********************************/
-
-.news-item {
-    border: 1px solid rgb(49, 181, 95);
 }
 
 
 
+/*==============================
+HEADER
+==============================*/
 
-/**********************************
-COLORS
-**********************************/
+header {
+  width: 100%;
+  height: 60px;
+}
+
+
+
+/*==============================
+NAVIGATION
+==============================*/
 
 nav {
-  background-color: rgb(49, 181, 95);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: relative;
 }
 
-nav a {
-  color: #333;
+nav div {
+  margin: auto 0;
+  padding: 0 1.4em;
 }
 
-nav a.selected, nav a:hover {
-  color: rgba(255, 255, 255, 0.6);
+#userImage {
+  order: 1;
+}
+
+#userImage a img {
+  width: 54px;
+  height: 54px;
+  border-radius: 100%;
+  margin-top: 3px;
+}
+
+#hamburgerIcon {
+  order: 2;
 }
 
 
 
-/**********************************
-FLOAT CLEARFIX
-**********************************/
+/*==============================
+MENUS
+==============================*/
 
-.group:after {
-  content: "";
-  display: table;
-  clear: both;
+.menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  margin: 20px 0;
+  padding: 5px 10px;
+}
+
+#userMenu {
+  margin-top: -3px;
+}
+
+#hamburgerMenu {
+  right: 0;
+}
+
+
+/*==============================
+ADS
+==============================*/
+
+#ads {
+  display: flex;
+  flex-wrap: wrap;
+  height: 80px;
+  justify-content: space-around;
+  overflow: hidden; /* Display only the top row */
+  padding: 0;
+}
+
+#ads img {
+  width: 80px;
+  margin: 0 2px;
+  border-radius: 5%;
+  border: 2px solid #444;
+}
+
+
+
+/*==============================
+FOOTER
+==============================*/
+
+footer {
+  width: 100%;
+}
+
+footer p {
+  margin: 0;
+  padding: 4px 15px;
+}
+
+footer address {
+  padding: 10px 15px;
+}
+
+
+
+/*==============================
+COLORS
+==============================*/
+
+header {
+  background-color: rgb(49, 49, 49);
+}
+
+nav div a {
+  color: #fff;
+}
+
+nav div li {
+  color: #999;
+}
+
+.menu {
+  background-color: rgba(49, 49, 49, 0.9);
+}
+
+footer {
+  background-color: rgb(49, 49, 49);
+}
+
+footer {
+  color: #fff;
+}
+
+
+
+/*==============================
+MEDIA QUERIES
+==============================*/
+
+@media screen and (max-width: 599px) {
+  /* For mobile, only display the first 3 elements */
+  .nav div:not(:nth-child(-n+3)) {
+  display: none;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  #hamburgerIcon {
+    display: none;
+  }
+  #userImage {
+    margin-left: auto;
+  }
+  #ads {
+    height: 100px;
+  }
+  #ads img {
+    width: 100px;
+  }
+  #userMenu {
+    right: 0;
+  }
 }

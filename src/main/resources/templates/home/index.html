@@ -4,7 +4,7 @@
 
 <head th:replace="layout :: head"></head>
 <body>
-<nav th:replace="layout :: nav"></nav>
+<header th:replace="layout :: header"></header>
 
 <!-- Only admins are autorized to make new news items and events -->
 <div class="new-items">
@@ -95,7 +95,9 @@
 
 <div th:replace="ad/ad :: ads"></div>
 
+<footer th:replace="layout :: footer"></footer>
 
+<div th:replace="layout :: scripts"></div>
 
 
 
