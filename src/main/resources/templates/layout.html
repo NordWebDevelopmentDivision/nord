@@ -26,7 +26,7 @@
                     <li><a href="#">Mín síða</a></li>
                     <li>
                         <form class="logout inline" th:action="@{/logout}" method="post">
-                            <button type="submit">Skrá út</button>
+                            <button type="submit">Útskrá</button>
                         </form>
                     </li>
                 </ul>
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <div id="hamburgerIcon">
+        <div id="hamburgerIcon"  th:switch="${#authorization.expression('isAuthenticated()')}">
             <a href="javascript:void(0);" onclick="toggleHamburgerMenu()">&#9776;</a>
             <ul id="hamburgerMenu" class="menu">
                 <li>Um Nörd</li>
@@ -55,10 +55,21 @@
                     <li><a href="#">Lokaverkefni</a></li>
                     <li><a href="#">Glósubanki</a></li>
                 </ul>
-                <li><a href="#">Innskrá</a></li>
-                <li><a href="#">Mín síða</a></li>
-                <li><a href="#">Admin</a></li>
-                <li><a href="#">Útskrá</a></li>
+                <li>Notandi</li>
+                <ul th:case="${true}">
+                    <li><a href="#">Mín síða</a></li>
+                    <li>
+                        <form class="logout inline" th:action="@{/logout}" method="post">
+                            <button type="submit">Útskrá</button>
+                        </form>
+                    </li>
+                    <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="#">Admin</a></li>
+                </ul>
+                <ul th:case="${false}">
+                    <li>
+                        <a href="/login">Innskrá</a>
+                    </li>
+                </ul>
             </ul>
         </div>
 
@@ -83,37 +94,11 @@
         </div>
 
         <div>
-            <a href="#">Admin</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" href="#">Admin</a>
         </div>
     </nav>
 </header>
 
-<!--
-<nav th:fragment="nav">
-    <div class="container">
-        <div class="nav-wrapper">
-            <a href="/" class="brand-logo">Nörd</a>
-            <a href="/about">Um Nörd</a>
-            <div th:switch="${#authorization.expression('isAuthenticated()')}">
-                <ul th:case="${true}">
-                    <li sec:authentication="name"></li>
-                    <li>
-                        <form class="logout inline" th:action="@{/logout}" method="post">
-                            <button type="submit">Skrá út</button>
-                        </form>
-                    </li>
-                </ul>
-                <ul th:case="${false}">
-                    <li>
-                        <a href="/login">Innskrá</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</nav>
--->
 
 <footer th:fragment="footer" class="main-footer">
     <address>
