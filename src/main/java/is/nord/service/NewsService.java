@@ -1,6 +1,7 @@
 package is.nord.service;
 
 import is.nord.model.News;
+import org.springframework.web.multipart.MultipartFile;
 
 /*
  * Author:
@@ -18,6 +19,8 @@ public interface NewsService {
     News findOne(Long id);
 
     // Saves the specified news item through a call to the newsRepository
+    void save(News news, MultipartFile file);
+
     void save(News news);
 
     // Deletes the specified news item through a call to the newsRepository

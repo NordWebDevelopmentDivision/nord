@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 
 /*
@@ -20,11 +21,13 @@ public class AdServiceImpl implements AdService {
     private AdRepository adRepository;
 
     @Override
+    @Transactional
     public Iterable<Ad> findAll() {
         return adRepository.findAll();
     }
 
     @Override
+    @Transactional
     public Ad findOne(Long id) {
         return adRepository.findOne(id);
     }

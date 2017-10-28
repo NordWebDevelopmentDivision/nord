@@ -1,105 +1,74 @@
 <!DOCTYPE html>
 
 <html>
+    <head>
+        <meta content ="text/html" charset="UTF-8"/>
+        <meta description="viewport" content="width=device-width, initial-scale=1"/>
 
-<head th:replace="layout :: head"></head>
-<body>
-<nav th:replace="layout :: nav"></nav>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <link rel="stylesheet" th:href="@{/assets/css/normalize.css}"/>
+        <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+        <link rel="stylesheet" th:href="@{/assets/css/articles.css}"/>
 
-<!-- Only admins are autorized to make new news items and events -->
-<div class="new-items">
-    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/news/add">Búa til frétt</a>
-    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/event/add">Búa til viðburð</a>
-    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/add">Bæta við notanda</a>
-    <a sec:authorize="hasAnyRole('ROLE_ADMIN, ROLE_USER')" href="/user/userList">Listi yfir notendur</a>
-    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/ad/add">Bæta við auglýsingu</a>
-    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/infoNord/add">Bæta við upplýsingum um Nörd</a>
-    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/infoBoard/add">Bæta við upplýsingum um stjórn/miðstjórn</a>
-</div>
+        <title>Nörd | Nemendafélag</title>
+    </head>
+    <body>
+        <header th:replace="layout :: header"></header>
+        <div th:replace="ad/ad :: ads"></div>
 
+        <main>
 
-<!-- For each news item -->
-<h1>Fréttir og viðburðir</h1>
-<div th:each="news : ${news}" class="news-item">
-    <h4>Birt þann: <strong th:text="${#temporals.format(news.datePosted, 'dd/MM/yyyy HH:mm')}"></strong></h4>
-    <h4 th:text="${'Birt af: '  + news.author}"></h4>
+            <div id="articles" th:each="news : ${news}" th:switch="${news instanceof T(is.nord.model.Event)}">
+                <!-- If the news item is an event -->
+                <div th:case="${true}">
+                    <a th:href="@{|/event/${news.id}|}">
+                        <article class="article" th:style="|background-image:
+                        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url(news/${news.id}.jpeg)|">
 
-    <div>
-        <h1 th:text="${news.title}"></h1>
-        <a th:text="${news.description}"></a>
+                            <div class="published">
+                                <p th:text="${'Birt '
+                                 + #temporals.dayOfWeekNameShort(news.datePosted)
+                                 + ' ' +  #temporals.format(news.datePosted, 'dd')
+                                 + '. ' + #temporals.monthName(news.datePosted)
+                                 + ' ' +  #temporals.format(news.datePosted, 'yyyy')
+                                 + ' - ' + news.author}"></p>
+                            </div>
 
-        <!-- If the news item is an event -->
-        <div th:if="${news instanceof T(is.nord.model.Event)}">
-            <h4 th:text="${'Gestgjafi: ' + news.host}"></h4>
-            <h4 th:text="${'Staðsetning: ' + news.location}"></h4>
-            <h4>Já.is/Google maps: <a th:href="@{${news.linkLocation}}" th:text="${news.linkLocation}"></a></h4>
-            <h4 th:text="${'Fjöldi sæta: ' + news.capacity}"></h4>
-
-            <h4 th:if="${news.isPriorityEvent} == true">Forgangsviðburður: Já</h4>
-            <h4 th:if="${news.isPriorityEvent} == false">Forgangsviðburður: Nei</h4>
-
-            <h4>Viðburður hefst: <strong th:text="${#temporals.format(news.timeOfEvent, 'dd/MM/yyyy HH:mm')}"></strong></h4>
-            <h4>Skráning hefst: <strong th:text="${#temporals.format(news.registrationOpens, 'dd/MM/yyyy HH:mm')}"></strong></h4>
-            <h4>Skráningu lýkur: <strong th:text="${#temporals.format(news.registrationCloses, 'dd/MM/yyyy HH:mm')}"></strong></h4>
-
-            <!-- If the user is authenticated -->
-            <div th:if="${#authorization.expression('isAuthenticated()')}">
-                <!-- Print out the list of registrations for each event -->
-                <h2>Skráningar:</h2>
-                <div th:each="registration : ${registrationService.findRegistrationsByEvent(news)}">
-                    <h4 th:text="${registration.user.username}"></h4>
-                    <label sec:authorize="hasRole('ROLE_ADMIN')" th:for="${#ids.next('confirmed')}">Mættur?</label>
-                    <input sec:authorize="hasRole('ROLE_ADMIN')" type="checkbox" name="confirmed"/>
+                            <div class="title">
+                                <h2 th:text="${news.title}"></h2>
+                            </div>
+                            <p class="date" th:text="${
+                            #temporals.dayOfWeekName(news.datePosted)
+                            + ' ' +  #temporals.format(news.datePosted, 'dd')
+                            + '. ' + #temporals.monthName(news.datePosted)
+                            + ' klukkan ' + #temporals.format(news.datePosted, 'HH:mm')
+                            }"></p>
+                        </article>
+                    </a>
                 </div>
-                <!-- Make conditions based on whether the authenticated user is registered for the event -->
-                <div th:switch="${registrationService.isRegisteredForEvent(news, user)}">
-                    <div th:case="${false}">
-                        <form th:action="@{/register}" method="post">
-                            <input name="eventId" type="hidden" th:value="${news.id}" />
-                            <input name="isRegistered" type="hidden" th:value="${true}" />
-                            <button type="submit">Skrá mig</button>
-                        </form>
-                    </div>
-                    <div th:case="${true}">
-                        <form th:action="@{/unregister}" method="post">
-                            <input name="newsId" type="hidden" th:value="${news.id}" />
-                            <button type="submit">Afskrá mig</button>
-                        </form>
-                    </div>
+                <div th:case="${false}">
+                    <a th:href="@{|/news/${news.id}|}">
+                        <article class="article" th:style="|background-image:
+                        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url(news/${news.id}.jpeg)|">
+
+                            <div class="published">
+                                <p th:text="${'Birt '
+                                 + #temporals.dayOfWeekNameShort(news.datePosted)
+                                 + ' ' +  #temporals.format(news.datePosted, 'dd')
+                                 + '. ' + #temporals.monthName(news.datePosted)
+                                 + ' ' +  #temporals.format(news.datePosted, 'yyyy')
+                                 + ' - ' + news.author}"></p>
+                            </div>
+
+                            <div class="title">
+                                <h2 th:text="${news.title}"></h2>
+                            </div>
+                        </article>
+                    </a>
                 </div>
             </div>
-        </div>
-        <!-- Make conditions based on whether the news item is news or event, and check for admin priveleges -->
-        <div th:switch="${news instanceof T(is.nord.model.Event)}">
-            <div th:case="${false}">
-                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/news/${news.id}/edit|}">Breyta</a>
-                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/news/${news.id}/delete|}">Eyða</a>
-            </div>
-            <div th:case="${true}">
-                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/event/${news.id}/edit|}">Breyta</a>
-                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/event/${news.id}/delete|}">Eyða</a>
-            </div>
-        </div>
-    </div>
-</div>
-<h2>Bannlisti:</h2>
-<div th:each="eventBan : ${eventBanService.findAllBanned()}">
-    <h4 th:text="${eventBan.user.username}"></h4>
-</div>
-<h2>Topp vísindamenn:</h2>
-<div th:each="topUser : ${userService.findAllOrderedByPoints()}">
-    <h4 th:text="${topUser.username} + ' - ' + ${topUser.points}"></h4>
-</div>
-
-
-
-<div th:replace="ad/ad :: ads"></div>
-
-
-
-
-
-
-</body>
-
+        </main>
+    <footer th:replace="layout :: footer"></footer>
+    <div th:replace="layout :: scripts"></div>
+    </body>
 </html>

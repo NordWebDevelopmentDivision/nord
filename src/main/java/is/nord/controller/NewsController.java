@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 
@@ -57,20 +56,59 @@ public class NewsController {
             model.addAttribute("user", user);
         }
 
-        // Allow method calls from the thymeleaf template to registrationService
-        model.addAttribute("registrationService", registrationService);
-
         // Allow method calls from the thymeleaf template to adService
         model.addAttribute("adService", adService);
+
+/*
+        // Allow method calls from the thymeleaf template to registrationService
+        model.addAttribute("registrationService", registrationService);
 
         // Allow method calls from the thymeleaf template to eventBanService
         model.addAttribute("eventBanService", eventBanService);
 
         // Allow method calls from the thymeleaf template to eventBanService
         model.addAttribute("userService", userService);
-
+*/
         return "home/index";
     }
+
+    @RequestMapping("news/{newsId}")
+    public String getNewsDetails(@PathVariable Long newsId, Model model, Principal principal) {
+        model.addAttribute("news", newsService.findOne(newsId));
+
+        // If a user is logged in then add his/her object to the model
+        if (principal != null) {
+            // Get the user
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+        }
+
+        // Allow method calls from the thymeleaf template to adService
+        model.addAttribute("adService", adService);
+
+        return "news/newsDetails";
+    }
+
+    @RequestMapping("event/{newsId}")
+    public String getEventDetails(@PathVariable Long newsId, Model model, Principal principal) {
+        model.addAttribute("news", newsService.findOne(newsId));
+
+        // If a user is logged in then add his/her object to the model
+        if (principal != null) {
+            // Get the user
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+        }
+
+        // Allow method calls from the thymeleaf template to adService
+        model.addAttribute("adService", adService);
+
+        // Allow method calls from the thymeleaf template to registrationService
+        model.addAttribute("registrationService", registrationService);
+
+        return "event/eventDetails";
+    }
+
 
     /**
      * Form for adding a new news item
@@ -110,7 +148,7 @@ public class NewsController {
      * @return back to the main page
      */
     @RequestMapping(value = "/news/save", method = RequestMethod.POST)
-    public String saveNews(News news) {
+    public String saveNews(News news, @RequestParam("file") MultipartFile file) {
         // Get the user
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -118,7 +156,7 @@ public class NewsController {
         news.setAuthor(user.getUsername());
 
         // Save to database through newsService
-        newsService.save(news);
+        newsService.save(news, file);
 
         // Redirect browser to /
         return "redirect:/";
@@ -130,7 +168,7 @@ public class NewsController {
      * @return back to the main page.
      */
     @RequestMapping(value = "/news/{newsId}", method = RequestMethod.POST)
-    public String updateNews(News news) {
+    public String updateNews(News news, @RequestParam MultipartFile file) {
 
         // Get the user
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -138,7 +176,11 @@ public class NewsController {
         // Set author
         news.setAuthor(user.getUsername());
 
-        newsService.save(news);
+        if(file.isEmpty()) {
+            newsService.save(news);
+        } else {
+            newsService.save(news, file);
+        }
 
         return "redirect:/";
     }
@@ -194,7 +236,7 @@ public class NewsController {
      * @return Back to the main page
      */
     @RequestMapping(value = "/event/save", method = RequestMethod.POST)
-    public String saveEvent(Event event) {
+    public String saveEvent(Event event, @RequestParam("file") MultipartFile file) {
         // Get the user
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -202,7 +244,7 @@ public class NewsController {
         event.setAuthor(user.getUsername());
 
         // Save to database through newsService
-        newsService.save(event);
+        newsService.save(event, file);
 
         // Redirect browser to /
         return "redirect:/";
@@ -214,7 +256,7 @@ public class NewsController {
      * @return back to the main page.
      */
     @RequestMapping(value = "/event/{newsId}", method = RequestMethod.POST)
-    public String updateEvent(Event event) {
+    public String updateEvent(Event event, @RequestParam MultipartFile file) {
 
         // Get the user
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -222,7 +264,11 @@ public class NewsController {
         // Set author
         event.setAuthor(user.getUsername());
 
-        newsService.save(event);
+        if(file.isEmpty()) {
+            newsService.save(event);
+        } else {
+            newsService.save(event, file);
+        }
 
         return "redirect:/";
     }
@@ -242,5 +288,14 @@ public class NewsController {
         return "redirect:/";
     }
 
-
+    /**
+     * Retrieves an image file from the database
+     * @param newsId the id of the image file
+     * @return a single image file from the database
+     */
+    @RequestMapping("/news/{newsId}.jpeg")
+    @ResponseBody
+    public byte[] getBackgroundImage(@PathVariable Long newsId) {
+        return newsService.findOne(newsId).getBytes();
+    }
 }

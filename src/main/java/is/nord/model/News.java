@@ -22,6 +22,9 @@ public class News {
     private String author;          // The author of the news item
     private LocalDateTime datePosted = LocalDateTime.now();        // The time when the news item was posted
 
+    @Lob
+    private byte[] bytes;          // The background image for front page
+
     public News() {}
 
     public Long getId() {
@@ -62,5 +65,13 @@ public class News {
 
     public void setDatePosted(LocalDateTime datePosted) {
         this.datePosted = datePosted;
+    }
+
+    public byte[] getBytes() {
+        return bytes;
+    }
+
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
     }
 }
