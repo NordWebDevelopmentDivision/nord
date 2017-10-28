@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta content ="text/html" charset="UTF-8"/>
+    <meta description="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/assets/css/normalize.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/eventDetails.css}"/>
+
+    <title>Nörd | Nemendafélag</title>
+</head>
+<body>
+<header th:replace="layout :: header"></header>
+<div th:replace="ad/ad :: ads"></div>
+
+<main>
+    <article>
+        <p sec:authorize="hasRole('ROLE_ADMIN')" class="infoText sectionInfo">Stjórnandi</p>
+        <section sec:authorize="hasRole('ROLE_ADMIN')" class="section adminSection">
+            <div id="editDelete">
+                <a th:href="@{|/event/${news.id}/delete|}"><img th:src="@{/assets/img/delete.png}" alt="delete symbol" /></a>
+                <a th:href="@{|/event/${news.id}/edit|}"><img th:src="@{/assets/img/edit.png}" alt="edit symbol" /></a>
+            </div>
+        </section>
+        <div id="published">
+            <p th:text="${'Birt '
+             + #temporals.dayOfWeekNameShort(news.datePosted)
+             + ' ' +  #temporals.format(news.datePosted, 'dd')
+             + '. ' + #temporals.monthName(news.datePosted)
+             + ' ' +  #temporals.format(news.datePosted, 'yyyy')
+             + ' - ' + news.author}"></p>
+        </div>
+        <div id="title">
+            <h2 th:text="${news.title}"></h2>
+        </div>
+
+        <p class="date timeOfEvent" th:text="${
+        #temporals.dayOfWeekName(news.timeOfEvent)
+        + ' ' +  #temporals.format(news.timeOfEvent, 'dd')
+        + '. ' + #temporals.monthName(news.timeOfEvent)
+        + ' klukkan ' + #temporals.format(news.timeOfEvent, 'HH:mm')
+        }"></p>
+
+        <div id ="description">
+            <p th:text="${news.description}"></p>
+        </div>
+
+        <div id="countdown">
+            <p class="infoText">-</p>
+            <p class="registrationOpens" th:text="${#temporals.format(news.registrationOpens, 'dd:MM:yyyy:HH:mm')}"></p>
+            <p class="registrationCloses" th:text="${#temporals.format(news.registrationCloses, 'dd:MM:yyyy:HH:mm')}"></p>
+            <p class="timer">
+                <span class="timerInt hours">--</span>
+                <span class="timerString">KLST</span>
+                <span class="timerInt minutes">--</span>
+                <span class="timerString">MÍN</span>
+                <span class="timerInt seconds">--</span>
+                <span class="timerString">SEK</span>
+            </p>
+        </div>
+        <div id="button">
+            <button disabled="true">Þú ert ekki innskráður</button>
+        </div>
+
+
+
+        <p class="infoText sectionInfo">Nánari upplýsingar</p>
+        <section class="section">
+            <div id="address">
+                <p th:text="${news.host}"></p><a th:href="@{${news.linkLocation}}">
+                    <img th:src="@{/assets/img/ja_logo.png}" alt="já.is logo" />
+                </a>
+                <p th:text="${news.location}"></p>
+            </div>
+
+            <div class="registration regOpens">
+                <p class="infoText">Skráning hefst:</p>
+                <p class="date" th:text="${
+                #temporals.dayOfWeekName(news.registrationOpens)
+                + ' ' +  #temporals.format(news.registrationOpens, 'dd')
+                + '. ' + #temporals.monthName(news.registrationOpens)
+                + ' klukkan ' + #temporals.format(news.registrationOpens, 'HH:mm')
+                }"></p>
+            </div>
+            <div class="registration regCloses">
+                <p class="infoText">Skráningu lýkur:</p>
+                <p class="date" th:text="${
+                #temporals.dayOfWeekName(news.registrationCloses)
+                + ' ' +  #temporals.format(news.registrationCloses, 'dd')
+                + '. ' + #temporals.monthName(news.registrationCloses)
+                + ' klukkan ' + #temporals.format(news.registrationCloses, 'HH:mm')
+                }"></p>
+            </div>
+            <div class="capacityInfo">
+                <p th:text="${'Fjöldi sæta: ' + news.capacity}"></p>
+                <p>Laus sæti: <span>50</span></p>
+                <p>Biðlisti: <span>0</span></p>
+            </div>
+        </section>
+
+        <div th:if="${#authorization.expression('isAuthenticated()')}">
+            <p class="infoText sectionInfo">Skráningarlisti</p>
+            <section class="section" th:each="registration : ${registrationService.findRegistrationsByEvent(news)}">
+                <p th:text="${registration.user.username}"></p>
+            </section>
+        </div>
+
+    </article>
+</main>
+
+<footer th:replace="layout :: footer"></footer>
+
+<script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/eventDetails.js}"></script>
+</body>
+</html>

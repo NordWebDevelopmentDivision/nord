@@ -1,0 +1,72 @@
+/*==============================
+MAIN
+==============================*/
+
+main {
+	max-width: 900px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+
+
+/*==============================
+ARTICLE
+==============================*/
+
+#articles {
+	max-width: 500px;
+	width: 100%;
+	margin: 0 auto;
+	height: auto;
+}
+
+.article {
+	margin: 15px auto;
+	text-align: center;
+	width: 100%;
+	min-height: 340px;
+	color: #fff;
+}
+
+.published p {
+	font-style: italic;
+	text-align: left;
+	padding-left: 20px;
+}
+
+.title {
+	font-size: 1.6em;
+	padding-top: 20px;
+}
+
+.title h2 {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.date {
+	padding: 0;
+	margin: 0;
+	font-size: 1.2em;
+}
+
+
+
+/*==============================
+COLORS
+==============================*/
+
+main {
+	background-color: #eee;
+}
+
+article {
+	background-color: #444;
+	border: 3px solid #444;
+	border-radius: 3%;
+}
+
+/*==============================
+MEDIA QUERIES
+==============================*/

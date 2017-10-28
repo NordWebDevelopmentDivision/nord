@@ -2,13 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>Nemendafélagið Nörd</title>
-    <link rel="stylesheet" href="../../css/normalize.css" />
+    <meta content ="text/html" charset="UTF-8"/>
+    <meta description="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/assets/css/normalize.css}"/>
+
+    <title>Nörd | Nemendafélag</title>
 </head>
 <body>
 
-<form th:action="@{${action}}" method="post" th:object="${news}">
+<form enctype="multipart/form-data" th:action="@{${action}}" method="post" th:object="${news}">
     <input type="hidden" th:field="*{id}"/>
 
     <h2 th:text="${heading}">Búa til frétt</h2>
@@ -18,6 +22,13 @@
 
     <label for="description">Meginmál:</label>
     <textarea cols="86" rows ="20" th:field="*{description}" id="description" placeholder="Meginmál"></textarea>
+
+    <div class="file-wrapper">
+        <input type="file" id="file" name="file"/>
+        <span class="placeholder" data-placeholder="Choose an image...">Choose an image...</span>
+        <label for="file" class="button">Browse</label>
+    </div>
+    <input type="hidden" th:field="*{bytes}"/>
 
     <button th:text="${submit}" type="submit"></button>
 </form>

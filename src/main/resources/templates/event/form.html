@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form th:action="@{${action}}" method="post" th:object="${event}">
+<form enctype="multipart/form-data" th:action="@{${action}}" method="post" th:object="${event}">
     <input type="hidden" th:field="*{id}"/>
 
     <h2 th:text="${heading}">Búa til Viðburð</h2>
@@ -42,6 +42,13 @@
 
     <label for="isPriorityEvent">Forgangsviðburður:</label>
     <input type="checkbox" th:field="*{isPriorityEvent}" id="isPriorityEvent"/>
+
+    <div class="file-wrapper">
+        <input type="file" id="file" name="file"/>
+        <span class="placeholder" data-placeholder="Choose an image...">Choose an image...</span>
+        <label for="file" class="button">Browse</label>
+    </div>
+    <input type="hidden" th:field="*{bytes}"/>
 
     <button th:text="${submit}" type="submit"></button>
 </form>

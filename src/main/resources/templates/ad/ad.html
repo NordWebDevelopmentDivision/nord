@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 
 <html>
-
-<div th:fragment="ads">
+<head th:replace="layout :: head"></head>
+<body>
+<div th:fragment="ads" id="ads">
     <!-- For each ad -->
-    <h1>Styrktaraðilar</h1>
     <div th:each="ad : ${adService.findAll()}" >
-        <div>
-            <a th:href="@{http://} + ${ad.link}">
-                <img th:src="@{|/ad/${ad.id}.jpg|}" alt="adLogo" />
-            </a>
-            <div>
-                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/ad/${ad.id}/edit|}">Breyta</a>
-                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/ad/${ad.id}/delete|}">Eyða</a>
-            </div>
-        </div>
+
+        <a th:href="@{http://} + ${ad.link}">
+            <img th:src="@{|/ad/${ad.id}.jpg|}" alt="adLogo" />
+        </a>
+       <!-- <div>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/ad/${ad.id}/edit|}">Breyta</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/ad/${ad.id}/delete|}">Eyða</a>
+        </div> -->
+
     </div>
 </div>
-
+</body>
 </html>

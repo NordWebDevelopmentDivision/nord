@@ -1,0 +1,58 @@
+article {
+	margin: 0 auto;
+	padding: 0 10px;
+	text-align: justify;
+    text-justify: inter-word;
+    max-width: 500px;
+}
+
+main {
+	border-top: 4px solid coral;
+	border-bottom: 4px solid coral;
+	max-width: 900px;
+ 	width: 100%;
+  	margin: 0 auto;
+  	margin-bottom: 30px;
+}
+
+#published p {
+	font-style: italic;
+	text-align: left;
+}
+
+#title {
+	text-align: center;
+	font-size: 1.6em;
+}
+
+
+#editDelete img {
+	height: 50px;
+	width: 50px;
+	padding: 10px;
+	background-color: #444;
+	margin: 0px 10px;
+	border-radius: 15%;
+}
+
+#editDelete {
+	margin: 10px;
+	text-align: center;
+}
+
+.infoText {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+.sectionInfo {
+	font-weight: bold;
+	margin-top: 30px;
+}
+
+.section {
+	border-top: 1px solid coral;
+	border-bottom: 1px solid coral;
+	margin-bottom: 50px;
+}
