@@ -50,32 +50,6 @@ main {
 	margin-top: 30px;
 }
 
-#countdown {
-	text-align: center;
-	font-size: 1.2em;
-}
-
-#countdown p {
-	margin: 0;
-	padding: 5px;
-}
-
-#button {
-	text-align: center;
-	margin: 15px 0;
-}
-
-#button button {
-	width: 60%;
-	height: 40px;
-}
-
-#button button:disabled {
-	color: red;
-	background-color: #eee;
-	border: 1px solid #ccc;
-}
-
 .section {
 	border-top: 1px solid coral;
 }
@@ -165,17 +139,66 @@ COUNTDOWN TIMER
     font-weight: bold;
 }
 
+#countdown {
+	text-align: center;
+	font-size: 1.2em;
+}
+
+#countdown p {
+	margin: 0;
+	padding: 5px;
+}
+
+#info {
+    font-weight: bold;
+}
+
+/*==============================
+REGISTRATION BUTTON
+==============================*/
+
+#button {
+	text-align: center;
+	margin: 15px 0;
+	height: 50px;
+}
+
+#button button {
+	width: 60%;
+	height: 50px;
+	font-weight: bold;
+}
+
 
 
 /*==============================
 COLORS
 ==============================*/
 
+#info {
+    color: #444;
+}
+
+#notSignedIn {
+    color: red;
+    font-weight: bold;
+}
+
+.registerButton {
+    color: green;
+    border: 1px solid green;
+}
+
+.unregisterButton {
+    color: red;
+    border: 1px solid red;
+}
+
 .date {
 	color: #999;
 }
 
-.timer {
+#timer {
     background-color: rgb(49, 49, 49);
     padding: 10px 20px;
     display: inline-block;
@@ -186,5 +209,5 @@ COLORS
 }
 
 .timerString {
-    color: #999;
+    color: #aaa;
 }
