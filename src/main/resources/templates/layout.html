@@ -94,7 +94,7 @@
                 <li><a href="#">Lög Nörd</a></li>
                 <li><a href="#">Kóðinn</a></li>
                 <li><a href="#">Myndir</a></li>
-                <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="#">Meðlimir</a></li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="/user/userList">Meðlimir</a></li>
             </ul>
         </div>
 
@@ -131,7 +131,7 @@
     <p><strong>Tölvupóstur:</strong> ft@hi.is</p>
     <p><strong>Kennitala:</strong> 551087-1589</p>
     <p><strong>Reikningsnúmer:</strong> 311-26-5587</p>
-    <p><small>&copy;2017 Nörd - Nemendafélag tölvunarfræði- og hugbúnaðarverkfræðinema</small></p>
+    <p><small>&copy;2017 Nörd - Nemendafélag tölvunarfræði- og hugbúnaðarverkfræðinema við Háskóla Íslands</small></p>
 </footer>
 
 <div th:fragment="flash" th:if="${flash != null}" class="container">

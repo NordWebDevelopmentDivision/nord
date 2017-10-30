@@ -49,10 +49,10 @@
         </div>
 
         <div id="countdown">
-            <p class="infoText">-</p>
+            <p id="info" class="infoText">&#9749;</p>
             <p class="registrationOpens" th:text="${#temporals.format(news.registrationOpens, 'dd:MM:yyyy:HH:mm')}"></p>
             <p class="registrationCloses" th:text="${#temporals.format(news.registrationCloses, 'dd:MM:yyyy:HH:mm')}"></p>
-            <p class="timer">
+            <p id="timer">
                 <span class="timerInt hours">--</span>
                 <span class="timerString">KLST</span>
                 <span class="timerInt minutes">--</span>
@@ -61,8 +61,29 @@
                 <span class="timerString">SEK</span>
             </p>
         </div>
+
         <div id="button">
-            <button disabled="true">Þú ert ekki innskráður</button>
+            <!--<button th:case="${false}" disabled="true">Þú ert ekki innskráður</button>-->
+            <!-- Make conditions based on whether the authenticated user is registered for the event -->
+            <div th:if="${#authorization.expression('isAuthenticated()')}" th:switch="${registrationService.isRegisteredForEvent(news, user)}">
+                <div th:case="${false}">
+                    <form th:action="@{/register}" method="post">
+                        <input name="eventId" type="hidden" th:value="${news.id}" />
+                        <input name="isRegistered" type="hidden" th:value="${true}" />
+                        <button class="registerButton regBtn" type="submit" style="display: none;">Skrá mig</button>
+                    </form>
+                </div>
+                <div th:case="${true}">
+                    <form th:action="@{/unregister}" method="post">
+                        <input name="newsId" type="hidden" th:value="${news.id}" />
+                        <button class="unregisterButton regBtn" type="submit" style="display: none;">Afskrá mig</button>
+                    </form>
+                </div>
+            </div>
+
+            <div th:if="!${#authorization.expression('isAuthenticated()')}">
+                <p id="notSignedIn">Þú ert ekki innskráður</p>
+            </div>
         </div>
 
 
@@ -94,17 +115,19 @@
                 + ' klukkan ' + #temporals.format(news.registrationCloses, 'HH:mm')
                 }"></p>
             </div>
-            <div class="capacityInfo">
+            <div class="capacityInfo" th:with="n=${#lists.size(registrationService.findRegistrationsByEvent(news))}">
+                <p th:if="${news.isPriorityEvent} == true">Forgangsviðburður</p>
                 <p th:text="${'Fjöldi sæta: ' + news.capacity}"></p>
-                <p>Laus sæti: <span>50</span></p>
-                <p>Biðlisti: <span>0</span></p>
+                <p th:text="${'Fjöldi skráninga: ' + n}"></p>
+                <p th:if="${(news.capacity - n) >= 0}" th:text="${'Laus sæti: ' + (news.capacity - n)}"></p>
+                <p th:if="${0 > (news.capacity - n)}" th:text="${'Biðlisti: ' + (n - news.capacity)}"></p>
             </div>
         </section>
 
         <div th:if="${#authorization.expression('isAuthenticated()')}">
             <p class="infoText sectionInfo">Skráningarlisti</p>
-            <section class="section" th:each="registration : ${registrationService.findRegistrationsByEvent(news)}">
-                <p th:text="${registration.user.username}"></p>
+            <section class="section">
+                <p th:each="registration : ${registrationService.findRegistrationsByEvent(news)}" th:text="${registration.user.username}"></p>
             </section>
         </div>
 
