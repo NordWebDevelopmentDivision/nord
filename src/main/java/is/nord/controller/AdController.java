@@ -1,12 +1,17 @@
 package is.nord.controller;
 
+import is.nord.FlashMessage;
 import is.nord.model.Ad;
 import is.nord.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 /*
  * Author:
@@ -30,8 +35,12 @@ public class AdController {
      */
     @RequestMapping("/ad/add")
     public String formNewAd(Model model) {
+
+        if(!model.containsAttribute("ad")) {
+            model.addAttribute("ad", new Ad());
+        }
+
         // Add model attributes needed for new form
-        model.addAttribute("ad", new Ad());
         model.addAttribute("action", "/ad/save");
         model.addAttribute("heading", "Ný auglýsing");
         model.addAttribute("submit","Vista auglýsingu");
@@ -61,9 +70,22 @@ public class AdController {
      * @return back to the main page
      */
     @RequestMapping(value = "/ad/save", method = RequestMethod.POST)
-    public String saveAd(Ad ad, @RequestParam("file") MultipartFile file) {
+    public String saveAd(@Valid Ad ad, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file) {
+        if (result.hasErrors()) {
+            // Include validation errors upon redirect
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.ad", result);
+
+            // Add ad if invalid was received
+            redirectAttributes.addFlashAttribute("ad", ad);
+
+            // Redirect back to the form
+            return "redirect:/ad/add";
+        }
+
         // Save to database through adService
         adService.save(ad, file);
+
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að bæta við auglýsingu", FlashMessage.Status.SUCCESS));
 
         // Redirect browser to /
         return "redirect:/";

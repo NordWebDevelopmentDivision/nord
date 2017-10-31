@@ -19,19 +19,32 @@ function myTimer() {
     if (currDate <= regDate) {
     /* Then the registration has not yet started */
         countdownText.innerHTML = "Skráning opnar eftir:";
-        timerInts[0].innerHTML = regDate.getHours() - currDate.getHours();
-        timerInts[1].innerHTML = regDate.getMinutes() - currDate.getMinutes() - 1;
-        timerInts[2].innerHTML = 60 - currDate.getSeconds();
+        document.getElementById("timer").style.display="initial";
+        var m1 = regDate.getHours()*60 + regDate.getMinutes();
+        var m2 = currDate.getHours()*60 + currDate.getMinutes();
+        var cntdwn = m1 - m2-1;
+        console.log(cntdwn);
+        hours = Math.floor(cntdwn / 60);
+        minutes = cntdwn % 60;
+        timerInts[0].innerHTML = hours;
+        timerInts[1].innerHTML = minutes;
+        timerInts[2].innerHTML = 59 - currDate.getSeconds();
     } else if (currDate >= regDate && currDate <= regClosesDate) {
     /* Then the registration is open */
         for (var i = 0; i < regBtn.length; i++) {
             regBtn[i].style.display="initial";
         }
         countdownText.innerHTML = "Skráningu lýkur eftir:"
+        document.getElementById("timer").style.display="initial";
         countdownText.style.color="green";
-        timerInts[0].innerHTML = regClosesDate.getHours() - currDate.getHours();
-        timerInts[1].innerHTML = regClosesDate.getMinutes() - currDate.getMinutes() - 1;
-        timerInts[2].innerHTML = 60 - currDate.getSeconds();
+        var m1 = regClosesDate.getHours()*60 + regClosesDate.getMinutes();
+        var m2 = currDate.getHours()*60 + currDate.getMinutes();
+        var cntdwn = m1 - m2-1;
+        hours = Math.floor(cntdwn / 60);
+        minutes = cntdwn % 60;
+        timerInts[0].innerHTML = hours;
+        timerInts[1].innerHTML = minutes;
+        timerInts[2].innerHTML = 59 - currDate.getSeconds();
 
     } else {
     /* Then the registration is over */
@@ -39,6 +52,7 @@ function myTimer() {
             regBtn[i].style.display="none";
         }
         countdownText.innerHTML = "Skráningu lokið";
+        document.getElementById("timer").style.display="none";
         countdownText.style.color="red";
         /*timerInts[0].innerHTML = "00";
         timerInts[1].innerHTML = "00";
