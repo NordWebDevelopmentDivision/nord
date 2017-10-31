@@ -148,6 +148,16 @@ MENUS
   margin-bottom: 10px;
 }
 
+.logoutBtn {
+    background:none!important;
+    color:inherit;
+    border:none;
+    font: inherit;
+    cursor: pointer;
+}
+
+
+
 /*==============================
 ADS
 ==============================*/
