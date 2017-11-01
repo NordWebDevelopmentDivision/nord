@@ -115,9 +115,11 @@ public class AdController {
      * @return back to the main page
      */
     @RequestMapping("/ad/{adId}/delete")
-    public String deleteAd(@PathVariable Long adId) {
+    public String deleteAd(@PathVariable Long adId, RedirectAttributes redirectAttributes) {
         Ad ad = adService.findOne(adId);
         adService.delete(ad);
+
+        redirectAttributes.addFlashAttribute("flash",new FlashMessage("Auglýsingu eytt!", FlashMessage.Status.SUCCESS));
 
         return "redirect:/";
     }

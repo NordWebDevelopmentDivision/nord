@@ -14,8 +14,10 @@
     <h3 th:text="${heading}">Að setja inn upplýsingar um stjórn/miðstjórn</h3>
 
     <input type="text" th:field="*{title}" placeholder="Embætti"/>
+    <div class="error-message" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
 
     <input type="text" th:field="*{name}" placeholder="Nafn"/>
+    <div class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 
     <input type="checkbox" th:field="*{isBoard}" id="isBoard"/>
 

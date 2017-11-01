@@ -11,6 +11,7 @@
     <title>Nörd | Nemendafélag</title>
 </head>
 <body>
+<div th:replace="layout :: flash"></div>
 
 <form enctype="multipart/form-data" th:action="@{${action}}" method="post" th:object="${news}">
     <input type="hidden" th:field="*{id}"/>
@@ -19,9 +20,11 @@
 
     <label for="title">Fyrirsögn:</label>
     <input type="text" th:field="*{title}" id="title" placeholder="Fyrirsögn"/>
+    <div class="error-message" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
 
     <label for="description">Meginmál:</label>
     <textarea cols="86" rows ="20" th:field="*{description}" id="description" placeholder="Meginmál"></textarea>
+    <div class="error-message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
 
     <div class="file-wrapper">
         <input type="file" id="file" name="file"/>

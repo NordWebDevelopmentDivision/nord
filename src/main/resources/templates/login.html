@@ -2,6 +2,7 @@
 <html lang="en">
 <head></head>
 <body>
+<div th:replace="layout :: flash"></div>
 
 <form th:action="@{/login}" th:object="${user}" method="post">
 

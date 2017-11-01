@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>Nemendafélagið Nörd</title>
-    <link rel="stylesheet" href="../../css/normalize.css" />
+    <link rel="stylesheet" href="@{/assets/css/normalize.css}" />
 </head>
 <body>
+<div th:replace="layout :: flash"></div>
 
 <form th:action="@{${action}}" method="post" th:object="${infoNord}">
     <input type="hidden" th:field="*{id}"/>
@@ -14,8 +15,10 @@
     <h2 th:text="${heading}">Að setja inn upplýsingar um Nörd</h2>
 
     <input type="text" th:field="*{title}" placeholder="Yfirheiti"/>
+    <div class="error-message" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
 
     <textarea cols="86" rows ="20" th:field="*{content}" placeholder="Innihald"></textarea>
+    <div class="error-message" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
 
     <button th:text="${submit}" type="submit"></button>
 

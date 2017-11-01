@@ -1,5 +1,7 @@
 package is.nord.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 
 /*
@@ -16,7 +18,11 @@ public class InfoBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;                // The id of the ad
+
+    @NotEmpty(message="{infoBoard.name.notEmpty}")
     private String name;           // The person's name
+
+    @NotEmpty(message="{infoBoard.title.notEmpty}")
     private String title;         // The title
     private boolean isBoard;         // Specifies if the person is one of the top five
 
