@@ -50,7 +50,7 @@
                         <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/event/add">Búa til viðburð</a></li>
                         <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/add">Bæta við notanda</a></li>
                         <li><a sec:authorize="hasAnyRole('ROLE_ADMIN, ROLE_USER')" href="/user/userList">Listi yfir notendur</a></li>
-                        <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/ad/add">Bæta við auglýsingu</a></li>
+                        <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/ad/add">Auglýsingar</a></li>
                         <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/infoNord/add">Bæta við upplýsingum um Nörd</a></li>
                         <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/infoBoard/add">Bæta við upplýsingum um stjórn/miðstjórn</a></li>
                     </ul>
@@ -113,7 +113,7 @@
                 <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/event/add">Búa til viðburð</a></li>
                 <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/add">Bæta við notanda</a></li>
                 <li><a sec:authorize="hasAnyRole('ROLE_ADMIN, ROLE_USER')" href="/user/userList">Listi yfir notendur</a></li>
-                <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/ad/add">Bæta við auglýsingu</a></li>
+                <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/ad/add">Auglýsingar</a></li>
                 <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/infoNord/add">Bæta við upplýsingum um Nörd</a></li>
                 <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/infoBoard/add">Bæta við upplýsingum um stjórn/miðstjórn</a></li>
             </ul>
@@ -134,9 +134,9 @@
     <p><small>&copy;2017 Nörd - Nemendafélag tölvunarfræði- og hugbúnaðarverkfræðinema við Háskóla Íslands</small></p>
 </footer>
 
-<div th:fragment="flash" th:if="${flash != null}" class="container">
+<div th:fragment="flash" th:if="${flash != null}" id="container">
     <div class="message">
-        <i class="right material-icons" data-close="">close</i>
+        <i class="right material-icons" data-close="" onclick="closeFlash()">close</i>
         <div th:classappend="${#strings.toLowerCase(flash.status)}" th:text="${flash.message}" class="flash"></div>
     </div>
 </div>

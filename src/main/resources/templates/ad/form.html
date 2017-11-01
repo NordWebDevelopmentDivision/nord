@@ -1,34 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta content ="text/html" charset="UTF-8"/>
+        <meta description="viewport" content="width=device-width, initial-scale=1"/>
 
-<head>
-    <meta charset="UTF-8" />
-    <title>Nemendafélagið Nörd</title>
-    <link rel="stylesheet" href="@{/assets/css/normalize.css}" />
-</head>
-<body>
-<div th:replace="layout :: flash"></div>
-<form enctype="multipart/form-data" th:action="@{${action}}" method="post" th:object="${ad}">
-    <input type="hidden" th:field="*{id}"/>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <link rel="stylesheet" th:href="@{/assets/css/normalize.css}"/>
+        <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+        <link rel="stylesheet" th:href="@{/assets/css/ads.css}"/>
 
-    <h2 th:text="${heading}">Búa til auglýsingu</h2>
+        <title>Nörd | Nemendafélag</title>
+    </head>
+    <body>
+    <header th:replace="layout :: header"></header>
 
-    <input type="text" th:field="*{link}" placeholder="Linkur"/>
-    <div class="error-message" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></div>
+        <form id="createEditAd" enctype="multipart/form-data" th:action="@{${action}}" method="post" th:object="${ad}">
+            <input type="hidden" th:field="*{id}"/>
 
-    <div class="file-wrapper">
-        <input type="file" id="file" name="file"/>
-        <span class="placeholder" data-placeholder="Choose an image...">Choose an image...</span>
-        <label for="file" class="button">Browse</label>
-    </div>
-    <input type="hidden" th:field="*{bytes}"/>
+            <h1 th:text="${heading}">Búa til auglýsingu</h1>
 
-    <button th:text="${submit}" type="submit"></button>
-</form>
+            <div class="file-wrapper">
+                <input class="inputFile" type="file" id="file" name="file" onchange="readURL(this);" />
+                <label for="file">Veldu mynd</label>
+                <img id="preview" src="#" alt="your image" />
+            </div>
 
+            <input type="hidden" th:field="*{bytes}"/>
 
-<a th:href="@{/}">Fara á forsíðu</a>
+            <input id="inputLink" type="text" th:field="*{link}" placeholder="Linkur"/>
+            <div class="error-message" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></div>
 
-</body>
+            <button th:text="${submit}" type="submit"></button>
+        </form>
 
+        <div th:replace="layout :: flash"></div>
+
+        <h2>Allar auglýsingar</h2>
+        <section id="allAds">
+            <div class="eachAd" th:each="ad : ${adService.findAll()}" >
+
+                <a th:href="@{http://} + ${ad.link}">
+                    <img class="adImg" th:src="@{|/ad/${ad.id}.jpg|}" alt="adLogo" />
+                </a>
+                <div id="editDeleteAds">
+                      <a th:href="@{|/ad/${ad.id}/edit|}">
+                          <img class="imgAction" th:src="@{/assets/img/edit.png}" alt="edit symbol" />
+                      </a>
+                      <a th:href="@{|/ad/${ad.id}/delete|}">
+                          <img class="imgAction" th:src="@{/assets/img/delete.png}" alt="delete symbol" />
+                      </a>
+                 </div>
+            </div>
+        </section>
+
+        <footer th:replace="layout :: footer"></footer>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+        <script type="text/javascript" th:src="@{/assets/js/ads.js}"></script>
+    </body>
 </html>
