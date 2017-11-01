@@ -22,7 +22,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "is.nord.repository")
-@PropertySource("application.properties")
+@PropertySource(value="application.properties", ignoreResourceNotFound=true)
 public class DataConfig {
     @Autowired
     private Environment env;

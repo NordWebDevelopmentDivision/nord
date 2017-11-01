@@ -10,7 +10,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-@PropertySource("messages.properties")
+@PropertySource(value="messages.properties", ignoreResourceNotFound=true)
 public class AppConfig  extends WebMvcConfigurerAdapter {
     @Bean
     public MessageSource messageSource() {

@@ -50,4 +50,9 @@ public class NewsServiceImpl implements NewsService {
     public void delete(News news) {
         newsRepository.delete(news);
     }
+
+    @Override
+    public boolean erALifi() {
+        return true;
+    }
 }

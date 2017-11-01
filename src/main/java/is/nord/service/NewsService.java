@@ -25,4 +25,6 @@ public interface NewsService {
 
     // Deletes the specified news item through a call to the newsRepository
     void delete(News news);
+
+    public boolean erALifi();
 }

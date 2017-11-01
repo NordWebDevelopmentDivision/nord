@@ -33,4 +33,6 @@ public interface RegistrationService {
     void deleteAll(Iterable<Registration> registrations);
 
     //List<TopEventUser> findTopUsers();
+
+
 }

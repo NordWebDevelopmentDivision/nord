@@ -379,4 +379,14 @@ public class NewsController {
     public byte[] getBackgroundImage(@PathVariable Long newsId) {
         return newsService.findOne(newsId).getBytes();
     }
+
+    @RequestMapping (value = "/lifir", method=RequestMethod.GET)
+    public String lifir(Model model) {
+        User k = new User();
+        model.addAttribute("kennari", k);
+        if(newsService.erALifi())
+            return "heima";
+        else
+            return "listiKennara";
+    }
 }
