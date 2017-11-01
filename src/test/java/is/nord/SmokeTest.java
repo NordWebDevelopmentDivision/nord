@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 
 @RunWith(SpringRunner.class)
-@PropertySource("classpath:main/resources/application.properties")
+@PropertySource(value="classpath:main/resources/application.properties", ignoreResourceNotFound=true)
 //@SpringBootTest(webEnvironment=NONE)  // Does not provide any servlet environment 
 @SpringBootTest
 //@TestPropertySource(
