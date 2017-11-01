@@ -64,7 +64,7 @@ public class RegistrationController {
         registrationService.save(registration);
 
         // Redirect browser to /
-        return "redirect:/";
+        return "redirect:/event/" + eventId;
     }
 
     /**
@@ -88,6 +88,6 @@ public class RegistrationController {
         registrationService.delete((Event)news, user);
 
         // Redirect browser to /
-        return "redirect:/";
+        return "redirect:/event/" + newsId;
     }
 }

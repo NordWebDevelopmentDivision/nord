@@ -1,5 +1,7 @@
 package is.nord.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 
 /*
@@ -16,8 +18,12 @@ public class InfoNord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;                // The id of the ad
+
+    @NotEmpty(message="{infoNord.title.notEmpty}")
     private String title;           // The title
+
     @Column(columnDefinition = "text")
+    @NotEmpty(message="{infoNord.content.notEmpty}")
     private String content;         // The content
 
     public InfoNord() {}

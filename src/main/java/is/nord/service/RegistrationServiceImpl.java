@@ -46,8 +46,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public Iterable<Registration> findRegistrationsByEvent(Event event) {
+        // TODO: If the event is priority event, then sort the list accordingly
         return registrationRepository.findRegistrationsByEvent(event);
-
     }
 
     @Override

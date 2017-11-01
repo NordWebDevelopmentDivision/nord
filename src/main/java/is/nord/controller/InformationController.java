@@ -1,5 +1,6 @@
 package is.nord.controller;
 
+import is.nord.FlashMessage;
 import is.nord.model.InfoBoard;
 import is.nord.model.InfoNord;
 import is.nord.service.InfoBoardService;
@@ -7,8 +8,12 @@ import is.nord.service.InfoNordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 /*
  * Author:
@@ -52,8 +57,12 @@ public class InformationController {
      */
     @RequestMapping("/infoNord/add")
     public String formNewInfoNord(Model model) {
+
+        if(!model.containsAttribute("infoNord")) {
+            model.addAttribute("infoNord", new InfoNord());
+        }
+
         // Add model attributes needed for new form
-        model.addAttribute("infoNord", new InfoNord());
         model.addAttribute("action", "/infoNord/save");
         model.addAttribute("heading", "Nýjar upplýsingar");
         model.addAttribute("submit","Vista upplýsingar");
@@ -69,7 +78,12 @@ public class InformationController {
      */
     @RequestMapping("/infoNord/{infoId}/edit")
     public String formEditInfoNord(@PathVariable Long infoId, Model model) {
-        model.addAttribute("infoNord", infoNordService.findOne(infoId));
+
+        if(!model.containsAttribute("infoNord")) {
+            model.addAttribute("infoNord", infoNordService.findOne(infoId));
+        }
+
+        //model.addAttribute("infoNord", infoNordService.findOne(infoId));
         model.addAttribute("action", String.format("/infoNord/%s", infoId));
         model.addAttribute("heading", "Breyta upplýsingum");
         model.addAttribute("submit","Uppfæra upplýsingar");
@@ -83,9 +97,22 @@ public class InformationController {
      * @return back to the main page
      */
     @RequestMapping(value = "/infoNord/save", method = RequestMethod.POST)
-    public String saveInfoNord(InfoNord infoNord) {
+    public String saveInfoNord(@Valid InfoNord infoNord, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            // Include validation errors upon redirect
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.infoNord", result);
+
+            // Add ad if invalid was received
+            redirectAttributes.addFlashAttribute("infoNord", infoNord);
+
+            // Redirect back to the form
+            return "redirect:/infoNord/add";
+        }
+
         // Save to database through aboutService
         infoNordService.save(infoNord);
+
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að bæta við upplýsingum", FlashMessage.Status.SUCCESS));
 
         // Redirect browser
         return "redirect:/about";
@@ -97,9 +124,22 @@ public class InformationController {
      * @return back to the infoNord page
      */
     @RequestMapping(value = "/infoNord/{infoId}", method = RequestMethod.POST)
-    public String updateInfoNord(InfoNord infoNord) {
+    public String updateInfoNord(@Valid InfoNord infoNord, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            // Include validation errors upon redirect
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.infoNord", result);
+
+            // Add data if invalid was received
+            redirectAttributes.addFlashAttribute("infoNord", infoNord);
+
+            // Redirect back to the form
+            return String.format("redirect:/infoNord/%s/edit",infoNord.getId());
+        }
+
         // Save to database through aboutService
         infoNordService.save(infoNord);
+
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að uppfæra upplýsingar", FlashMessage.Status.SUCCESS));
 
         return "redirect:/about";
     }
@@ -110,9 +150,12 @@ public class InformationController {
      * @return back to the information page
      */
     @RequestMapping("/infoNord/{infoId}/delete")
-    public String deleteInfoNord(@PathVariable Long infoId) {
+    public String deleteInfoNord(@PathVariable Long infoId, RedirectAttributes redirectAttributes) {
         InfoNord infoNord = infoNordService.findOne(infoId);
         infoNordService.delete(infoNord);
+
+        redirectAttributes.addFlashAttribute("flash",new FlashMessage("Upplýsingum hefur verið eytt!", FlashMessage.Status.SUCCESS));
+
 
         return "redirect:/about";
     }
@@ -124,8 +167,11 @@ public class InformationController {
      */
     @RequestMapping("/infoBoard/add")
     public String formNewInfoBoard(Model model) {
+        if(!model.containsAttribute("infoBoard")) {
+            model.addAttribute("infoBoard", new InfoBoard());
+        }
+
         // Add model attributes needed for new form
-        model.addAttribute("infoBoard", new InfoBoard());
         model.addAttribute("action", "/infoBoard/save");
         model.addAttribute("heading", "Nýjar upplýsingar");
         model.addAttribute("submit","Vista upplýsingar");
@@ -141,7 +187,10 @@ public class InformationController {
      */
     @RequestMapping("/infoBoard/{infoId}/edit")
     public String formEditInfoBoard(@PathVariable Long infoId, Model model) {
-        model.addAttribute("infoBoard", infoBoardService.findOne(infoId));
+        if(!model.containsAttribute("infoBoard")) {
+            model.addAttribute("infoBoard", infoBoardService.findOne(infoId));
+        }
+
         model.addAttribute("action", String.format("/infoBoard/%s", infoId));
         model.addAttribute("heading", "Breyta upplýsingum");
         model.addAttribute("submit","Uppfæra upplýsingar");
@@ -155,9 +204,22 @@ public class InformationController {
      * @return back to the main page
      */
     @RequestMapping(value = "/infoBoard/save", method = RequestMethod.POST)
-    public String saveInfoBoard(InfoBoard infoBoard, @RequestParam MultipartFile file) {
+    public String saveInfoBoard(@Valid InfoBoard infoBoard,  BindingResult result, RedirectAttributes redirectAttributes, @RequestParam MultipartFile file) {
+        if (result.hasErrors()) {
+            // Include validation errors upon redirect
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.infoBoard", result);
+
+            // Add ad if invalid was received
+            redirectAttributes.addFlashAttribute("infoBoard", infoBoard);
+
+            // Redirect back to the form
+            return "redirect:/infoBoard/add";
+        }
+
         // Save to database through aboutService
         infoBoardService.save(infoBoard, file);
+
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að bæta við upplýsingum", FlashMessage.Status.SUCCESS));
 
         // Redirect browser
         return "redirect:/about";
@@ -169,15 +231,26 @@ public class InformationController {
      * @return back to the information page
      */
     @RequestMapping(value = "/infoBoard/{infoId}", method = RequestMethod.POST)
-    public String updateInfoBoard(InfoBoard infoBoard, @RequestParam MultipartFile file) {
+    public String updateInfoBoard(@Valid InfoBoard infoBoard, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam MultipartFile file) {
+        if (result.hasErrors()) {
+            // Include validation errors upon redirect
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.infoBoard", result);
+
+            // Add data if invalid was received
+            redirectAttributes.addFlashAttribute("infoBoard", infoBoard);
+
+            // Redirect back to the form
+            return String.format("redirect:/infoBoard/%s/edit",infoBoard.getId());
+        }
+
         // Save to database through aboutService
         if(file.isEmpty()) {
-            System.out.println("===============================banani");
             infoBoardService.save(infoBoard);
-            System.out.println("===============================api");
         } else {
             infoBoardService.save(infoBoard, file);
         }
+
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að uppfæra upplýsingar", FlashMessage.Status.SUCCESS));
 
         return "redirect:/about";
     }
@@ -188,9 +261,11 @@ public class InformationController {
      * @return back to the information page
      */
     @RequestMapping("/infoBoard/{infoId}/delete")
-    public String deleteInfoBoard(@PathVariable Long infoId) {
+    public String deleteInfoBoard(@PathVariable Long infoId, RedirectAttributes redirectAttributes) {
         InfoBoard infoBoard = infoBoardService.findOne(infoId);
         infoBoardService.delete(infoBoard);
+
+        redirectAttributes.addFlashAttribute("flash",new FlashMessage("Upplýsingum hefur verið eytt!", FlashMessage.Status.SUCCESS));
 
         return "redirect:/about";
     }

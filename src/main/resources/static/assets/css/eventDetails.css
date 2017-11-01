@@ -1,0 +1,221 @@
+article {
+	margin: 0 auto;
+	padding: 0 10px;
+	text-align: justify;
+    text-justify: inter-word;
+    max-width: 500px;
+}
+
+main {
+	border-top: 4px solid coral;
+	border-bottom: 4px solid coral;
+	max-width: 900px;
+ 	width: 100%;
+  	margin: 0 auto;
+  	color: #444;
+  	margin-bottom: 30px;
+}
+
+#published p {
+	font-style: italic;
+	text-align: left;
+}
+
+#title {
+	text-align: center;
+	font-size: 1.6em;
+}
+
+#title h2 {
+	margin-bottom: 10px;
+}
+
+.date {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	font-size: 1em;
+	margin-bottom: 30px;
+}
+
+.infoText {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+.sectionInfo {
+	font-weight: bold;
+	margin-top: 30px;
+}
+
+.section {
+	border-top: 1px solid coral;
+}
+
+.adminSection {
+	border-bottom: 1px solid coral;
+}
+
+#editDelete img {
+	height: 50px;
+	width: 50px;
+	padding: 10px;
+	background-color: #444;
+	margin: 0px 10px;
+	border-radius: 15%;
+}
+
+#editDelete {
+	margin: 10px;
+	text-align: center;
+}
+
+#address img {
+	height: 25px;
+	width: 25px;
+	margin-top: 10px;
+}
+
+#address {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+#address p {
+	margin: 5px;
+}
+
+#address p:first-child {
+	font-size: 1.2em;
+	font-weight: bold;
+	display: inline;
+}
+
+.registration p {
+	margin: 0;
+}
+
+.registration p:first-child {
+	margin-top: 15px;
+}
+
+.capacityInfo p {
+	margin: 0;
+}
+
+.capacityInfo {
+	margin: 20px 0;
+	text-align: center;
+}
+
+#description p {
+    margin-bottom: 45px;
+}
+
+
+
+/*==============================
+COUNTDOWN TIMER
+==============================*/
+
+/* A field for javascript */
+.registrationOpens {
+    display: none;
+}
+
+/* A field for javascript */
+.registrationCloses {
+    display: none;
+}
+
+.timerString {
+    font-size: 0.8em;
+}
+
+.timerInt {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#countdown {
+	text-align: center;
+	font-size: 1.2em;
+	margin: 15px 0;
+}
+
+#countdown p {
+	margin: 0;
+	padding: 5px;
+}
+
+#info {
+    font-weight: bold;
+    margin: 15px;
+}
+
+#timer {
+    margin: 150px 0;
+    padding: 10px;
+}
+
+/*==============================
+REGISTRATION BUTTON
+==============================*/
+
+#button {
+	text-align: center;
+	margin: 15px 0;
+}
+
+#button button {
+	width: 60%;
+	height: 50px;
+	font-weight: bold;
+	margin: 10px;
+}
+
+
+
+/*==============================
+COLORS
+==============================*/
+
+#info {
+    color: #444;
+}
+
+#notSignedIn {
+    color: red;
+    font-weight: bold;
+}
+
+.regBtn {
+    color: #444;
+    border-radius: 3%;
+}
+
+.registerButton {
+    border: 2px solid green;
+}
+
+.unregisterButton {
+    border: 2px solid red;
+}
+
+.date {
+	color: #999;
+}
+
+#timer {
+    background-color: rgb(49, 49, 49);
+}
+
+.timerInt {
+    color: coral;
+}
+
+.timerString {
+    color: #aaa;
+}

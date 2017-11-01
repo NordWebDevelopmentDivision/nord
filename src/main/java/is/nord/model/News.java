@@ -1,5 +1,7 @@
 package is.nord.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,12 +17,18 @@ public class News {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;                // The id of the news item
+
+    @NotEmpty(message="{news.title.notEmpty}")
     private String title;           // The title of the news item
 
+    @NotEmpty(message="{news.description.notEmpty}")
     @Column(columnDefinition = "text")
     private String description;     // The description of the news item
     private String author;          // The author of the news item
     private LocalDateTime datePosted = LocalDateTime.now();        // The time when the news item was posted
+
+    @Lob
+    private byte[] bytes;          // The background image for front page
 
     public News() {}
 
@@ -62,5 +70,13 @@ public class News {
 
     public void setDatePosted(LocalDateTime datePosted) {
         this.datePosted = datePosted;
+    }
+
+    public byte[] getBytes() {
+        return bytes;
+    }
+
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
     }
 }
