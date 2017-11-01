@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+<title>Heima</title>
+</head>
+<body>
+ 
+	<h1>
+		<span th:text="#{velkomin.skilabod}" />
+	</h1>
+	<p>
+		Klukkan er <span th:text="${serverTime}" />
+	</p>
+	<table>
+		<tr>
+			<td><a th:href="@{/nyrKennari}" 
+                               th:text="#{msg.NyrKennari}" /></td>
+		</tr>
+		<tr>
+			<td><a th:href="@{/listiKennarar}" 
+                               th:text="#{msg.ListiKennarar}" /></td>
+		</tr>
+	</table>
+   
+</body>
+</html>

@@ -44,16 +44,14 @@ public class WebLayerTest {
     @MockBean
     UserService userService;
     
-    /***
+    /**
      * aðferð til að athuga hvort virkar að senda HttpRequest á ...
      * og fá til baka ....html síðuna
-     */
+     **/
     @Test
     public void nyrKennariSkilarKarl() throws Exception{
         this.mockMvc.perform(get("/infoNord/add"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("forsíðu")));
-   //              .andExpect(view().name("information/form"));
-   //             .andExpect(model().attributeExists("action"));
     }
 }

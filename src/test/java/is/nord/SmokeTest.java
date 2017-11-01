@@ -20,25 +20,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @PropertySource(value="classpath:main/resources/application.properties", ignoreResourceNotFound=true)
-//@SpringBootTest(webEnvironment=NONE)  // Does not provide any servlet environment 
 @SpringBootTest
-//@TestPropertySource(
-//    properties = {
-//        "spring.mvc.view.prefix=/WEB-INF/vefvidmot/",
-//"spring.mvc.view.suffix=.jsp",
-//        "nord.db.driver = org.postgresql.Driver",
-//        "nord.db.url= jdbc:postgresql://localhost:5432/HBV",
-//"nord.db.username=postgres",
-//"nord.db.password=ebba" })
-
 public class SmokeTest {
 
     @Autowired
     InformationController infoController;
     LoginController loginController;
     RegistrationController regController;
+
     /**
-     * Apferp til að athuga hvort controllerinn hefur verið búinn til
+     * Aðferðir til að athuga hvort controllerarnir hefur verið búnir til
      */
 
     @Test

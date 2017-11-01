@@ -19,18 +19,8 @@ import org.springframework.test.context.TestPropertySource;
 
 
 @RunWith(SpringRunner.class)
-//@SpringBootTest(webEnvironment=NONE)
 @SpringBootTest
 @AutoConfigureMockMvc
-//@PropertySource("classpath:/main/resources/application.properties")
-//@TestPropertySource(
-//    properties = {
-//        "spring.mvc.view.prefix=/WEB-INF/vefvidmot/",
-//"spring.mvc.view.suffix=.jsp",
-//        "nord.db.driver = org.postgresql.Driver",
-//        "nord.db.url= jdbc:postgresql://localhost:5432/HBV",
-//"nord.db.username=postgres",
-//"nord.db.password=ebba" })
 public class ApplicationTest {
 
     //Þjónninn(Tomcat) ekki keyrður upp
@@ -38,8 +28,8 @@ public class ApplicationTest {
     private MockMvc mockMvc;
 
     /**
-     * Aðferð til að athuga hvort virkar að senda HttpRequest á /...
-     * og fá til baka ....html síðuna sem inniheldur strenginn ...
+     * Aðferð til að athuga hvort virkar að senda HttpRequest á /
+     * og fá til baka index.html síðuna sem inniheldur strenginn Nemendafélag
      */
     @Test
     public void nyrKennariSkilarKarl() throws Exception{

@@ -385,8 +385,8 @@ public class NewsController {
         User k = new User();
         model.addAttribute("kennari", k);
         if(newsService.erALifi())
-            return "test/heima";
+            return "heima";
         else
-            return "test/listiKennara";
+            return "listiKennara";
     }
 }

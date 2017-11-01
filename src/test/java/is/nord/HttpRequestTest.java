@@ -13,7 +13,6 @@ import org.springframework.context.annotation.PropertySource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@PropertySource("classpath:main/resources/application.properties")
 public class HttpRequestTest {
 
     //Fyrir random port

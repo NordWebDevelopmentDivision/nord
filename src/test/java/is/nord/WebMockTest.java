@@ -30,7 +30,7 @@ public class WebMockTest {
     @Autowired
     private MockMvc mockMvc;
 
-    //Bætum við prófunar (e. Mock) service klasa - kemur frá springframework safninu (fyrir Mockito
+    //Bætum við prófunar (e. Mock) service klösum - kemur frá springframework safninu (fyrir Mockito
     // serstaklega gert fyrir Mockito safnið
     @MockBean
     RegistrationService regService;
@@ -47,13 +47,6 @@ public class WebMockTest {
     @MockBean
     EventBanService eventBanService;
 
-    /*@Test
-    public void test1() throws Exception{
-        this.mockMvc.perform(get("/"))
-                .andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Nemendafélag")));
-    }*/
-
     @Test
     public void testaLifirTrue() throws Exception {
         // Látum erNafnRett() skila true
@@ -67,10 +60,10 @@ public class WebMockTest {
                 .andExpect(status()
                         .isOk())
                 .andExpect(content()
-                        .string(containsString("Nýr kennari")));
+                        .string(containsString("Heima")));
 
     }
-/*
+
     @Test
     public void testaLifirFalse() throws Exception {
 
@@ -82,7 +75,7 @@ public class WebMockTest {
                         .isOk())
                 .andExpect(content()
                         .string(containsString("Listi yfir kennara")));
-    }*/
+    }
 
     /**
      * Prófið ætti að mistakast - prófum ósönnu leiðina erALifi() en berum
@@ -91,7 +84,7 @@ public class WebMockTest {
      */
 
 
-/*
+
     @Test
     public void testaLifirFalseMedRongumStreng() throws Exception {
 
@@ -101,6 +94,6 @@ public class WebMockTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("blabla")));
     }
-*/
+
 }
 
