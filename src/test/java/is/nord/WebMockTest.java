@@ -5,10 +5,12 @@ import is.nord.controller.NewsController;
 import is.nord.controller.RegistrationController;
 import is.nord.service.*;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,6 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@RunWith(SpringRunner.class)
 
 @WebMvcTest(controllers={NewsController.class, SecurityConfig.class})
 public class WebMockTest {
@@ -63,20 +67,22 @@ public class WebMockTest {
                 .andExpect(status()
                         .isOk())
                 .andExpect(content()
-                        .string(containsString("Nemendafélag")));
+                        .string(containsString("Nýr kennari")));
 
     }
-
+/*
     @Test
     public void testaLifirFalse() throws Exception {
 
         // Prófið ætti að takast - prófum ósönnu leiðina í if-setningunni
         when(newsService.erALifi()).thenReturn(false);
-        this.mockMvc.perform(get("/lifir")).andDo(print())
-                .andExpect(status().isOk())
+        this.mockMvc.perform(get("/lifir"))
+                .andDo(print())
+                .andExpect(status()
+                        .isOk())
                 .andExpect(content()
-                        .string(containsString("Nýr kennari")));
-    }
+                        .string(containsString("Listi yfir kennara")));
+    }*/
 
     /**
      * Prófið ætti að mistakast - prófum ósönnu leiðina erALifi() en berum
@@ -85,7 +91,7 @@ public class WebMockTest {
      */
 
 
-
+/*
     @Test
     public void testaLifirFalseMedRongumStreng() throws Exception {
 
@@ -95,6 +101,6 @@ public class WebMockTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("blabla")));
     }
-
+*/
 }
 

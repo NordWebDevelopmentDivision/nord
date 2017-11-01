@@ -1,15 +1,19 @@
 package is.nord.controller;
 
+import is.nord.FlashMessage;
 import is.nord.model.*;
 import is.nord.service.*;
+import org.hibernate.validator.internal.metadata.descriptor.ReturnValueDescriptorImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 /*
@@ -57,20 +61,59 @@ public class NewsController {
             model.addAttribute("user", user);
         }
 
-        // Allow method calls from the thymeleaf template to registrationService
-        model.addAttribute("registrationService", registrationService);
-
         // Allow method calls from the thymeleaf template to adService
         model.addAttribute("adService", adService);
+
+/*
+        // Allow method calls from the thymeleaf template to registrationService
+        model.addAttribute("registrationService", registrationService);
 
         // Allow method calls from the thymeleaf template to eventBanService
         model.addAttribute("eventBanService", eventBanService);
 
         // Allow method calls from the thymeleaf template to eventBanService
         model.addAttribute("userService", userService);
-
+*/
         return "home/index";
     }
+
+    @RequestMapping("news/{newsId}")
+    public String getNewsDetails(@PathVariable Long newsId, Model model, Principal principal) {
+        model.addAttribute("news", newsService.findOne(newsId));
+
+        // If a user is logged in then add his/her object to the model
+        if (principal != null) {
+            // Get the user
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+        }
+
+        // Allow method calls from the thymeleaf template to adService
+        model.addAttribute("adService", adService);
+
+        return "news/newsDetails";
+    }
+
+    @RequestMapping("event/{newsId}")
+    public String getEventDetails(@PathVariable Long newsId, Model model, Principal principal) {
+        model.addAttribute("news", newsService.findOne(newsId));
+
+        // If a user is logged in then add his/her object to the model
+        if (principal != null) {
+            // Get the user
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+        }
+
+        // Allow method calls from the thymeleaf template to adService
+        model.addAttribute("adService", adService);
+
+        // Allow method calls from the thymeleaf template to registrationService
+        model.addAttribute("registrationService", registrationService);
+
+        return "event/eventDetails";
+    }
+
 
     /**
      * Form for adding a new news item
@@ -79,8 +122,13 @@ public class NewsController {
      */
     @RequestMapping("/news/add")
     public String formNewNews(Model model) {
+
+        if(!model.containsAttribute("news")) {
+            model.addAttribute("news", new News());
+        }
+
         // Add model attributes needed for new form
-        model.addAttribute("news", new News());
+        //model.addAttribute("news", new News());
         model.addAttribute("action", "/news/save");
         model.addAttribute("heading", "Ný frétt");
         model.addAttribute("submit","Birta frétt");
@@ -96,7 +144,12 @@ public class NewsController {
      */
     @RequestMapping("/news/{newsId}/edit")
     public String formEditNews(@PathVariable Long newsId, Model model) {
-        model.addAttribute("news", newsService.findOne(newsId));
+
+        if(!model.containsAttribute("news")) {
+            model.addAttribute("news", newsService.findOne(newsId));
+        }
+
+        //model.addAttribute("news", newsService.findOne(newsId));
         model.addAttribute("action", String.format("/news/%s", newsId));
         model.addAttribute("heading", "Breyta frétt");
         model.addAttribute("submit","Uppfæra frétt");
@@ -110,7 +163,19 @@ public class NewsController {
      * @return back to the main page
      */
     @RequestMapping(value = "/news/save", method = RequestMethod.POST)
-    public String saveNews(News news) {
+    public String saveNews(@Valid News news, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file) {
+
+        if (result.hasErrors()) {
+            // Include validation errors upon redirect
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.news", result);
+
+            // Add ad if invalid was received
+            redirectAttributes.addFlashAttribute("news", news);
+
+            // Redirect back to the form
+            return "redirect:/news/add";
+        }
+
         // Get the user
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -118,7 +183,9 @@ public class NewsController {
         news.setAuthor(user.getUsername());
 
         // Save to database through newsService
-        newsService.save(news);
+        newsService.save(news, file);
+
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að bæta við frétt", FlashMessage.Status.SUCCESS));
 
         // Redirect browser to /
         return "redirect:/";
@@ -130,7 +197,17 @@ public class NewsController {
      * @return back to the main page.
      */
     @RequestMapping(value = "/news/{newsId}", method = RequestMethod.POST)
-    public String updateNews(News news) {
+    public String updateNews(@Valid News news, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam MultipartFile file) {
+        if (result.hasErrors()) {
+            // Include validation errors upon redirect
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.news", result);
+
+            // Add data if invalid was received
+            redirectAttributes.addFlashAttribute("news", news);
+
+            // Redirect back to the form
+            return String.format("redirect:/news/%s/edit",news.getId());
+        }
 
         // Get the user
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -138,7 +215,13 @@ public class NewsController {
         // Set author
         news.setAuthor(user.getUsername());
 
-        newsService.save(news);
+        if(file.isEmpty()) {
+            newsService.save(news);
+        } else {
+            newsService.save(news, file);
+        }
+
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að uppfæra frétt", FlashMessage.Status.SUCCESS));
 
         return "redirect:/";
     }
@@ -149,9 +232,11 @@ public class NewsController {
      * @return back to the home page
      */
     @RequestMapping("/news/{newsId}/delete")
-    public String deleteNews(@PathVariable Long newsId) {
+    public String deleteNews(@PathVariable Long newsId, RedirectAttributes redirectAttributes) {
         News news = newsService.findOne(newsId);
         newsService.delete(news);
+
+        redirectAttributes.addFlashAttribute("flash",new FlashMessage("Frétt hefur verið eytt!", FlashMessage.Status.SUCCESS));
 
         return "redirect:/";
     }
@@ -163,8 +248,13 @@ public class NewsController {
      */
     @RequestMapping("/event/add")
     public String formNewEvent(Model model) {
+
+        if(!model.containsAttribute("event")) {
+            model.addAttribute("event", new Event());
+        }
+
         // Add model attributes needed for new form
-        model.addAttribute("event", new Event());
+        //model.addAttribute("event", new Event());
         model.addAttribute("action", "/event/save");
         model.addAttribute("heading","Nýr viðburður");
         model.addAttribute("submit","Birta viðburð");
@@ -180,7 +270,12 @@ public class NewsController {
      */
     @RequestMapping("/event/{newsId}/edit")
     public String formEditEvent(@PathVariable Long newsId, Model model) {
-        model.addAttribute("event", newsService.findOne(newsId));
+
+        if(!model.containsAttribute("event")) {
+            model.addAttribute("event", newsService.findOne(newsId));
+        }
+
+        //model.addAttribute("event", newsService.findOne(newsId));
         model.addAttribute("action", String.format("/event/%s", newsId));
         model.addAttribute("heading", "Breyta viðburði");
         model.addAttribute("submit","Uppfæra viðburð");
@@ -194,7 +289,19 @@ public class NewsController {
      * @return Back to the main page
      */
     @RequestMapping(value = "/event/save", method = RequestMethod.POST)
-    public String saveEvent(Event event) {
+    public String saveEvent(@Valid Event event, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file) {
+
+        if (result.hasErrors()) {
+            // Include validation errors upon redirect
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.event", result);
+
+            // Add ad if invalid was received
+            redirectAttributes.addFlashAttribute("event", event);
+
+            // Redirect back to the form
+            return "redirect:/event/add";
+        }
+
         // Get the user
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -202,7 +309,9 @@ public class NewsController {
         event.setAuthor(user.getUsername());
 
         // Save to database through newsService
-        newsService.save(event);
+        newsService.save(event, file);
+
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að bæta við viðburði", FlashMessage.Status.SUCCESS));
 
         // Redirect browser to /
         return "redirect:/";
@@ -214,7 +323,17 @@ public class NewsController {
      * @return back to the main page.
      */
     @RequestMapping(value = "/event/{newsId}", method = RequestMethod.POST)
-    public String updateEvent(Event event) {
+    public String updateEvent(@Valid Event event, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam MultipartFile file) {
+        if (result.hasErrors()) {
+            // Include validation errors upon redirect
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.event", result);
+
+            // Add data if invalid was received
+            redirectAttributes.addFlashAttribute("event", event);
+
+            // Redirect back to the form
+            return String.format("redirect:/event/%s/edit",event.getId());
+        }
 
         // Get the user
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -222,7 +341,13 @@ public class NewsController {
         // Set author
         event.setAuthor(user.getUsername());
 
-        newsService.save(event);
+        if(file.isEmpty()) {
+            newsService.save(event);
+        } else {
+            newsService.save(event, file);
+        }
+
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að uppfæra viðburð", FlashMessage.Status.SUCCESS));
 
         return "redirect:/";
     }
@@ -233,13 +358,26 @@ public class NewsController {
      * @return back to the home page
      */
     @RequestMapping("/event/{newsId}/delete")
-    public String deleteEvent(@PathVariable Long newsId) {
+    public String deleteEvent(@PathVariable Long newsId, RedirectAttributes redirectAttributes) {
         News news = newsService.findOne(newsId);
         Iterable<Registration> registrations = registrationService.findRegistrationsByEvent((Event)news);
         registrationService.deleteAll(registrations);
         newsService.delete(news);
 
+        redirectAttributes.addFlashAttribute("flash",new FlashMessage("Viðburði hefur verið eytt!", FlashMessage.Status.SUCCESS));
+
         return "redirect:/";
+    }
+
+    /**
+     * Retrieves an image file from the database
+     * @param newsId the id of the image file
+     * @return a single image file from the database
+     */
+    @RequestMapping("/news/{newsId}.jpeg")
+    @ResponseBody
+    public byte[] getBackgroundImage(@PathVariable Long newsId) {
+        return newsService.findOne(newsId).getBytes();
     }
 
     @RequestMapping (value = "/lifir", method=RequestMethod.GET)
@@ -247,10 +385,8 @@ public class NewsController {
         User k = new User();
         model.addAttribute("kennari", k);
         if(newsService.erALifi())
-            return "heima";
+            return "test/heima";
         else
-            return "listiKennara";
+            return "test/listiKennara";
     }
-
-
 }
