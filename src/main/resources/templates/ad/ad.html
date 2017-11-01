@@ -17,7 +17,7 @@
     <!-- For each ad -->
     <div th:each="ad : ${adService.findAll()}" >
 
-        <a th:href="@{http://} + ${ad.link}">
+        <a th:href="${ad.link}">
             <img th:src="@{|/ad/${ad.id}.jpg|}" alt="adLogo" />
         </a>
        <!--<div id="editDeleteAds">

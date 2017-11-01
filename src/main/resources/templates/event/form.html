@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../css/normalize.css" />
 </head>
 <body>
+<div th:replace="layout :: flash"></div>
 
 <form enctype="multipart/form-data" th:action="@{${action}}" method="post" th:object="${event}">
     <input type="hidden" th:field="*{id}"/>
@@ -15,30 +16,39 @@
 
     <label for="title">Fyrirsögn:</label>
     <input type="text" th:field="*{title}" id="title" placeholder="Fyrirsögn"/>
+    <div class="error-message" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
 
     <label for="description">Meginmál:</label>
     <textarea cols="86" rows ="20" th:field="*{description}" id="description" placeholder="Meginmál"></textarea>
+    <div class="error-message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
 
     <label for="host">Gestgjafi:</label>
     <input type="text" th:field="*{host}" id="host" placeholder="Gestgjafi"/>
+    <div class="error-message" th:if="${#fields.hasErrors('host')}" th:errors="*{host}"></div>
 
     <label for="location">Staðsetning:</label>
     <input type="text" th:field="*{location}" id="location" placeholder="Staðsetning"/>
+    <div class="error-message" th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></div>
 
     <label for="linkLocation">Já.is/Google maps linkur:</label>
-    <input type="url" th:field="*{linkLocation}" id="linkLocation" placeholder="https://ja.is/"/>
+    <input type="text" th:field="*{linkLocation}" id="linkLocation" placeholder="https://ja.is/"/>
+    <div class="error-message" th:if="${#fields.hasErrors('linkLocation')}" th:errors="*{linkLocation}"></div>
 
     <label for="capacity">Hámarksfjöldi:</label>
     <input type="number" th:field="*{capacity}" id="capacity"/>
+    <div class="error-message" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></div>
 
     <label for="timeOfEvent">Dags. og tími viðburðar:</label>
     <input type="datetime-local" th:field="*{timeOfEvent}" id="timeOfEvent"/>
+    <div class="error-message" th:if="${#fields.hasErrors('timeOfEvent')}" th:errors="*{timeOfEvent}"></div>
 
     <label for="registrationOpens">Skráning hefst:</label>
     <input type="datetime-local" th:field="*{registrationOpens}" id="registrationOpens"/>
+    <div class="error-message" th:if="${#fields.hasErrors('registrationOpens')}" th:errors="*{registrationOpens}"></div>
 
     <label for="registrationCloses">Skráningu lýkur:</label>
     <input type="datetime-local" th:field="*{registrationCloses}" id="registrationCloses"/>
+    <div class="error-message" th:if="${#fields.hasErrors('registrationCloses')}" th:errors="*{registrationCloses}"></div>
 
     <label for="isPriorityEvent">Forgangsviðburður:</label>
     <input type="checkbox" th:field="*{isPriorityEvent}" id="isPriorityEvent"/>

@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.URL;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.File;
 
 /*
@@ -24,8 +25,8 @@ public class Ad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;                // The id of the ad
 
-    @URL
-    @NotEmpty
+    @URL(message="{ad.link.URL}")
+    @NotEmpty(message="{ad.link.notEmpty}")
     private String link;            // The link behind the ad for the company's website
 
     @Lob
