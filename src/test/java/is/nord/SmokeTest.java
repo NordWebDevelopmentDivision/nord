@@ -45,12 +45,12 @@ public class SmokeTest {
     public void contextLoadsInfo(){
         assertThat(InformationController.class).isNotNull();
     }
-    
+
     @Test
     public void contextLoadsLogin(){
         assertThat(LoginController.class).isNotNull();
     }
-    
+
     @Test
     public void contextLoadsRegistration(){
         assertThat(RegistrationController.class).isNotNull();
