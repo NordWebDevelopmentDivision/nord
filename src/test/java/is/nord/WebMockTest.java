@@ -1,4 +1,6 @@
 package is.nord;
+import is.nord.config.SecurityConfig;
+import is.nord.controller.InformationController;
 import is.nord.controller.NewsController;
 import is.nord.controller.RegistrationController;
 import is.nord.service.*;
@@ -18,7 +20,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(NewsController.class)
+@WebMvcTest(controllers={NewsController.class, SecurityConfig.class})
 public class WebMockTest {
     //Þjóninn(Tomcat) ekki keyrður upp
     @Autowired
@@ -56,7 +58,7 @@ public class WebMockTest {
 
         // Prófið ætti að takast - prófum sönnu leiðina í if-setningunni
         when(newsService.erALifi()).thenReturn(true);
-        this.mockMvc.perform(get("/"))
+        this.mockMvc.perform(get("/lifir"))
                 .andDo(print())
                 .andExpect(status()
                         .isOk())
@@ -70,10 +72,10 @@ public class WebMockTest {
 
         // Prófið ætti að takast - prófum ósönnu leiðina í if-setningunni
         when(newsService.erALifi()).thenReturn(false);
-        this.mockMvc.perform(get("/")).andDo(print())
+        this.mockMvc.perform(get("/lifir")).andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content()
-                        .string(containsString("Nemendafélag")));
+                        .string(containsString("Nýr kennari")));
     }
 
     /**

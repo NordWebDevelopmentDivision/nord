@@ -242,5 +242,15 @@ public class NewsController {
         return "redirect:/";
     }
 
+    @RequestMapping (value = "/lifir", method=RequestMethod.GET)
+    public String lifir(Model model) {
+        User k = new User();
+        model.addAttribute("kennari", k);
+        if(newsService.erALifi())
+            return "heima";
+        else
+            return "listiKennara";
+    }
+
 
 }
