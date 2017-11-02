@@ -30,7 +30,7 @@ public class Event extends News {
     @NotEmpty(message="{event.linkLocation.notEmpty}")
     private String linkLocation;    // The ja.is link
 
-    private int capacity = 1337;           // The maximum allowed attendance to the event
+    private int capacity;           // The maximum allowed attendance to the event
 
     @NotNull(message="{event.timeOfEvent.notNull}")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -110,7 +110,7 @@ public class Event extends News {
     }
 
     public void setIsPriorityEvent(boolean isPriorityEvent) {
-        isPriorityEvent = isPriorityEvent;
+        this.isPriorityEvent = isPriorityEvent;
     }
 
     public List<Registration> getRegistrations() {

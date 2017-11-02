@@ -3,13 +3,11 @@ package is.nord.service;
 import is.nord.model.News;
 import org.springframework.web.multipart.MultipartFile;
 
-/*
- * Author:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
-*/
 
 /**
  * A service layer between the Newscontroller and the Newsrepository
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ * @Date 1.11.2017
  */
 public interface NewsService {
     // Returns all the news items (in descending order)

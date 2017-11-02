@@ -1,0 +1,154 @@
+/*==============================
+CREATE / EDIT NEWS ITEM
+==============================*/
+
+#eventForm {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(49, 181, 51);
+    border-top: 2px solid #fff;
+    height: 1980px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+}
+
+.inputFile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.file-wrapper {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.inputFile + label {
+    padding: 10px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #fff;
+    border: 1px solid #fff;
+    cursor: pointer;
+    display: inline-block;
+    max-width: 440px;
+    width: 90%;
+}
+
+#preview {
+    height: 340px;
+    max-width: 500px;
+    width: 100%;
+    margin: 10px auto 20px auto;
+    border-radius: 3%;
+}
+
+.error-message {
+    color: red;
+    background-color: #ddd;
+    display: inline-block;
+    width: 300px;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+#eventForm button {
+    width: 250px;
+    height: 100px;
+    margin: 30px auto 20px auto;
+}
+
+input {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 550px;
+    padding: 5px;
+}
+
+#description {
+    margin: 10px auto 0 auto;
+    width: 90%;
+    max-width: 650px;
+    padding: 5px;
+    height: 250px;
+}
+
+label {
+    margin: 15px auto 0 auto;
+    width: 80%;
+    max-width: 550px;
+    padding: 5px;
+    text-align: left;
+    font-weight: bold;
+}
+
+#priorityEventWrapper {
+    margin: 10px auto 0 auto;
+    width: 80%;
+    max-width: 450px;
+}
+
+label[for=isPriorityEvent] {
+    display: inline-block;
+}
+
+#isPriorityEvent {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+}
+
+label[for=file] {
+    text-align: center;
+}
+
+#capacityWrapper {
+    margin: 20px auto 0 auto;
+    width: 80%;
+    max-width: 450px;
+}
+
+#capacity {
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+}
+
+label[for=capacity] {
+    width: 150px;
+    display: inline-block;
+}
+
+input[type=datetime-local] {
+    max-width: 250px;
+}
+
+
+
+/*==============================
+COLORS
+==============================*/
+
+#preview {
+	background-color: #444;
+	border: 3px solid #444;
+}
+
+#eventForm button {
+    background-color: #444;
+    color: coral;
+    font-weight: bold;
+    border: 1px solid coral;
+}
+
+label {
+    color: #fff;
+}

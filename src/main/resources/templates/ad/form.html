@@ -22,7 +22,7 @@
             <div class="file-wrapper">
                 <input class="inputFile" type="file" id="file" name="file" onchange="readURL(this);" />
                 <label for="file">Veldu mynd</label>
-                <img id="preview" src="#" alt="your image" />
+                <img id="preview" th:src="@{|/ad/${ad.id}.jpg|}" alt="your image" />
             </div>
 
             <input type="hidden" th:field="*{bytes}"/>

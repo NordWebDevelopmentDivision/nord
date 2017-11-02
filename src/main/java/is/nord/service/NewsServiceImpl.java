@@ -14,6 +14,7 @@ import java.io.IOException;
  *       Ólafur Georg Gylfason (ogg4@hi.is)
 */
 
+
 @Service
 public class NewsServiceImpl implements NewsService {
     @Autowired

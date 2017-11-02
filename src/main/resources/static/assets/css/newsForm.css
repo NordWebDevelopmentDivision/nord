@@ -1,0 +1,98 @@
+/*==============================
+CREATE / EDIT NEWS ITEM
+==============================*/
+
+#newsForm {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(49, 181, 51);
+    border-top: 2px solid #fff;
+    height: 980px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+}
+
+.inputFile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.file-wrapper {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.inputFile + label {
+    padding: 10px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #fff;
+    border: 1px solid #fff;
+    cursor: pointer;
+    display: inline-block;
+    max-width: 440px;
+    width: 90%;
+}
+
+#preview {
+    height: 340px;
+    max-width: 500px;
+    width: 100%;
+    margin: 10px auto 20px auto;
+    border-radius: 3%;
+}
+
+.error-message {
+    color: red;
+    background-color: #ddd;
+    display: inline-block;
+    width: 300px;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+#newsForm button {
+    width: 250px;
+    height: 100px;
+    margin: 30px auto 20px auto;
+}
+
+#title {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 550px;
+    padding: 5px;
+}
+
+#description {
+    margin: 10px auto 0 auto;
+    width: 90%;
+    max-width: 650px;
+    padding: 5px;
+}
+
+
+
+/*==============================
+COLORS
+==============================*/
+
+#preview {
+	background-color: #444;
+	border: 3px solid #444;
+}
+
+#newsForm button {
+    background-color: #444;
+    color: coral;
+    font-weight: bold;
+    border: 1px solid coral;
+}
