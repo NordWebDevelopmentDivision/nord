@@ -8,6 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /*
  * Author:
@@ -23,7 +26,11 @@ public class AdServiceImpl implements AdService {
     @Override
     @Transactional
     public Iterable<Ad> findAll() {
-        return adRepository.findAll();
+        List<Ad> ads =  (ArrayList)adRepository.findAll();
+
+        // Shuffle the ads so the same ones will not appear all the time on small screens
+        Collections.shuffle(ads);
+        return ads;
     }
 
     @Override

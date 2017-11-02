@@ -7,6 +7,9 @@ import is.nord.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+
 /*
  * Author:
  *       Ólafur Georg Gylfason (ogg4@hi.is)
@@ -46,8 +49,14 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public Iterable<Registration> findRegistrationsByEvent(Event event) {
-        // TODO: If the event is priority event, then sort the list accordingly
-        return registrationRepository.findRegistrationsByEvent(event);
+        List<Registration> regs = registrationRepository.findRegistrationsByEvent(event);
+
+        // If the event is priority event, then sort the list accordingly with senior members first
+        if (event.getIsPriorityEvent()) {
+            Collections.sort(regs, (Registration reg1 ,Registration reg2) ->
+                    Boolean.compare(reg2.getUser().getSenior(), reg1.getUser().getSenior()));
+        }
+        return regs;
     }
 
     @Override

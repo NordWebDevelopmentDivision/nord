@@ -16,13 +16,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.security.Principal;
 
-/*
- * Author:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
-*/
+
 
 /**
  * A controller that controls news/event related things
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ * @Date 1.11.2017
  */
 @Controller
 public class NewsController {

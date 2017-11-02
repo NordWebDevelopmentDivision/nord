@@ -37,8 +37,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private boolean enabled;    // Whether the user is enabled
 
-    //@Column(nullable = true)
-    //private boolean isSenior; // Whether the user is a senior
+    @Column(nullable = false)
+    private boolean senior; // Whether the user is a senior
 
     @Column(nullable = true)
     private int points;         // How many points the user has
@@ -74,13 +74,13 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
-    /*public boolean isSenior() {
-        return isSenior;
+    public boolean getSenior() {
+        return senior;
     }
 
     public void setSenior(boolean senior) {
-        isSenior = senior;
-    }*/
+        this.senior = senior;
+    }
 
     public void setRole(Role role) {
         this.role = role;
