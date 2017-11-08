@@ -89,8 +89,8 @@
         <div>
             <a href="javascript:void(0);" onclick="toggleAboutMenu()">Um Nörd</a>
             <ul id="aboutMenu" class="menu">
-                <li><a href="#">Hvað er Nörd?</a></li>
-                <li><a href="#">Stjórn og miðstjórn</a></li>
+                <li><a href="/aboutNord">Hvað er Nörd?</a></li>
+                <li><a href="/aboutBoard">Stjórn og miðstjórn</a></li>
                 <li><a href="#">Lög Nörd</a></li>
                 <li><a href="#">Kóðinn</a></li>
                 <li><a href="#">Myndir</a></li>
@@ -142,6 +142,7 @@
 </div>
 <div th:fragment="scripts">
     <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/confirmationMessages.js}"></script>
 </div>
 </body>
 </html>

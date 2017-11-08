@@ -22,7 +22,7 @@
         <p sec:authorize="hasRole('ROLE_ADMIN')" class="infoText sectionInfo">Stjórnandi</p>
         <section sec:authorize="hasRole('ROLE_ADMIN')" class="section">
             <div id="editDelete">
-                <a th:href="@{|/news/${news.id}/delete|}"><img th:src="@{/assets/img/delete.png}" alt="delete symbol" /></a>
+                <a id="deleteNews" th:href="@{|/news/${news.id}/delete|}"><img th:src="@{/assets/img/delete.png}" alt="delete symbol" /></a>
                 <a th:href="@{|/news/${news.id}/edit|}"><img th:src="@{/assets/img/edit.png}" alt="edit symbol" /></a>
             </div>
         </section>
@@ -46,5 +46,7 @@
 
 <footer th:replace="layout :: footer"></footer>
 <div th:replace="layout :: scripts"></div>
+
+
 </body>
 </html>

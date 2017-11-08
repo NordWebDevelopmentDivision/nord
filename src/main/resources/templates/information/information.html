@@ -21,18 +21,17 @@
 
 
 <!-- For each info item -->
-<h1>Um Nörd</h1>
-
+<h1 th:if="${infoNord}">Um Nörd</h1>
 <div th:each="infoNord : ${infoNord}" >
     <h2 th:text="${infoNord.title}"></h2>
     <a th:text="${infoNord.content}"></a>
     <div>
         <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoNord/${infoNord.id}/edit|}">Breyta</a>
-        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoNord/${infoNord.id}/delete|}">Eyða</a>
+        <a id="deleteInfoNord + ${infoNord.count}" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoNord/${infoNord.id}/delete|}">Eyða</a>
     </div>
 </div>
 
-<h2>Stjórn Nörd</h2>
+<h1 th:if="${infoBoard}">Stjórn Nörd</h1>
 <div th:each="infoBoard : ${infoBoard}" >
     <div th:if="${infoBoard.isBoard} == true">
         <h3 th:text="${infoBoard.title}"></h3>
@@ -40,12 +39,12 @@
         <img th:src="@{|/infoBoard/${infoBoard.id}.jpg|}" alt="boardMember" />
         <div>
             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoBoard/${infoBoard.id}/edit|}">Breyta</a>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoBoard/${infoBoard.id}/delete|}">Eyða</a>
+            <a id="deleteInfoBoard + ${infoBoard.count}" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoBoard/${infoBoard.id}/delete|}">Eyða</a>
         </div>
     </div>
 </div>
 
-<h2>Miðstjórn Nörd</h2>
+<h1 th:if="${infoBoard}">Miðstjórn Nörd</h1>
 <div th:each="infoBoard : ${infoBoard}" >
     <div th:if="${infoBoard.isBoard} == false">
         <h3 th:text="${infoBoard.title}"></h3>
@@ -53,10 +52,12 @@
         <img th:src="@{|/infoBoard/${infoBoard.id}.jpg|}" alt="boardMember" />
         <div>
             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoBoard/${infoBoard.id}/edit|}">Breyta</a>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoBoard/${infoBoard.id}/delete|}">Eyða</a>
+            <a id="deleteInfoMiddleBoard + ${infoBoard.count}" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/infoBoard/${infoBoard.id}/delete|}">Eyða</a>
         </div>
     </div>
 </div>
+
+<div th:replace="layout :: scripts"></div>
 
 </body>
 

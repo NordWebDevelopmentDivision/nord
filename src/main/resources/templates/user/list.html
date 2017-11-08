@@ -16,10 +16,10 @@
 
     <div th:switch="${eventBanService.isEventBanned(user)}">
         <div th:case="${false}">
-            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/user/${user.id}/eventBan|}">Setja á bannlista</a>
+            <a id="eventBan + ${user.count}" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/user/${user.id}/eventBan|}">Setja á bannlista</a>
         </div>
         <div th:case="${true}">
-            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/user/${user.id}/removeEventBan|}">Fjarlægja af bannlista</a>
+            <a id="removeEventBan + ${user.count}" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/user/${user.id}/removeEventBan|}">Fjarlægja af bannlista</a>
         </div>
     </div>
 </div>
@@ -32,6 +32,7 @@
 
 
 <a th:href="@{/}">Fara á forsíðu</a>
+<div th:replace="layout :: scripts"></div>
 
 </body>
 

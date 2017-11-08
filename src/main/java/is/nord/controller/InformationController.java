@@ -37,12 +37,24 @@ public class InformationController {
      * @param model the model
      * @return a website that displays informations about Nörd
      */
-    @RequestMapping(path = "/about", method = RequestMethod.GET)
-    public String about(Model model) {
+    @RequestMapping(path = "/aboutNord", method = RequestMethod.GET)
+    public String aboutNord(Model model) {
         // Get all information items
         Iterable<InfoNord> infoNord = infoNordService.findAll();
         // Add them to the model
         model.addAttribute("infoNord", infoNord);
+
+        return "information/information";
+    }
+
+
+    /**
+     * Displays informations about Nörd
+     * @param model the model
+     * @return a website that displays informations about Nörd
+     */
+    @RequestMapping(path = "/aboutBoard", method = RequestMethod.GET)
+    public String aboutBoard(Model model) {
 
         Iterable<InfoBoard> infoBoard = infoBoardService.findAll();
         model.addAttribute("infoBoard", infoBoard);
@@ -115,7 +127,7 @@ public class InformationController {
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að bæta við upplýsingum", FlashMessage.Status.SUCCESS));
 
         // Redirect browser
-        return "redirect:/about";
+        return "redirect:/aboutNord";
     }
 
     /**
@@ -141,7 +153,7 @@ public class InformationController {
 
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að uppfæra upplýsingar", FlashMessage.Status.SUCCESS));
 
-        return "redirect:/about";
+        return "redirect:/aboutNord";
     }
 
     /**
@@ -157,7 +169,7 @@ public class InformationController {
         redirectAttributes.addFlashAttribute("flash",new FlashMessage("Upplýsingum hefur verið eytt!", FlashMessage.Status.SUCCESS));
 
 
-        return "redirect:/about";
+        return "redirect:/aboutNord";
     }
 
     /**
@@ -222,7 +234,7 @@ public class InformationController {
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að bæta við upplýsingum", FlashMessage.Status.SUCCESS));
 
         // Redirect browser
-        return "redirect:/about";
+        return "redirect:/aboutBoard";
     }
 
     /**
@@ -252,7 +264,7 @@ public class InformationController {
 
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Tókst að uppfæra upplýsingar", FlashMessage.Status.SUCCESS));
 
-        return "redirect:/about";
+        return "redirect:/aboutBoard";
     }
 
     /**
@@ -267,7 +279,7 @@ public class InformationController {
 
         redirectAttributes.addFlashAttribute("flash",new FlashMessage("Upplýsingum hefur verið eytt!", FlashMessage.Status.SUCCESS));
 
-        return "redirect:/about";
+        return "redirect:/aboutBoard";
     }
 
     /**
