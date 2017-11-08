@@ -48,6 +48,15 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
+    public Registration findRegistrationByEventAndUser(Event event, User user) {
+        if(isRegisteredForEvent(event, user)) {
+            return registrationRepository.findRegistrationByEventAndUser(event, user);
+        }
+        return new Registration();
+    }
+
+
+    @Override
     public Iterable<Registration> findRegistrationsByEvent(Event event) {
         List<Registration> regs = registrationRepository.findRegistrationsByEvent(event);
 

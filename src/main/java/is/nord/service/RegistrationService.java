@@ -25,6 +25,9 @@ public interface RegistrationService {
     // Returns whether the specified user is registered for the specified event
     boolean isRegisteredForEvent(Event event, User user);
 
+    // Returns the registration for a specific event and user
+    Registration findRegistrationByEventAndUser(Event event, User user);
+
     // Returns all registrations to the specified event
     Iterable<Registration> findRegistrationsByEvent(Event event);
 

@@ -101,14 +101,14 @@
                 <div th:if="${#authorization.expression('isAuthenticated()')}" th:switch="${registrationService.isRegisteredForEvent(news, user)}">
                     <div th:case="${false}">
                         <form th:action="@{/register}" method="post">
-                            <input name="eventId" type="hidden" th:value="${news.id}" />
+                            <input name="eventIdReg" type="hidden" th:value="${news.id}" />
                             <input name="isRegistered" type="hidden" th:value="${true}" />
                             <button class="registerButton regBtn" type="submit" style="display: none;">Skrá mig</button>
                         </form>
                     </div>
                     <div th:case="${true}">
                         <form th:action="@{/unregister}" method="post">
-                            <input name="newsId" type="hidden" th:value="${news.id}" />
+                            <input name="eventIdUnrg" type="hidden" th:value="${news.id}" />
                             <button class="unregisterButton regBtn" type="submit" style="display: none;">Afskrá mig</button>
                         </form>
                     </div>
@@ -133,8 +133,7 @@
             <section class="section">
                 <div th:each="registration,iter : ${registrationService.findRegistrationsByEvent(news)}">
                     <p th:if="${news.capacity >= iter.count}" th:text="${iter.count + '. ' + registration.user.username}"></p>
-                    <p th:if="${iter.count > news.capacity}" th:text="${iter.count + '. ' + registration.user.username}"
-                    style="color: #888;"></p>
+                    <p th:if="${iter.count > news.capacity}" th:text="${iter.count + '. ' + registration.user.username}" style="color: #888;"></p>
                 </div>
 
             </section>

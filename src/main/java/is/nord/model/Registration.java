@@ -22,7 +22,8 @@ public class Registration {
     @ManyToOne
     private User user;                              // The user registered
     private LocalDateTime timeOfRegistration;       // The time of the registration
-    private Boolean confirmed;                      // If the user showed up to the event or not
+    private boolean confirmed;                      // If the user showed up to the event or not
+    private boolean questionAnswer;                            // If the user wants to take the bus
 
     public Registration(){}
 
@@ -58,11 +59,19 @@ public class Registration {
         this.timeOfRegistration = timeOfRegistration;
     }
 
-    public Boolean getConfirmed() {
+    public boolean getConfirmed() {
         return confirmed;
     }
 
-    public void setConfirmed(Boolean confirmed) {
+    public void setConfirmed(boolean confirmed) {
         this.confirmed = confirmed;
+    }
+
+    public boolean getQuestionAnswer() {
+        return questionAnswer;
+    }
+
+    public void setQuestionAnswer(boolean questionAnswer) {
+        this.questionAnswer = questionAnswer;
     }
 }

@@ -45,7 +45,7 @@ public class RegistrationController {
      * @return back to the homepage
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@RequestParam("eventId") Long eventId) {
+    public String register(@RequestParam("eventIdReg") Long eventId) {
         // The new registration that will be added to the database
         Registration registration = new Registration();
 
@@ -67,27 +67,28 @@ public class RegistrationController {
         return "redirect:/event/" + eventId;
     }
 
+
     /**
      * Allows an authenticated user to unregister from an event
      * @param newsId the id of the event from which the user is unregistering
      * @return back to the homepage
      */
     @RequestMapping(value = "/unregister", method = RequestMethod.POST)
-    public String unregister(@RequestParam("newsId") Long newsId) {
+    public String unregister(@RequestParam("eventIdUnreg") Long eventId) {
         // Get the user
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         // Get the event
-        News news = newsService.findOne(newsId);
+        Event event = (Event)newsService.findOne(eventId);
 
         // Deduct a point from the user
         user.addPoints(unregistrationPoints);
         userService.update(user);
 
         // delete the registration for the authenticated user for this particular event
-        registrationService.delete((Event)news, user);
+        registrationService.delete(event, user);
 
         // Redirect browser to /
-        return "redirect:/event/" + newsId;
+        return "redirect:/event/" + eventId;
     }
 }
