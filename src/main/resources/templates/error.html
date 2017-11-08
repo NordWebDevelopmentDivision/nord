@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+
+<head>
+    <title>Villa í slóðinni </title>
+</head>
+<body>
+
+<h1>Villa hefur komið upp</h1>
+<!--<h3 th:text="|HTTP ${attrs.status} ${attrs.error}|"></h3>
+<p th:text="${attrs.message}"></p>-->
+
+<div th:switch="${attrs.status}">
+    <p th:case="403">Þú hefur ekki aðgang að þessari síðu</p>
+    <p th:case="404">Síða finnst ekki</p>
+    <p th:case="*">Villa hefur komið upp</p>
+</div>
+
+
+
+</body>
+</html>

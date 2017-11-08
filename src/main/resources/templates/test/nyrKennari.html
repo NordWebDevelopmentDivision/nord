@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Nýr kennari</title>
+</head>
+<body>
+	<h1>Nýr kennari</h1>
+	<form action="#" th:action="@{/vistaKennari}" th:object="${kennari}"
+		method="post">
+		<ul>
+			<li th:errors="*{id}" />
+			<li th:errors="*{nafn}" />
+			<li th:errors="*{kyn}" />
+			<li th:errors="*{prosenta}" />
+		</ul>
+		<table border="1">
+			<tr>
+				<td><label th:text="#{msg.id}" /></td>
+				<td><input type="number" th:field="*{id}" /></td>
+			</tr>
+			<tr>
+				<td><label th:text="#{msg.nafn}" /></td>
+				<td><input type="text" th:field="*{nafn}" /></td>
+			</tr>
+			<tr>
+				<td><label th:text="#{msg.kyn}" /></td>
+				<td><select th:field="*{kyn}">
+						<option th:value="'M'" 
+                                                        th:text="Karl"></option>
+						<option th:value="'F'" 
+                                                        th:text="Kona"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><label th:text="#{msg.prosenta}" /></td>
+				<td><input type="text" 
+                                           th:field="*{prosenta}" /></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Vista" /></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

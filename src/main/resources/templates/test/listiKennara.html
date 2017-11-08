@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Listi yfir kennara</title>
+</head>
+
+<body>
+	<h1>Listi yfir kennara</h1>
+	<table border="1">
+		<thead>
+			<tr>
+				<th th:text="#{msg.id}" />
+				<th th:text="#{msg.nafn}" />
+				<th th:text="#{msg.kyn}" />
+				<th th:text="#{msg.prosenta}" />
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="kennari: ${kennarar}">
+				<td th:text="${kennari.id}" />
+				<td th:text="${{kennari.nafn}}" />
+				<td th:switch="${kennari.kyn}">
+                                    <span th:case="'M'" th:text="Karl" /> <span 
+                                        th:case="'F'" th:text="Kona" /></td>
+				<td th:text="${#conversions.convert
+                                    (kennari.prosenta, 'Integer')}" />
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<p>
+			<a th:href="@{/}" th:text="#{msg.Heima}" />
+		</p>
+	</div>
+</body>
+</html>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+<script>
+	$(document).ready(function() {
+		$.ajax({
+			url : "/spring-thymeleaf/js",
+		});
+	});
+</script>
+
