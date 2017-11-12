@@ -73,6 +73,22 @@ public class RegistrationServiceImpl implements RegistrationService {
         registrationRepository.delete(registrations);
     }
 
+    @Override
+    public Registration findRegistrationById(Long id){
+        return registrationRepository.findOne(id);
+    }
+
+    @Override
+    public boolean isConfirmed(Long id){
+        Registration registration = registrationRepository.findOne(id);
+        return registration.getConfirmed();
+    }
+
+    @Override
+    public void update(Registration registration){
+        registrationRepository.save(registration);
+    }
+
     /*@Override
     public List<TopEventUser> findTopUsers(){
         return registrationRepository.findTopEventUsers();

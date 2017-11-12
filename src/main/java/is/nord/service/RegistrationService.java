@@ -35,6 +35,12 @@ public interface RegistrationService {
     // This is used when deleting an event which contains registrations
     void deleteAll(Iterable<Registration> registrations);
 
+    Registration findRegistrationById(Long id);
+
+    boolean isConfirmed(Long id);
+
+    void update(Registration registration);
+
     //List<TopEventUser> findTopUsers();
 
 

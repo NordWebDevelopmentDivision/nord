@@ -26,6 +26,7 @@
 <h2>Bannlisti:</h2>
 <div th:each="eventBan : ${eventBanService.findAllBanned()}">
     <h4 th:text="${eventBan.user.username}"></h4>
+    <a id="dong" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/user/${eventBan.user.id}/removeEventBan|}">Fjarlægja af bannlista</a>
 </div>
 
 
