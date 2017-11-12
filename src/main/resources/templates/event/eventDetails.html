@@ -134,6 +134,15 @@
                 <div th:each="registration,iter : ${registrationService.findRegistrationsByEvent(news)}">
                     <p th:if="${news.capacity >= iter.count}" th:text="${iter.count + '. ' + registration.user.username}"></p>
                     <p th:if="${iter.count > news.capacity}" th:text="${iter.count + '. ' + registration.user.username}" style="color: #888;"></p>
+                    <div th:switch="${registrationService.isConfirmed(registration.id)}">
+                        <div th:case="${false}">
+                            <a id="bla" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/confirmRegistration/${registration.id}|}">Staðfesta mætingu</a>
+                        </div>
+                        <div th:case="${true}">
+                            <a id="alb" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/unconfirmRegistration/${registration.id}|}">Taka mætingu af</a>
+                        </div>
+                    </div>
+
                 </div>
 
             </section>

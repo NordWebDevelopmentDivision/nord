@@ -68,11 +68,11 @@ public class NewsController {
         model.addAttribute("registrationService", registrationService);
 
         // Allow method calls from the thymeleaf template to eventBanService
-        model.addAttribute("eventBanService", eventBanService);
+        model.addAttribute("eventBanService", eventBanService);*/
 
         // Allow method calls from the thymeleaf template to eventBanService
         model.addAttribute("userService", userService);
-*/
+
         return "home/index";
     }
 

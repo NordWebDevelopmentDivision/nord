@@ -10,6 +10,7 @@ import is.nord.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +36,7 @@ public class RegistrationController {
     @Autowired
     private NewsService newsService;    // Establish a connection to the newsService
 
+
     // Points the user gets for registering and unregistering for an event
     private int registrationPoints = 1;
     private int unregistrationPoints = -1;
@@ -57,9 +59,6 @@ public class RegistrationController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         registration.setUser(user);
 
-        // Add a point to the user
-        user.addPoints(registrationPoints);
-        userService.update(user);
         // Save to database through a service
         registrationService.save(registration);
 
@@ -70,7 +69,7 @@ public class RegistrationController {
 
     /**
      * Allows an authenticated user to unregister from an event
-     * @param newsId the id of the event from which the user is unregistering
+     * @param eventId the id of the event from which the user is unregistering
      * @return back to the homepage
      */
     @RequestMapping(value = "/unregister", method = RequestMethod.POST)
@@ -81,14 +80,39 @@ public class RegistrationController {
         // Get the event
         Event event = (Event)newsService.findOne(eventId);
 
-        // Deduct a point from the user
-        user.addPoints(unregistrationPoints);
-        userService.update(user);
-
         // delete the registration for the authenticated user for this particular event
         registrationService.delete(event, user);
 
         // Redirect browser to /
         return "redirect:/event/" + eventId;
+    }
+
+    @RequestMapping("/confirmRegistration/{registrationId}")
+    public String confirmRegistration(@PathVariable Long registrationId ) {
+        Registration registration = registrationService.findRegistrationById(registrationId);
+        registration.setConfirmed(true);
+
+        User user = registration.getUser();
+        user.addPoints(registrationPoints);
+        userService.update(user);
+
+        Event event = registration.getEvent();
+
+        return "redirect:/event/" + event.getId();
+    }
+
+    @RequestMapping("/unconfirmRegistration/{registrationId}")
+    public String unconfirmRegistration(@PathVariable Long registrationId ) {
+        Registration registration = registrationService.findRegistrationById(registrationId);
+        registration.setConfirmed(false);
+        registrationService.update(registration);
+
+        User user = registration.getUser();
+        user.addPoints(unregistrationPoints);
+        userService.update(user);
+
+        Event event = registration.getEvent();
+
+        return "redirect:/event/" + event.getId();
     }
 }
