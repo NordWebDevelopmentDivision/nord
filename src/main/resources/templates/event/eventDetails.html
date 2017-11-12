@@ -2,14 +2,12 @@
 
 <html>
 <head>
-    <meta content ="text/html" charset="UTF-8"/>
+    <meta content="text/html" charset="UTF-8"/>
     <meta description="viewport" content="width=device-width, initial-scale=1"/>
-
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <link rel="stylesheet" th:href="@{/assets/css/normalize.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/eventDetails.css}"/>
-
     <title>Nörd | Nemendafélag</title>
 </head>
 <body>
@@ -22,8 +20,9 @@
         <p sec:authorize="hasRole('ROLE_ADMIN')" class="infoText sectionInfo">Stjórnandi</p>
         <section sec:authorize="hasRole('ROLE_ADMIN')" class="section adminSection">
             <div id="editDelete">
-                <a id="deleteEvent" th:href="@{|/event/${news.id}/delete|}"><img th:src="@{/assets/img/delete.png}" alt="delete symbol" /></a>
-                <a th:href="@{|/event/${news.id}/edit|}"><img th:src="@{/assets/img/edit.png}" alt="edit symbol" /></a>
+                <a id="deleteEvent" th:href="@{|/event/${news.id}/delete|}"><img th:src="@{/assets/img/delete.png}"
+                                                                                 alt="delete symbol"/></a>
+                <a th:href="@{|/event/${news.id}/edit|}"><img th:src="@{/assets/img/edit.png}" alt="edit symbol"/></a>
             </div>
         </section>
         <div id="published">
@@ -45,7 +44,7 @@
         + ' klukkan ' + #temporals.format(news.timeOfEvent, 'HH:mm')
         }"></p>
 
-        <div id ="description">
+        <div id="description">
             <p th:text="${news.description}"></p>
         </div>
 
@@ -53,7 +52,7 @@
         <section class="section">
             <div id="address">
                 <p th:text="${news.host}"></p><a th:href="@{${news.linkLocation}}">
-                <img th:src="@{/assets/img/ja_logo.png}" alt="já.is logo" />
+                <img th:src="@{/assets/img/ja_logo.png}" alt="já.is logo"/>
             </a>
                 <p th:text="${news.location}"></p>
             </div>
@@ -83,8 +82,10 @@
         <section class="section">
             <div id="countdown">
                 <div id="info" class="infoText">&#9749;</div>
-                <p class="registrationOpens" th:text="${#temporals.format(news.registrationOpens, 'dd:MM:yyyy:HH:mm')}"></p>
-                <p class="registrationCloses" th:text="${#temporals.format(news.registrationCloses, 'dd:MM:yyyy:HH:mm')}"></p>
+                <p class="registrationOpens"
+                   th:text="${#temporals.format(news.registrationOpens, 'dd:MM:yyyy:HH:mm')}"></p>
+                <p class="registrationCloses"
+                   th:text="${#temporals.format(news.registrationCloses, 'dd:MM:yyyy:HH:mm')}"></p>
                 <div id="timer" style="display: none;">
                     <span class="timerInt hours">--</span>
                     <span class="timerString">KLST</span>
@@ -98,18 +99,20 @@
             <div id="button">
                 <!--<button th:case="${false}" disabled="true">Þú ert ekki innskráður</button>-->
                 <!-- Make conditions based on whether the authenticated user is registered for the event -->
-                <div th:if="${#authorization.expression('isAuthenticated()')}" th:switch="${registrationService.isRegisteredForEvent(news, user)}">
+                <div th:if="${#authorization.expression('isAuthenticated()')}"
+                     th:switch="${registrationService.isRegisteredForEvent(news, user)}">
                     <div th:case="${false}">
                         <form th:action="@{/register}" method="post">
-                            <input name="eventIdReg" type="hidden" th:value="${news.id}" />
-                            <input name="isRegistered" type="hidden" th:value="${true}" />
+                            <input name="eventIdReg" type="hidden" th:value="${news.id}"/>
+                            <input name="isRegistered" type="hidden" th:value="${true}"/>
                             <button class="registerButton regBtn" type="submit" style="display: none;">Skrá mig</button>
                         </form>
                     </div>
                     <div th:case="${true}">
                         <form th:action="@{/unregister}" method="post">
-                            <input name="eventIdUnrg" type="hidden" th:value="${news.id}" />
-                            <button class="unregisterButton regBtn" type="submit" style="display: none;">Afskrá mig</button>
+                            <input name="eventIdUnreg" type="hidden" th:value="${news.id}"/>
+                            <button class="unregisterButton regBtn" type="submit" style="display: none;">Afskrá mig
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -132,14 +135,18 @@
             <p class="infoText sectionInfo">Skráningarlisti</p>
             <section class="section">
                 <div th:each="registration,iter : ${registrationService.findRegistrationsByEvent(news)}">
-                    <p th:if="${news.capacity >= iter.count}" th:text="${iter.count + '. ' + registration.user.username}"></p>
-                    <p th:if="${iter.count > news.capacity}" th:text="${iter.count + '. ' + registration.user.username}" style="color: #888;"></p>
+                    <p th:if="${news.capacity >= iter.count}"
+                       th:text="${iter.count + '. ' + registration.user.username}"></p>
+                    <p th:if="${iter.count > news.capacity}" th:text="${iter.count + '. ' + registration.user.username}"
+                       style="color: #888;"></p>
                     <div th:switch="${registrationService.isConfirmed(registration.id)}">
                         <div th:case="${false}">
-                            <a id="bla" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/confirmRegistration/${registration.id}|}">Staðfesta mætingu</a>
+                            <a id="bla" sec:authorize="hasRole('ROLE_ADMIN')"
+                               th:href="@{|/confirmRegistration/${registration.id}|}">Staðfesta mætingu</a>
                         </div>
                         <div th:case="${true}">
-                            <a id="alb" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{|/unconfirmRegistration/${registration.id}|}">Taka mætingu af</a>
+                            <a id="alb" sec:authorize="hasRole('ROLE_ADMIN')"
+                               th:href="@{|/unconfirmRegistration/${registration.id}|}">Taka mætingu af</a>
                         </div>
                     </div>
 
@@ -154,7 +161,6 @@
 <footer th:replace="layout :: footer"></footer>
 <div th:replace="layout :: scripts"></div>
 
-<script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
 <script type="text/javascript" th:src="@{/assets/js/eventDetails.js}"></script>
 </body>
 </html>

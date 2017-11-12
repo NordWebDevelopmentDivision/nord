@@ -1,12 +1,12 @@
 var deleteNews = document.getElementById('deleteNews');
 var deleteEvent = document.getElementById('deleteEvent');
-
+var deleteAd = document.getElementById('deleteAd');
 var eventBan = document.querySelectorAll("[id^='eventBan']")
 var removeEventBan = document.querySelectorAll("[id^='removeEventBan']")
+var removeBan = document.querySelectorAll("[id^='removeBan']")
 var deleteInfoNord = document.querySelectorAll("[id^='deleteInfoNord']")
 var deleteInfoBoard = document.querySelectorAll("[id^='deleteInfoBoard']")
 var deleteInfoMiddleBoard = document.querySelectorAll("[id^='deleteInfoMiddleBoard']")
-
 
 if(deleteNews) {
     deleteNews.addEventListener('click', confirmDelete);
@@ -14,6 +14,10 @@ if(deleteNews) {
 
 if(deleteEvent) {
     deleteEvent.addEventListener('click', confirmDelete);
+}
+
+if(deleteAd) {
+    deleteAd.addEventListener('click', confirmDelete);
 }
 
 for(var i=0; i<eventBan.length; i++) {
@@ -24,6 +28,10 @@ for(var i=0; i<removeEventBan.length; i++) {
      removeEventBan[i].addEventListener('click', confirmEventBanRemoval);
  }
 
+for(var i=0; i<removeBan.length; i++) {
+     removeBan[i].addEventListener('click', confirmEventBanRemoval);
+ }
+
 for(var i=0; i<deleteInfoNord.length; i++) {
      deleteInfoNord[i].addEventListener('click', confirmDelete);
  }
@@ -32,9 +40,9 @@ for(var i=0; i<deleteInfoBoard.length; i++) {
      deleteInfoBoard[i].addEventListener('click', confirmDelete);
  }
 
- for(var i=0; i<deleteInfoMiddleBoard.length; i++) {
-      deleteInfoMiddleBoard[i].addEventListener('click', confirmDelete);
-  }
+for(var i=0; i<deleteInfoMiddleBoard.length; i++) {
+  deleteInfoMiddleBoard[i].addEventListener('click', confirmDelete);
+}
 
 function confirmDelete(e) {
     var confirmDeletion = confirm('Viltu eyða?');

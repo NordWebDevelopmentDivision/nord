@@ -1,79 +1,76 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta content ="text/html" charset="UTF-8"/>
-        <meta description="viewport" content="width=device-width, initial-scale=1"/>
+<head>
+    <meta content="text/html" charset="UTF-8"/>
+    <meta description="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/assets/css/normalize.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/articles.css}"/>
+    <title>Nörd | Nemendafélag</title>
+</head>
+<body>
+<header th:replace="layout :: header"></header>
+<div th:replace="ad/ad :: ads"></div>
+<div th:replace="layout :: flash"></div>
 
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        <link rel="stylesheet" th:href="@{/assets/css/normalize.css}"/>
-        <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
-        <link rel="stylesheet" th:href="@{/assets/css/articles.css}"/>
-
-        <title>Nörd | Nemendafélag</title>
-    </head>
-    <body>
-        <header th:replace="layout :: header"></header>
-        <div th:replace="ad/ad :: ads"></div>
-        <div th:replace="layout :: flash"></div>
-
-        <main>
-
-            <div id="articles" th:each="news : ${news}" th:switch="${news instanceof T(is.nord.model.Event)}">
-                <!-- If the news item is an event -->
-                <div th:case="${true}">
-                    <a th:href="@{|/event/${news.id}|}">
-                        <article class="article" th:style="|background-image:
+<main>
+    <div id="articles" th:each="news : ${news}" th:switch="${news instanceof T(is.nord.model.Event)}">
+        <!-- If the news item is an event -->
+        <div th:case="${true}">
+            <a th:href="@{|/event/${news.id}|}">
+                <article class="article" th:style="|background-image:
                         linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url(news/${news.id}.jpeg)|">
 
-                            <div class="published">
-                                <p th:text="${'Birt '
+                    <div class="published">
+                        <p th:text="${'Birt '
                                  + #temporals.dayOfWeekNameShort(news.datePosted)
                                  + ' ' +  #temporals.format(news.datePosted, 'dd')
                                  + '. ' + #temporals.monthName(news.datePosted)
                                  + ' ' +  #temporals.format(news.datePosted, 'yyyy')
                                  + ' - ' + news.author}"></p>
-                            </div>
+                    </div>
 
-                            <div class="title">
-                                <h2 th:text="${news.title}"></h2>
-                            </div>
-                            <p class="date" th:text="${
+                    <div class="title">
+                        <h2 th:text="${news.title}"></h2>
+                    </div>
+                    <p class="date" th:text="${
                             #temporals.dayOfWeekName(news.datePosted)
                             + ' ' +  #temporals.format(news.datePosted, 'dd')
                             + '. ' + #temporals.monthName(news.datePosted)
                             + ' klukkan ' + #temporals.format(news.datePosted, 'HH:mm')
                             }"></p>
-                        </article>
-                    </a>
-                </div>
-                <div th:case="${false}">
-                    <a th:href="@{|/news/${news.id}|}">
-                        <article class="article" th:style="|background-image:
+                </article>
+            </a>
+        </div>
+        <div th:case="${false}">
+            <a th:href="@{|/news/${news.id}|}">
+                <article class="article" th:style="|background-image:
                         linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url(news/${news.id}.jpeg)|">
 
-                            <div class="published">
-                                <p th:text="${'Birt '
+                    <div class="published">
+                        <p th:text="${'Birt '
                                  + #temporals.dayOfWeekNameShort(news.datePosted)
                                  + ' ' +  #temporals.format(news.datePosted, 'dd')
                                  + '. ' + #temporals.monthName(news.datePosted)
                                  + ' ' +  #temporals.format(news.datePosted, 'yyyy')
                                  + ' - ' + news.author}"></p>
-                            </div>
+                    </div>
 
-                            <div class="title">
-                                <h2 th:text="${news.title}"></h2>
-                            </div>
-                        </article>
-                    </a>
-                </div>
-            </div>
-            <h2>Topp vísindamenn:</h2>
-            <div th:each="topUser : ${userService.findAllOrderedByPoints()}">
-                <h4 th:text="${topUser.username} + ' - ' + ${topUser.points}"></h4>
-            </div>
-        </main>
-    <footer th:replace="layout :: footer"></footer>
-    <div th:replace="layout :: scripts"></div>
-    </body>
+                    <div class="title">
+                        <h2 th:text="${news.title}"></h2>
+                    </div>
+                </article>
+            </a>
+        </div>
+    </div>
+    <h2>Topp vísindamenn:</h2>
+    <div th:each="topUser : ${userService.findAllOrderedByPoints()}">
+        <h4 th:text="${topUser.username} + ' - ' + ${topUser.points}"></h4>
+    </div>
+</main>
+<footer th:replace="layout :: footer"></footer>
+<div th:replace="layout :: scripts"></div>
+</body>
 </html>
