@@ -45,9 +45,9 @@ public class DataConfig {
     public DataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName(env.getProperty("nord.db.driver"));
-        ds.setUrl(env.getProperty("nord.db.url"));
-        ds.setUsername(env.getProperty("nord.db.username"));
-        ds.setPassword(env.getProperty("nord.db.password"));
+        ds.setUrl(env.getProperty("spring.datasource.url"));              //"nord.db.url"));
+        ds.setUsername(env.getProperty("spring.datasource.username"));         //"nord.db.username"));
+        ds.setPassword(env.getProperty("spring.datasource.password"));         //"nord.db.password"));
         return ds;
     }
 
