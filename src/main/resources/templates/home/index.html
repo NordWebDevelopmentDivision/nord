@@ -65,10 +65,7 @@
             </a>
         </div>
     </div>
-    <h2>Topp vísindamenn:</h2>
-    <div th:each="topUser : ${userService.findAllOrderedByPoints()}">
-        <h4 th:text="${topUser.username} + ' - ' + ${topUser.points}"></h4>
-    </div>
+
 </main>
 <footer th:replace="layout :: footer"></footer>
 <div th:replace="layout :: scripts"></div>

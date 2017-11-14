@@ -65,6 +65,7 @@ public class UserController {
 
         // Allow method calls from the thymeleaf template to eventBanService
         model.addAttribute("eventBanService", eventBanService);
+        model.addAttribute("userService", userService);
 
         return "user/list";
     }

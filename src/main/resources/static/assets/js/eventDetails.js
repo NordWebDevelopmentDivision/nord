@@ -22,8 +22,16 @@ function myTimer() {
         document.getElementById("timer").style.display="initial";
         var m1 = regDate.getHours()*60 + regDate.getMinutes();
         var m2 = currDate.getHours()*60 + currDate.getMinutes();
-        var cntdwn = m1 - m2-1;
-        console.log(cntdwn);
+        var currDay = currDate.getDate();
+        var regDay = regDate.getDate();
+        var dayDiff = 0;
+        if (regDay > currDay) {
+            dayDiff = (regDay - currDay)*24*60
+        } else if (regDay < currDay) {
+            dayDiff = ((daysInThisMonth()- (new Date()).getDate()) + regDay)*24*60;
+        }
+
+        var cntdwn = dayDiff + m1 - m2-1;
         hours = Math.floor(cntdwn / 60);
         minutes = cntdwn % 60;
         timerInts[0].innerHTML = hours;
@@ -39,7 +47,17 @@ function myTimer() {
         countdownText.style.color="green";
         var m1 = regClosesDate.getHours()*60 + regClosesDate.getMinutes();
         var m2 = currDate.getHours()*60 + currDate.getMinutes();
-        var cntdwn = m1 - m2-1;
+
+        var currDay = currDate.getDate();
+        var regDay = regClosesDate.getDate();
+        var dayDiff = 0;
+        if (regDay > currDay) {
+            dayDiff = (regDay - currDay)*24*60
+        } else if (regDay < currDay) {
+            dayDiff = ((daysInThisMonth()- (new Date()).getDate()) + regDay)*24*60;
+        }
+
+        var cntdwn = dayDiff + m1 - m2-1;
         hours = Math.floor(cntdwn / 60);
         minutes = cntdwn % 60;
         timerInts[0].innerHTML = hours;
@@ -54,31 +72,10 @@ function myTimer() {
         countdownText.innerHTML = "Skráningu lokið";
         document.getElementById("timer").style.display="none";
         countdownText.style.color="red";
-        /*timerInts[0].innerHTML = "00";
-        timerInts[1].innerHTML = "00";
-        timerInts[2].innerHTML = "00";*/
-
     }
 }
 
-   /* var x = document.getElementsByClassName("timer");
-    var time = document.getElementsByClassName("registrationOpens");
-    var button = document.getElementsByClassName("registerButton");
-    for (var i = 0; i < x.length; i++) {
-
-        var arr = time[i].innerHTML.toString().split(":");
-        var date = new Date(arr[2], arr[1]-1, arr[0], arr[3], arr[4], 0, 0);
-        x[i].innerHTML = (d.getDate() - date.getDate()) + " " + (d.getHours()-date.getHours()) + " " + (date.getMinutes()-d.getMinutes()-1) + " " + (60 - d.getSeconds());
-
-        if (typeof button[i] != "undefined" && d >= date) {
-            button[i].removeAttribute("disabled");
-        } else {
-            console.log("nayyyy");
-        }
-*/
-       /* if (d.getTime() >= date.getTime()) {
-
-        }
-        else {
-            button[i].style.disabled = true;
-        }*/
+function daysInThisMonth() {
+  var now = new Date();
+  return new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+}
