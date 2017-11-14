@@ -46,12 +46,22 @@ public class DataConfig {
 
     @Bean
     public DataSource dataSource() {
-        BasicDataSource ds = new BasicDataSource();
-        ds.setDriverClassName(env.getProperty("nord.db.driver"));
-        ds.setUrl("JDBC_DATABASE_URL");          //env.getProperty("nord.db.url"));
-        ds.setUsername("JDBC_DATABASE_USERNAME");     //env.getProperty("nord.db.username"));
-        ds.setPassword("JDBC_DATABASE_PASSWORD");     //env.getProperty("nord.db.password"));
-        return ds;
+        //BasicDataSource ds = new BasicDataSource();
+        /*ds.setDriverClassName(env.getProperty("nord.db.driver"));
+        ds.setUrl(env.getProperty("nord.db.url"));
+        ds.setUsername(env.getProperty("nord.db.username"));
+        ds.setPassword(env.getProperty("nord.db.password"));
+        return ds;*/
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        String username = System.getenv("JDBC_DATABASE_USERNAME");
+        String password = System.getenv("JDBC_DATABASE_PASSWORD");
+
+        BasicDataSource basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(dbUrl);
+        basicDataSource.setUsername(username);
+        basicDataSource.setPassword(password);
+
+        return basicDataSource;
     }
 
     /*@Bean
