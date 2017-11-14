@@ -29,7 +29,7 @@ import java.util.Properties;
 public class DataConfig {
     @Autowired
     private Environment env;
-
+/*
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
@@ -42,7 +42,7 @@ public class DataConfig {
         factory.setJpaProperties(getHibernateProperties());
 
         return factory;
-    }
+    }*/
  /*
     @Bean
     public DataSource dataSource() {
@@ -54,7 +54,7 @@ public class DataConfig {
         return ds;
 
     }*/
-
+/*
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
@@ -69,5 +69,5 @@ public class DataConfig {
         properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         return properties;
-    }
+    }*/
 }
