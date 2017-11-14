@@ -178,3 +178,7 @@ var toggleAdminMenu = function() {
     menuList.style.display = "flex";
   }
 }
+
+function closeFlash() {
+    document.getElementById("container").style.display = "none";
+}

@@ -63,6 +63,31 @@ article {
 	border-radius: 3%;
 }
 
+
+
 /*==============================
-MEDIA QUERIES
+FLASH MESSAGE
 ==============================*/
+
+#container {
+    background-color: green;
+    height: 70px;
+    color: #fff;
+}
+
+.flash {
+    font-weight: bold;
+    text-align: center;
+}
+
+.right {
+    margin-top: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.message {
+    height: 100%;
+
+}
