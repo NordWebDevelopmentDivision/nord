@@ -43,33 +43,24 @@ public class DataConfig {
 
         return factory;
     }
-
+ /*
     @Bean
     public DataSource dataSource() {
-        //BasicDataSource ds = new BasicDataSource();
-        /*ds.setDriverClassName(env.getProperty("nord.db.driver"));
+        BasicDataSource ds = new BasicDataSource();
+       ds.setDriverClassName(env.getProperty("nord.db.driver"));
         ds.setUrl(env.getProperty("nord.db.url"));
         ds.setUsername(env.getProperty("nord.db.username"));
         ds.setPassword(env.getProperty("nord.db.password"));
-        return ds;*/
-        String dbUrl = System.getenv("JDBC_DATABASE_URL");
-        String username = System.getenv("JDBC_DATABASE_USERNAME");
-        String password = System.getenv("JDBC_DATABASE_PASSWORD");
+        return ds;
 
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl(dbUrl);
-        basicDataSource.setUsername(username);
-        basicDataSource.setPassword(password);
+    }*/
 
-        return basicDataSource;
-    }
-
-    /*@Bean
+    @Bean
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
-    }*/
+    }
 
     private Properties getHibernateProperties() {
         Properties properties = new Properties();
