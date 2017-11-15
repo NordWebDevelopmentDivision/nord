@@ -12,7 +12,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -25,27 +24,26 @@ import java.util.Properties;
 */
 
 @Configuration
-@EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "is.nord.repository")
 @PropertySource(value="application.properties", ignoreResourceNotFound=true)
 public class DataConfig {
     @Autowired
     private Environment env;
-
+/*
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 
-        //factory.setDataSource(dataSource());
+        factory.setDataSource(dataSource());
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setPackagesToScan(env.getProperty("nord.entity.package"));
-        //factory.setJpaProperties(getHibernateProperties());
+        factory.setJpaProperties(getHibernateProperties());
 
         return factory;
-    }
-
+    }*/
+ /*
     @Bean
     public DataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();
@@ -55,14 +53,14 @@ public class DataConfig {
         ds.setPassword(env.getProperty("nord.db.password"));
         return ds;
 
-    }
+    }*/
 /*
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
-*/
+
     private Properties getHibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
@@ -71,5 +69,5 @@ public class DataConfig {
         properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         return properties;
-    }
+    }*/
 }
