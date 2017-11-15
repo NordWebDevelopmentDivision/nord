@@ -9,13 +9,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
-/*
- * Author:
- *       Chris Ramacciotti, a teacher at teamtreehouse.com
-*/
 
 /**
  * A controller that handles login
+ * @Author Chris Ramacciotti, a teacher at teamtreehouse.com
  */
 @Controller
 public class LoginController {

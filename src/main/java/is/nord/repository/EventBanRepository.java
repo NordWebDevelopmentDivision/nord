@@ -8,13 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/*
- * Author:
- *       Kári Snær Kárason (ksk12@hi.is)
-*/
-
 /**
  * An interface which queries the database for EventBan-related things
+ * @Author Kári Snær Kárason (ksk12@hi.is)
  */
 @Repository
 public interface EventBanRepository extends CrudRepository<EventBan, Long> {

@@ -1,10 +1,8 @@
 package is.nord;
 
-/*
- * Author:
- *       Chris Ramacciotti, a teacher at teamtreehouse.com
-*/
-
+/**
+ * @Author Chris Ramacciotti, a teacher at teamtreehouse.com
+ */
 public class FlashMessage {
     private String message;
     private Status status;

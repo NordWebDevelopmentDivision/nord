@@ -13,14 +13,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-/*
- * Author:
- *       Stella Rut Guðmundsdóttir (srg30@hi.is)
- *       Ólafur Georg Gylfason (ogg4@hi.is)
-*/
-
 /**
  * A controller that controls ad related things
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ * @Author Stella Rut Guðmundsdóttir (srg30@hi.is)
  */
 @Controller
 public class AdController {

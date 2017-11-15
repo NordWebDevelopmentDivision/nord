@@ -15,13 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-/*
- * Author:
- *       Stella Rut Guðmðundsdóttir (srg30@hi.is)
-*/
-
 /**
  * A controller that handles information about Nörd
+ * @Author Stella Rut Guðmðundsdóttir (srg30@hi.is)
  */
 @Controller
 public class InformationController {

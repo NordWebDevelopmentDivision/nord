@@ -8,11 +8,9 @@ import is.nord.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/*
- * Author:
- *       Kári Snær Kárason(ksk12@hi.is)
-*/
-
+/**
+ * @Author Kári Snær Kárason (ksk12@hi.is)
+ */
 @Service
 public class EventBanServiceImpl implements EventBanService {
     @Autowired

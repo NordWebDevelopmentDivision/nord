@@ -13,11 +13,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/*
- * Author:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
-*/
-
+/**
+ * @Author Ólafur Georg Gylfason
+ */
 @Entity
 public class Event extends News {
     @NotEmpty(message="{event.host.notEmpty}")

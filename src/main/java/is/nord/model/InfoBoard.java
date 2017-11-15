@@ -4,13 +4,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 
-/*
- * Author:
- *       Stella Rut Guðmundsdóttir (srg30@hi.is)
-*/
-
 /**
  * A model for information information the board
+ * @Author Stella Rut Guðmundsdóttir (srg30@hi.is)
  */
 @Entity
 @Table(name="infoBoard")

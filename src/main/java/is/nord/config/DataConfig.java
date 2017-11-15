@@ -13,13 +13,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-/*
- * Author:
- *       Chris Ramacciotti, a teacher at teamtreehouse.com
- * Altered by:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
-*/
-
+/**
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ */
 @Configuration
 @EnableJpaRepositories(basePackages = "is.nord.repository")
 @PropertySource(value="application.properties", ignoreResourceNotFound=true)

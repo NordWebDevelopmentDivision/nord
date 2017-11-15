@@ -5,15 +5,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
-/*
- * Author:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
- * Altered:
- *       Kári Snær Kárason(ksk12@hi.is)
-*/
-
 /**
  * An interface which queries the database for user-related things
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ * @Author Kári Snær Kárason (ksk12@hi.is)
  */
 @Repository
 public interface UserRepository extends CrudRepository<User,Long> {

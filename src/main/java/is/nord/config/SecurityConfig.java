@@ -22,13 +22,10 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 
-/*
- * Author:
- *       Chris Ramacciotti, a teacher at teamtreehouse.com
- * Altered by:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
-*/
-
+/**
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ * @Author Stella Rut Guðmundsdóttir (srg30@hi.is)
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

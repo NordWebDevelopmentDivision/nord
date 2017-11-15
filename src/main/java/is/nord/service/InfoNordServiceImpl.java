@@ -5,11 +5,9 @@ import is.nord.repository.InfoNordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/*
- * Author:
- *       Stella Rut Guðmundsdóttir (srg30@hi.is)
-*/
-
+/**
+ * @Author Stella Rut Guðmundsdóttir (srg30@hi.is)
+ */
 @Service
 public class InfoNordServiceImpl implements InfoNordService {
     @Autowired

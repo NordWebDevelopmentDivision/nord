@@ -4,13 +4,9 @@ import is.nord.model.InfoBoard;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-/*
- * Author:
- *       Stella Rut Guðmundsdóttir (srg30@hi.is)
-*/
-
 /**
  * An interface which queries the database for information information Nörd's board
+ * @Author Stella Rut Guðmundsdóttir (srg30@hi.is)
  */
 @Repository
 public interface InfoBoardRepository extends CrudRepository<InfoBoard, Long> {

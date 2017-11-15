@@ -11,11 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-/*
- * Author:
- *       Stella Rut Guðmundsdóttir (srg30@hi.is)
-*/
-
+/**
+ * @Author Stella Rut Guðmundsdóttir (srg30@hi.is)
+ */
 @Service
 public class InfoBoardServiceImpl implements InfoBoardService {
     @Autowired

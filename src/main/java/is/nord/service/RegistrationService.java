@@ -4,13 +4,9 @@ import is.nord.model.Event;
 import is.nord.model.Registration;
 import is.nord.model.User;
 
-/*
- * Author:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
-*/
-
 /**
  * A service layer between the Registrationcontroller and the Registrationrepository
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
  */
 public interface RegistrationService {
     // Returns all the registrations

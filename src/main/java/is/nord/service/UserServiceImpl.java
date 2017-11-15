@@ -8,14 +8,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-/*
- * Author:
- *       Chris Ramacciotti, a teacher at teamtreehouse.com
- *
- * Altered by:
- *       Kári Snær Kárason (ksk12@hi.is)
-*/
-
+/**
+ * @Author Kári Snær Kárason (ksk12@hi.is)
+ */
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired

@@ -2,14 +2,10 @@ package is.nord.model;
 
 import javax.persistence.*;
 
-/*
- * Author:
- *       Chris Ramacciotti, a teacher at teamtreehouse.com
-*/
-
 /**
  * Define a role for each user.
  * Each role has different authorization
+ * @Author Chris Ramacciotti, a teacher at teamtreehouse.com
  */
 @Entity
 @Table(name="role")

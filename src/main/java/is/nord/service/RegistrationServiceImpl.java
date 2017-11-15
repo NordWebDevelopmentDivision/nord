@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 
-/*
- * Author:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
-*/
-
+/**
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ */
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
     @Autowired

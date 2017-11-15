@@ -12,11 +12,10 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
-/*
- * Author:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
-*/
 
+/**
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ */
 @Configuration
 public class TemplateConfig {
     @Bean

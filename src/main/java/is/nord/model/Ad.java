@@ -9,14 +9,10 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.File;
 
-/*
- * Author:
- *       Stella Rut Guðmundsdóttir (srg30@hi.is)
- *       Ólafur Georg Gylfason (ogg4@hi.is)
-*/
-
 /**
  * A model for ads
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ * @Author Stella Rut Guðmundsdóttir (srg30@hi.is)
  */
 @Entity
 @Table(name="ad")

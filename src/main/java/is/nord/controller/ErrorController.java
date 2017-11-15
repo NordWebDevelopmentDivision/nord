@@ -12,6 +12,9 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * @Author Stella Rut Guðmundsdóttir (srg30@hi.is)
+ */
 @Controller
 public class ErrorController implements org.springframework.boot.autoconfigure.web.ErrorController {
 

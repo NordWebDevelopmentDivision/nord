@@ -6,11 +6,9 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/*
- * Author:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
-*/
-
+/**
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ */
 @Entity
 @Table(name="news")
 public class News {

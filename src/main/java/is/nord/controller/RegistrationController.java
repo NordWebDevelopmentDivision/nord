@@ -15,15 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/*
- * Author:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
- * Altered:
- *       Kári Snær Kárason(ksk12@hi.is)
-*/
-
 /**
  * A controller that controls registration-related things
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ * @Author Kári Snær Kárason (ksk12@hi.is)
  */
 @Controller
 public class RegistrationController {

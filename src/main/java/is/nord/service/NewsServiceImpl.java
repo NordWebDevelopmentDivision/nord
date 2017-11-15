@@ -9,12 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.IOException;
 
-/*
- * Author:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
-*/
-
-
+/**
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ */
 @Service
 public class NewsServiceImpl implements NewsService {
     @Autowired

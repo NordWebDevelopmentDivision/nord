@@ -9,16 +9,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/*
- * Author:
- *       Chris Ramacciotti, a teacher at teamtreehouse.com
- * Altered by:
- *       Ólafur Georg Gylfason (ogg4@hi.is)
- *       Kári Snær Kárason(ksk12@hi.is)
-*/
-
 /**
  * Define users
+ * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ * @Author Kári Snær Kárason (ksk12@hi.is)
  */
 @Entity
 @Table(name="nord_user")
