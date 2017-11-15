@@ -12,8 +12,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -25,6 +25,7 @@ import java.util.Properties;
 */
 
 @Configuration
+@EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "is.nord.repository")
 @PropertySource(value="application.properties", ignoreResourceNotFound=true)
 public class DataConfig {
@@ -32,7 +33,6 @@ public class DataConfig {
     private Environment env;
 
     @Bean
-    @PersistenceContext
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 
@@ -45,7 +45,7 @@ public class DataConfig {
 
         return factory;
     }
- /*
+
     @Bean
     public DataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();
@@ -55,14 +55,14 @@ public class DataConfig {
         ds.setPassword(env.getProperty("nord.db.password"));
         return ds;
 
-    }*/
+    }
 /*
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
-
+*/
     private Properties getHibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
@@ -71,5 +71,5 @@ public class DataConfig {
         properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         return properties;
-    }*/
+    }
 }
