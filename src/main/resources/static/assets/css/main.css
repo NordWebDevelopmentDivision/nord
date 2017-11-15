@@ -68,20 +68,23 @@ nav div {
 
 #userImage {
   order: 1;
+  padding-top: 3px;
 }
 
 #userImage a img {
   width: 54px;
   height: 54px;
   border-radius: 100%;
-  margin-top: 3px;
 }
 
 #hamburgerIcon {
   order: 2;
 }
 
-
+#logo img {
+    height: 50px;
+    width: auto;
+}
 
 /*==============================
 MENUS
@@ -130,6 +133,7 @@ MENUS
 
 #hamburgerMenu {
   right: 0;
+  margin-top: 19px;
 }
 
 .submenu {
@@ -166,17 +170,19 @@ ADS
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 90px;
+  height: 120px;
   justify-content: space-around;
   overflow: hidden; /* Display only the top row */
-  padding: 0;
+  padding: 20px 0;
+  margin-bottom: 20px;
 }
 
 #ads img {
   width: 80px;
   margin: 5px 2px 0 2px;
   border-radius: 5%;
-  border: 2px solid #444;
+  margin: 20px 0;
+  /*border: 2px solid #444;*/
 }
 
 
@@ -258,10 +264,10 @@ MEDIA QUERIES
     margin-left: auto;
   }
   #ads {
-    height: 120px;
+    height: 160px;
   }
   #ads img {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     width: 100px;
   }
   #userMenu {

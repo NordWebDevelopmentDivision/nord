@@ -13,12 +13,12 @@
 <header th:fragment="header" class="main-header">
     <nav class="nav" id="myNav">
         <div id="logo">
-            <a href="/">Nörd</a>
+            <a href="/"><img th:src="@{/assets/img/nordLogo.png}" alt="nord logo" /></a>
         </div>
 
         <div id="userImage">
             <a href="javascript:void(0);" onclick="toggleUserMenu()">
-                <img th:src="@{/assets/img/me.jpg}" alt="User image"/>
+                <img th:src="@{/assets/img/bighead.png}" alt="User image"/>
             </a>
             <div id="userMenu" class="menu" th:switch="${#authorization.expression('isAuthenticated()')}">
                 <ul th:case="${true}">
