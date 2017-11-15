@@ -2,8 +2,11 @@ package is.nord.config;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -26,7 +29,7 @@ import java.util.Properties;
 public class DataConfig {
     @Autowired
     private Environment env;
-
+/*
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
@@ -39,18 +42,25 @@ public class DataConfig {
         factory.setJpaProperties(getHibernateProperties());
 
         return factory;
-    }
-
+    }*/
+ /*
     @Bean
     public DataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();
-        ds.setDriverClassName(env.getProperty("nord.db.driver"));
+       ds.setDriverClassName(env.getProperty("nord.db.driver"));
         ds.setUrl(env.getProperty("nord.db.url"));
         ds.setUsername(env.getProperty("nord.db.username"));
         ds.setPassword(env.getProperty("nord.db.password"));
         return ds;
-    }
 
+    }*/
+    /*
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource dataSource() {
+        return DataSourceBuilder.create().build();
+    }*/
+/*
     private Properties getHibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
@@ -59,5 +69,5 @@ public class DataConfig {
         properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         return properties;
-    }
+    }*/
 }
