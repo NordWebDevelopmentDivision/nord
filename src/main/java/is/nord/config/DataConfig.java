@@ -29,20 +29,20 @@ import java.util.Properties;
 public class DataConfig {
     @Autowired
     private Environment env;
-/*
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 
-        factory.setDataSource(dataSource());
+        //factory.setDataSource(dataSource());
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setPackagesToScan(env.getProperty("nord.entity.package"));
-        factory.setJpaProperties(getHibernateProperties());
+        //factory.setJpaProperties(getHibernateProperties());
 
         return factory;
-    }*/
+    }
  /*
     @Bean
     public DataSource dataSource() {
