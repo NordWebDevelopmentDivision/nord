@@ -16,23 +16,23 @@
     </parent>
 
     <dependencies>
-<!--
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
         <dependency>
@@ -41,29 +41,30 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-        </dependency>-->
+            <!--  <version>5.2.11.Final</version>-->
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-dbcp -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-dbcp</artifactId>
             <version>9.0.1</version>
-        </dependency>-->
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4 -->
         <dependency>
@@ -73,10 +74,11 @@
         </dependency>
 
         <!-- jsr303 validation -->
-        <!--<dependency>
+        <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-        </dependency>-->
+            <!--<version>1.1.0.Final</version>-->
+        </dependency>
         <!-- Hibernate validators -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -85,24 +87,25 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4-1201-jdbc4</version>
-        </dependency>-->
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/javax.transaction/jta -->
-        <!-- <dependency>
-             <groupId>javax.transaction</groupId>
-             <artifactId>jta</artifactId>
-             <version>1.1</version>
-         </dependency>-->
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.1</version>
+        </dependency>
 
-         <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-        <!--<dependency>
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+        <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-        </dependency>-->
+            <!--<version>1.8.10</version> -->
+        </dependency>
 
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
@@ -111,38 +114,40 @@
         </dependency>
 
 
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>-->
+        </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-        </dependency>-->
-        <!--
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </dependency>-->
-                <dependency>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-core</artifactId>
-                    <!--<version>4.2.3.RELEASE</version> -->
         </dependency>
-        <!-- <dependency>
-             <groupId>org.springframework.security</groupId>
-             <artifactId>spring-security-config</artifactId>
-        </dependency>-->
-        <!--<dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <!--<version>4.2.3.RELEASE</version> -->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <!--<version>4.2.3.RELEASE</version> -->
+        </dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-        </dependency>-->
-        <!--<dependency>
+            <!--<version>4.2.3.RELEASE</version> -->
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>-->
+        </dependency>
         <!--
         <dependency>
             <groupId>org.springframework</groupId>
@@ -171,6 +176,13 @@
         </dependency>
 
         -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
