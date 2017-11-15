@@ -1,0 +1,14 @@
+=== DATABASE_URL
+Plan:                  Hobby-dev
+Status:                Available
+Connections:           0/20
+PG Version:            9.6.5
+Created:               2017-11-15 13:39 UTC
+Data Size:             7.1 MB
+Tables:                0
+Rows:                  0/10000 (In compliance)
+Fork/Follow:           Unsupported
+Rollback:              Unsupported
+Continuous Protection: Off
+Add-on:                postgresql-vertical-99336
+
