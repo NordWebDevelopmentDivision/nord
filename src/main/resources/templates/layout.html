@@ -18,7 +18,7 @@
 
         <div id="userImage">
             <a href="javascript:void(0);" onclick="toggleUserMenu()">
-                <img th:src="@{/assets/img/bighead.png}" alt="User image"/>
+                <img th:src="@{/assets/img/richard.png}" alt="User image"/>
             </a>
             <div id="userMenu" class="menu" th:switch="${#authorization.expression('isAuthenticated()')}">
                 <ul th:case="${true}">
