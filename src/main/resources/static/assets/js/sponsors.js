@@ -1,3 +1,4 @@
+/* This javascript handles the image preview for ads */
 function readURL(input) {
 
   if (input.files && input.files[0]) {
@@ -15,6 +16,7 @@ $("#file").change(function() {
   readURL(this);
 });
 
+/* Close the flash message banner */
 function closeFlash() {
     document.getElementById("container").style.display = "none";
 }

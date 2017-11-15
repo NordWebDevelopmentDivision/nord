@@ -3,13 +3,9 @@ package is.nord.model;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-/*
- * Author:
- *       Kári Snær Kárason (ksk12@hi.is)
-*/
-
 /**
  * This class is for EventBans
+ * @Author Kári Snær Kárason (ksk12@hi.is)
  */
 @Entity
 @Table(name="eventBan")

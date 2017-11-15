@@ -179,6 +179,7 @@ var toggleAdminMenu = function() {
   }
 }
 
+/* Close the flash message banner */
 function closeFlash() {
     document.getElementById("container").style.display = "none";
 }

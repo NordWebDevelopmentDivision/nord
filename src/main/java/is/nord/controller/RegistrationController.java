@@ -1,7 +1,6 @@
 package is.nord.controller;
 
 import is.nord.model.Event;
-import is.nord.model.News;
 import is.nord.model.Registration;
 import is.nord.model.User;
 import is.nord.service.NewsService;
@@ -82,6 +81,11 @@ public class RegistrationController {
         return "redirect:/event/" + eventId;
     }
 
+    /**
+     *  A mapping for confirming a registration
+     * @param registrationId the Id of the registration being confirmed
+     * @return the webpage that was being viewed
+     */
     @RequestMapping("/confirmRegistration/{registrationId}")
     public String confirmRegistration(@PathVariable Long registrationId ) {
         Registration registration = registrationService.findRegistrationById(registrationId);
@@ -96,6 +100,11 @@ public class RegistrationController {
         return "redirect:/event/" + event.getId();
     }
 
+    /**
+     * A mapping for unconfirming a registration
+     * @param registrationId the id of the registration being unconfirmed
+     * @return the webpage that was being viewed
+     */
     @RequestMapping("/unconfirmRegistration/{registrationId}")
     public String unconfirmRegistration(@PathVariable Long registrationId ) {
         Registration registration = registrationService.findRegistrationById(registrationId);

@@ -1,6 +1,5 @@
 package is.nord.controller;
 
-import is.nord.model.Event;
 import is.nord.model.EventBan;
 import is.nord.model.Role;
 import is.nord.model.User;

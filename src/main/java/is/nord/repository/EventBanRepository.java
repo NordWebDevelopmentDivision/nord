@@ -1,6 +1,5 @@
 package is.nord.repository;
 
-import is.nord.model.Event;
 import is.nord.model.EventBan;
 import is.nord.model.User;
 import org.springframework.data.repository.CrudRepository;

@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ * @Author Kári Snær Kárason (ksk12@hi.is)
  */
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
@@ -86,11 +87,4 @@ public class RegistrationServiceImpl implements RegistrationService {
     public void update(Registration registration){
         registrationRepository.save(registration);
     }
-
-    /*@Override
-    public List<TopEventUser> findTopUsers(){
-        return registrationRepository.findTopEventUsers();
-    }*/
-
-
 }

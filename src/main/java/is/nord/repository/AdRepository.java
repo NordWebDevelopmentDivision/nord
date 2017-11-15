@@ -3,7 +3,6 @@ package is.nord.repository;
 import is.nord.model.Ad;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import java.util.List;
 
 /**
  * An interface which queries the database for ads

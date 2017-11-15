@@ -1,3 +1,4 @@
+/* Handles confirmation */
 var deleteNews = document.getElementById('deleteNews');
 var deleteEvent = document.getElementById('deleteEvent');
 var deleteAd = document.getElementById('deleteAd');

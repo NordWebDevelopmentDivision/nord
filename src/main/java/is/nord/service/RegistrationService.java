@@ -7,6 +7,7 @@ import is.nord.model.User;
 /**
  * A service layer between the Registrationcontroller and the Registrationrepository
  * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ * @Author Kári Snær Kárason (ksk12@hi.is)
  */
 public interface RegistrationService {
     // Returns all the registrations
@@ -31,13 +32,12 @@ public interface RegistrationService {
     // This is used when deleting an event which contains registrations
     void deleteAll(Iterable<Registration> registrations);
 
+    // Finds registration by its Id
     Registration findRegistrationById(Long id);
 
+    // Return whether a certain registration is confirmed
     boolean isConfirmed(Long id);
 
+    // Updates information about a certain registration
     void update(Registration registration);
-
-    //List<TopEventUser> findTopUsers();
-
-
 }

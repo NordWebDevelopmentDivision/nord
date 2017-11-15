@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * An interface which queries the database for registration-related things
  * @Author Ólafur Georg Gylfason (ogg4@hi.is)
+ * @Author Kári Snær Kárason (ksk12@hi.is)
  */
 @Repository
 public interface RegistrationRepository extends CrudRepository<Registration, Long> {
@@ -21,9 +22,4 @@ public interface RegistrationRepository extends CrudRepository<Registration, Lon
     // Fetches all registrations for the specified event
     List<Registration> findRegistrationsByEvent(Event event);
 
-
-
-    /*@Query(value = "SELECT user, COUNT(user) as total FROM Registration GROUP BY user ORDER BY COUNT(user) DESC", nativeQuery = true)
-    List<TopEventUser> findTopEventUsers();
-    List<User> getUsersOrderB*/
 }

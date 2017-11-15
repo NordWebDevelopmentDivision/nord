@@ -3,15 +3,10 @@ package is.nord.service;
 import is.nord.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-/*
- * Author:
- *       Chris Ramacciotti, a teacher at teamtreehouse.com
- * Altered:
- *       Kári Snær Kárason(ksk12@hi.is)
-*/
-
 /**
  * A service layer for user objects
+ * @Author Chris Ramacciotti, a teacher at teamtreehouse.com
+ * @Author Kári Snær Kárason(ksk12@hi.is)
  */
 public interface UserService extends UserDetailsService {
 
@@ -29,5 +24,6 @@ public interface UserService extends UserDetailsService {
     // Updates the user
     void update(User user);
 
+    // Finds all users and orderes the output by points
     Iterable<User> findAllOrderedByPoints();
 }

@@ -3,7 +3,6 @@ package is.nord.controller;
 import is.nord.FlashMessage;
 import is.nord.model.*;
 import is.nord.service.*;
-import org.hibernate.validator.internal.metadata.descriptor.ReturnValueDescriptorImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -63,19 +62,19 @@ public class NewsController {
         // Allow method calls from the thymeleaf template to adService
         model.addAttribute("adService", adService);
 
-/*
-        // Allow method calls from the thymeleaf template to registrationService
-        model.addAttribute("registrationService", registrationService);
-
-        // Allow method calls from the thymeleaf template to eventBanService
-        model.addAttribute("eventBanService", eventBanService);*/
-
         // Allow method calls from the thymeleaf template to eventBanService
         model.addAttribute("userService", userService);
 
         return "home/index";
     }
 
+    /**
+     * Form for displaying a news object
+     * @param newsId the Id of the news object being used
+     * @param model the model
+     * @param principal the logged in user
+     * @return a webpage with details about the news object in question
+     */
     @RequestMapping("news/{newsId}")
     public String getNewsDetails(@PathVariable Long newsId, Model model, Principal principal) {
         model.addAttribute("news", newsService.findOne(newsId));
@@ -93,6 +92,13 @@ public class NewsController {
         return "news/newsDetails";
     }
 
+    /**
+     * Form for displaying a event object
+     * @param newsId the Id of the event item to be displayed
+     * @param model the model
+     * @param principal the user logged in
+     * @return a webpage with details about the event item in question
+     */
     @RequestMapping("event/{newsId}")
     public String getEventDetails(@PathVariable Long newsId, Model model, Principal principal) {
         model.addAttribute("news", newsService.findOne(newsId));

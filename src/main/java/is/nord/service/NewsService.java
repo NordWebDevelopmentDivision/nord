@@ -19,10 +19,12 @@ public interface NewsService {
     // Saves the specified news item through a call to the newsRepository
     void save(News news, MultipartFile file);
 
+    // Saves the specified item
     void save(News news);
 
     // Deletes the specified news item through a call to the newsRepository
     void delete(News news);
 
+    // For test purposes
     public boolean erALifi();
 }

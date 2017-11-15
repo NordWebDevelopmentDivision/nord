@@ -1,3 +1,4 @@
+/* This function handles the countdown timer for events */
 var myVar = setInterval(myTimer, 1000);
 function myTimer() {
     var currDate = new Date();

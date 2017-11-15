@@ -1,7 +1,8 @@
+/* This function handles the countdown timer for events */
 var myVar = setInterval(myTimer, 1000);
 function myTimer() {
     var currDate = new Date();
-    //var timer = document.getElementsByClassName("timer");
+
     var countdown = document.getElementsByClassName("countdown");
     for (var i = 0; i < countdown.length; i++) {
         var countdownText = countdown[i].children[0];
