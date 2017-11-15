@@ -36,10 +36,10 @@
                         <h2 th:text="${news.title}"></h2>
                     </div>
                     <p class="date" th:text="${
-                            #temporals.dayOfWeekName(news.datePosted)
-                            + ' ' +  #temporals.format(news.datePosted, 'dd')
-                            + '. ' + #temporals.monthName(news.datePosted)
-                            + ' klukkan ' + #temporals.format(news.datePosted, 'HH:mm')
+                            #temporals.dayOfWeekName(news.timeOfEvent)
+                            + ' ' +  #temporals.format(news.timeOfEvent, 'dd')
+                            + '. ' + #temporals.monthName(news.timeOfEvent)
+                            + ' klukkan ' + #temporals.format(news.timeOfEvent, 'HH:mm')
                             }"></p>
                 </article>
             </a>
